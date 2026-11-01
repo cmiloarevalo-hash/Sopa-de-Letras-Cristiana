@@ -1,17 +1,26 @@
 <!-- PROYECTO: SOPA DE LETRAS CRISTIANA -->
-# Sopa de Letras Cristiana
+# Sopa de Letras Cristiana — Aventura Bíblica Moderna
 
-**Proyecto Android para niños y jóvenes:** adaptación del juego original a una aventura bíblica moderna, con **300 niveles (10 mundos de 30)** y el objetivo de obtener un **APK propio instalable**.
+**Decisión del Humano (2026-11-01):** juego Android para **niños y jóvenes**, desarrollado como una aventura por la Biblia con **300 niveles en 10 mundos de 30**. Conservamos el motor de sopa de letras existente y adaptaremos contenido e interfaz al **español**. El objetivo de primera entrega es un **APK propio, firmado y compartible, instalable en el teléfono y funcional sin cuentas ni internet obligatorio**. Cuentas, sincronización y Google Play son posibilidades futuras, **no funciones de esta primera versión**.
 
-**Decisión de producto del 1 de noviembre de 2026:** conservar el motor de sopa de letras y los niveles; adaptar vocabulario, pistas, mundos, interfaz y presentación al **español** y a una temática **cristiana**. El estilo visual elegido es **Aventura bíblica moderna**, basado en el concepto ilustrado aprobado en la conversación con el Humano.
+**Distribución de la campaña:** La Creación · Noé y el Diluvio · Los Patriarcas · Moisés y el Éxodo · Reyes y Profetas · La Vida de Jesús · Parábolas y Enseñanzas · Los Apóstoles · La Iglesia Primitiva · Valores Cristianos. Los tableros crecerán progresivamente.
 
-**Estado:** fase de definición y adaptación planificada. La rama `main` contiene aún el juego original; **no representa todavía una versión cristiana adaptada ni un APK propio probado**. La imagen visual original aprobada está pendiente de incorporación al repositorio.
+**Motivación aprobada:** hasta 3 estrellas por nivel (900 posibles), álbum de descubrimientos bíblicos, logros e insignias coleccionables offline.
 
-**[Objetivo, decisiones, criterios de éxito y alcance previsto](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)**
+**Identidad visual propia:** la imagen conceptual de **cinco pantallas «Aventura Bíblica Moderna»**, elegida por el Humano; su lenguaje visual queda traducido a reglas textuales reproducibles. **La investigación de «Biblia para Jóvenes» se consulta solo para criterios editoriales/literarios, no para copiar su estilo visual.**
 
-> **Base original:** el README que sigue documenta el software del autor `SyscallBrain/SopaDeLetras`; se conserva como referencia técnica histórica. Las funciones descritas a continuación no acreditan que la adaptación cristiana ya esté implementada. La licencia y atribución originales se mantienen.
+**Documentación vigente del producto:**
+- [Objetivo y los siete puntos aprobados](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
+- [Marco visual](docs/MARCO_VISUAL.md)
+- [Marco editorial](docs/MARCO_EDITORIAL.md)
+- [Marco literario](docs/MARCO_LITERARIO.md)
+- [Referencias visuales y estado del archivo](docs/REFERENCIAS_VISUALES.md)
+
+**Estado:** decisiones documentadas; la adaptación cristiana **no está implementada**, no hay APK propio probado y el PNG original de referencia **no se ha verificado dentro de GitHub**. No confundir descripciones del proyecto del autor original con avances de esta adaptación.
 
 ---
+
+## README histórico del software original (se conserva con licencia y atribuciones)
 
 <div align="center">
 
