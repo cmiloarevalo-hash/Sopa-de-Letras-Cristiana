@@ -36,21 +36,24 @@ Franja inferior de la composición: diez iconos de mundos, paleta azul/violeta/t
 
 Acentos verdes y magenta pueden distinguir modos, sin convertirlos en identidad principal. Valores aproximados y ajustables tras contraste y pruebas de accesibilidad. Textos y tableros deben conservar alta legibilidad.
 
-## 4. Coherencia entre diez mundos
-| Mundo | Motivo de ilustración propuesto |
-|---|---|
-| La Creación | árbol y jardín, paisaje verde luminoso |
-| Noé y el Diluvio | arca, río/agua y arcoíris |
-| Los Patriarcas | tiendas y rutas del desierto |
-| Moisés y el Éxodo | sendero, desierto y montaña |
-| Reyes y Profetas | ciudad antigua, arquitectura y corona simbólica |
-| La Vida de Jesús | caminos, aldea, amanecer y luz |
-| Parábolas y Enseñanzas | campo, flores y semillas |
-| Los Apóstoles | barca, agua y horizonte |
-| La Iglesia Primitiva | comunidad y casas antiguas |
-| Valores Cristianos | culminación luminosa del sendero y símbolos de conexión |
+## 4. Coherencia gráfica entre los diez mundos (distribución narrativa vigente)
 
-Esta tabla describe una **familia visual**, no autoriza inventar una escena bíblica que contradiga el texto o una iconografía confesional todavía sin decidir.
+La imagen aprobada contiene **rótulos de una organización conceptual anterior**. Su estilo visual se conserva, pero las miniaturas y escenas definitivas deben organizarse de acuerdo con la distribución temática actualizada, respetando el Diluvio en el tercer mundo.
+
+| Mundo | Escena o motivo visual general coherente con la imagen madre |
+|---|---|
+| 1. La Creación | Jardín, árbol, paisaje vivo e iluminación de amanecer |
+| 2. Los primeros tiempos | Senderos, espacios naturales, escenas anteriores al Diluvio sin violencia gráfica |
+| 3. Noé y el Diluvio | Arca, agua, arcoíris y renovación — mundo central del tramo AT |
+| 4. Patriarcas y promesas | Caminos, campamentos, tiendas y luz de esperanza |
+| 5. Moisés, reyes y profetas | Desierto, monte, caminos, ciudades antiguas y símbolos de guía |
+| 6. Jesús, su infancia y familia | Hogar, aldea, calidez familiar y episodios documentados |
+| 7. Jesús crece y enseña | Caminos, naturaleza, encuentros y luz cálida; proximidad al Padre |
+| 8. Jesús, sus amigos y apóstoles | Barca, costa, caminos y comunidad |
+| 9. Redención, resurrección y salvación | Amanecer, esperanza, piedra apartada y luz; no sufrimiento gráfico |
+| 10. Comunidad y valores cristianos | Camino de llegada, hogares, cooperación, símbolos de servicio y paz |
+
+**Jesús como guía de los mundos AT** se representa como acompañamiento didáctico en tarjetas/interfaz, **no dentro de escenas de los patriarcas como un participante histórico**. Las escenas de la vida de Jesús se basan en testimonios verificables de la Reina-Valera 1909 y no inventan biografía juvenil.
 
 ## 5. UI y experiencia
 - Grilla del juego limpia y táctil, sin decoraciones que confundan letras o selección. Tamaños/direcciones aumentan progresivamente.
