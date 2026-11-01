@@ -73,4 +73,11 @@ La documentación normativa del juego **permanece en GitHub**. Los archivos de a
 
 Los nuevos archivos de Drive utilizarán nombres versionados `slc_<tipo>_<descripcion>_vNNN_AAAA-MM-DD.ext`; cada versión debe conservar su procedencia, estado, ruta/ID verificados y relación con el marco que la rige. En GitHub los documentos canónicos conservan nombre y registran cambios mediante SHA/commit; no se duplican por versión.
 
-**Estado contrastado, 2026-11-01:** las carpetas Drive existen, pero las subcarpetas están vacías; el **PNG conceptual aprobado no ha sido subido**, por lo que ninguna IA debe describirlo como disponible en Drive ni afirmar haberlo descargado desde allí. Compartir un enlace a carpeta no acredita autorización de acceso de otros agentes.
+**Estado contrastado, 2026-11-01:** la imagen conceptual aprobada está [guardada en Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk) como `aventura_biblica_moderna_aprobada.png` (`SLC-VIS-001/v001`), con ubicación, formato y tamaño verificados. La carpeta de documentos sigue vacía. El PNG no consta como binario en GitHub y el acceso Drive no es público, por lo que cada agente debe comprobar permisos.
+
+
+## Preparación para la primera APK y continuidad del Supervisor
+
+Por petición del Humano, el hito operativo deseado es **una APK Android funcional para instalar y probar en su teléfono sin consultas rutinarias de producto**. La [especificación de alcance de la primera APK](ALCANCE_PRIMER_APK_V1.md) fija criterios observables: 300 niveles jugables, español cristiano basado en RV1909, pistas, perfil local, progreso, estrellas, álbum, logros y estilo visual aprobado. La [guía de continuidad del Supervisor](CONTINUIDAD_SUPERVISOR_APK_V1.md) distingue detalles técnicos delegables de decisiones materiales reservadas, conforme a Workflow V3.
+
+**Límite verificable:** este objetivo no activa agentes entre conversaciones, no constituye Work Item y no autoriza publicación pública, claves privadas, gasto, acceso remoto al celular ni una aceptación técnica ficticia. La futura ejecución requiere un Supervisor/Work Item/canal de comunicación realmente autorizados y verificables. El primer APK de prueba y la eventual publicación en Play o una página web son hitos distintos.
