@@ -12,7 +12,7 @@
 | Imágenes | [Imágenes y referencias visuales](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr) | PNG, WEBP, recursos gráficos, versiones de diseños |
 | Documentos | [Documentos del proyecto](https://drive.google.com/drive/folders/1O5kEzYPuhzXwaKcQb8iRfasUfHx2Zb44) | Materiales auxiliares, estudios y archivos de referencia |
 
-**Verificación del 2026-11-01:** las **tres carpetas existen**, pero las subcarpetas de imágenes y documentos estaban **vacías al momento de la consulta**. La imagen aprobada **NO se ha verificado subida a Drive ni a GitHub**. El acceso a estos enlaces depende de los permisos de Google Drive del propietario: la existencia del enlace **no implica acceso público, acceso de todos los agentes ni autorización para modificar**. No cambiar permisos de compartición sin decisión del Humano.
+**Verificación actualizada del 2026-11-01:** las tres carpetas existen; la carpeta de imágenes **contiene el PNG original** [aventura_biblica_moderna_aprobada.png](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk), ID de Drive `1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03`, tipo `image/png`, 2.362.665 bytes. La carpeta de documentos permanece vacía. El PNG no está comprobado como archivo físico en GitHub. El acceso a estos enlaces depende de los permisos de Google Drive del propietario: la existencia del enlace **no implica acceso público, acceso de todos los agentes ni autorización para modificar**. No cambiar permisos de compartición sin decisión del Humano.
 
 ## Convención de nombres versionados (archivos alojados en Drive)
 
@@ -27,9 +27,9 @@ Patrón recomendado para archivos nuevos o transferidos:
 - `AAAA-MM-DD`: fecha de creación/aprobación de la versión, según quede documentado; no inventarla.
 - Mantener la extensión y formato originales, especialmente para imágenes y material técnico.
 
-**Nombre reservado para la imagen conceptual ya aprobada:**
+**Alias versionado de catálogo de la imagen conceptual ya aprobada (el nombre real en Drive sigue siendo `aventura_biblica_moderna_aprobada.png`):**
 `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png`.
-Se refiere al PNG de **1536 × 1024** producido y aprobado en el chat, cuyo nombre local original era `aventura_biblica_moderna_aprobada.png`. Renombrar al cargar en Drive es una **convención de registro**, no una nueva versión de contenido ni una edición del PNG.
+Se refiere al PNG de **1536 × 1024** producido y aprobado en el chat, cuyo nombre local original era `aventura_biblica_moderna_aprobada.png`. No se ha renombrado ni duplicado el archivo real: `v001` es la **versión lógica** que corresponde a este ID único de Drive. Reutilizar esa referencia en documentos y agentes.
 
 Ejemplos de revisiones hipotéticas (no existen): `slc_ilustracion_mundo_03_diluvio_v001_2026-11-01.png`; `slc_visual_aventura_biblica_moderna_v002_AAAA-MM-DD.png` (fecha real al crearla). Una corrección de nombre sin alterar contenido debe registrarse como **renombre**, no como nuevo diseño aprobado.
 
@@ -45,7 +45,7 @@ Estados: **PENDIENTE DE CARGA**, **SUBIDO / NO VERIFICADO**, **VERIFICADO** (exi
 
 | ID | Archivo lógico / nombre previsto | Ubicación | Estado factual y autoridad | Relación |
 |---|---|---|---|---|
-| `SLC-VIS-001` | `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png` (original del chat: `aventura_biblica_moderna_aprobada.png`) | Carpeta de imágenes indicada arriba | **APROBADA por el Humano como concepto visual**, **PENDIENTE DE CARGA** a Drive; no hay URL/ID de archivo verificado | [Marco visual](MARCO_VISUAL.md), [Referencias visuales](REFERENCIAS_VISUALES.md) |
+| `SLC-VIS-001` | **Real:** `aventura_biblica_moderna_aprobada.png`; alias `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png` | [Drive: archivo original](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk) — ID `1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03` | **Aprobado por el Humano, presente y verificado por metadatos en Drive** (2.362.665 bytes, PNG, v001, 2026-11-01); privado; no se comprobó igualdad SHA-256 contra Drive | [Marco visual](MARCO_VISUAL.md), [Referencias visuales](REFERENCIAS_VISUALES.md) |
 | `SLC-DOC-001` | Marcos y objetivos canónicos (archivos Markdown de GitHub) | Repositorio `main` | **VERSIONADOS EN GIT**; no se han cargado copias a Drive | [Objetivo](OBJETIVO_PRODUCTO_CRISTIANO.md) |
 
 Una vez que un archivo esté realmente subido: **leer la carpeta, obtener su ID y enlace de Drive, verificar nombre, tamaño/formato, registrar el estado y enlazarlo desde el marco correspondiente**. Si la subida fue con nombre anterior, registrar equivalencia sin inventar un nuevo recurso. No afirmar «guardado» o «compartido» hasta observar la evidencia correspondiente. No crear duplicaciones ni sobrescribir versiones sin motivo.
@@ -58,4 +58,4 @@ Una vez que un archivo esté realmente subido: **leer la carpeta, obtener su ID 
 4. Antes de producir una variante, conservar referencia del original, documentar propósito y relación con la versión previa. Proponer sin sustituir una referencia aprobada hasta autorización del Humano.
 5. No replicar código, herramientas de Workflow o fuente normativa a Drive por preferencia. No crear inventarios paralelos, automatizaciones ni trabajo continuo: aplicar las reglas de Workflow V3 y las autorizaciones del Humano.
 
-**No se ha transferido ningún archivo externo a este Drive mediante esta decisión documental.**
+**Estado comprobado:** el Humano subió el PNG a Drive y su presencia fue verificada mediante listado y metadatos; esta actualización **no sube ni altera el binario o sus permisos**. La imagen no fue añadida como blob a GitHub.
