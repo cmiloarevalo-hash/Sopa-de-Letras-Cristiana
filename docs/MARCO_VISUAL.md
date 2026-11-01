@@ -4,7 +4,9 @@
 
 **REGLA INNEGOCIABLE:** este diseño **NO se extrae ni copia** de «Biblia para Jóvenes». El repositorio externo es fuente de investigación *editorial* solamente. Sus colores, interfaz y «Calma viva» **no** son referencias visuales de este juego.
 
-**Biblioteca de archivos del proyecto:** [recursos en Google Drive, registro y versión vigente](RECURSOS_DRIVE_VERSIONADO.md) · [carpeta de imágenes](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr). La imagen conceptual aprobada se identifica en el registro como **SLC-VIS-001**, nombre Drive previsto `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png`. **A fecha de verificación, la carpeta sigue vacía**: el PNG aún no está alojado allí. Quien diseñe o implemente no debe reemplazarla por una imagen diferente ni afirmar haberla revisado en Drive mientras no exista enlace verificado.
+**Imagen madre aprobada `SLC-VIS-001/v001`:** [abrir el PNG real y verificado en Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk). Nombre en Drive `aventura_biblica_moderna_aprobada.png`, tamaño 2.362.665 bytes, 1536 × 1024 según copia del chat. El alias versionado es solo para el registro, no un segundo archivo. Ver [recursos y accesos](RECURSOS_DRIVE_VERSIONADO.md) y [referencias visuales](REFERENCIAS_VISUALES.md). **El PNG está privado en Drive; cada agente debe comprobar que puede abrirlo.** No está guardado como archivo binario de GitHub.
+
+**Vinculación de autoridad visual:** el PNG fija la estética (exploradores, mapa, tablero, colores, estrellas y jerarquías), mientras la versión vigente de [objetivos](OBJETIVO_PRODUCTO_CRISTIANO.md) fija el contenido: Diluvio en el mundo 3, Jesús como guía, los 300 niveles y la progresión. Los nombres antiguos impresos en la maqueta no prevalecen sobre las decisiones humanas posteriores.
 
 ## 1. Imagen madre y su interpretación textual
 
@@ -70,7 +72,7 @@ Cada pieza futura debe especificar: **mundo/uso, escena bíblica o personaje, co
 **Instrucción de estilo reproducible para futuras ilustraciones (propuesta, no orden ejecutiva):** «Ilustración digital 2D/2.5D estilizada para videojuego móvil de aventura bíblica moderna, formas suaves y legibles, personajes exploradores amistosos, iluminación dorada cálida, verdes/turquesas/azules/violetas/dorado controlados, paisajes por capas, acabados consistentes, composición cinematográfica acogedora, sin texto integrado ni interfaz, espacio de lectura en primer plano, sin estética fotográfica ni violencia explícita».
 
 ## 7. Estado del archivo aprobado
-El archivo **PNG original 1536 × 1024** generado en la conversación existe como referencia del Humano fuera del repositorio en el entorno del chat. **No darlo por almacenado en GitHub a menos que aparezca su blob en la rama y ruta verificadas.** Ver [REFERENCIAS_VISUALES.md](REFERENCIAS_VISUALES.md).
+El **PNG original de 1536 × 1024** [está alojado y verificado por metadatos en Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk); no se ha confirmado una copia binaria en GitHub. Ver [REFERENCIAS_VISUALES.md](REFERENCIAS_VISUALES.md).
 
 ---
 
@@ -84,4 +86,4 @@ El archivo **PNG original 1536 × 1024** generado en la conversación existe com
 
 **Cronología visual, sin cambiar el ADN del arte:** mundos 1–2 jardín y primeros tiempos; mundo 3 agua/arca/arcoíris en el centro del AT; mundo 4 caminos y tiendas de patriarcas; mundo 5 paisajes de éxodo, liderazgo y profetas; mundos 6–8 escenas de infancia con familia y vida pública/entorno de Jesús; mundo 9 luz, camino, esperanza y resurrección, sin escenas gráficas de sufrimiento; mundo 10 comunidad y símbolos de servicio y amor. Esto **actualiza las etiquetas temáticas antiguas de la imagen**, no el arte canónico aprobado.
 
-**Estado del archivo visual:** se verificó el PNG en el entorno de la conversación. La descripción coincide en sus elementos esenciales, pero **el archivo PNG todavía no se ha verificado como archivo real en GitHub**. No citar una ruta de GitHub como si existiera; el procedimiento de incorporación y verificación permanece pendiente.
+**Estado del archivo visual:** el [PNG aprobado está disponible en Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk), con ID, nombre, tipo y tamaño comprobados. El archivo **no está probado como blob en GitHub**, pero el marco lo enlaza directamente y describe su aspecto para agentes con permisos de lectura.
