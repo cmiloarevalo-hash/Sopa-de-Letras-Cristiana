@@ -1,22 +1,24 @@
 <!-- PROYECTO: SOPA DE LETRAS CRISTIANA -->
 # Sopa de Letras Cristiana — Aventura Bíblica Moderna
 
-**Decisión del Humano (2026-11-01):** juego Android para **niños y jóvenes**, desarrollado como una aventura por la Biblia con **300 niveles en 10 mundos de 30**. Conservamos el motor de sopa de letras existente y adaptaremos contenido e interfaz al **español**. El objetivo de primera entrega es un **APK propio, firmado y compartible, instalable en el teléfono y funcional sin cuentas ni internet obligatorio**. Cuentas, sincronización y Google Play son posibilidades futuras, **no funciones de esta primera versión**.
+**Objetivo del Humano, 1 de noviembre de 2026:** juego Android gratuito y offline para **niños y jóvenes**, con **300 niveles en diez mundos bíblicos de 30**, dificultad creciente pero alcanzable y una narrativa que permita conocer a **Jesús como guía del aprendizaje**, sus enseñanzas sobre los patriarcas y profetas, su niñez y familia, sus amigos y apóstoles, su relación con Dios Padre y su mensaje de **amor, redención y salvación**.
 
-**Distribución de la campaña:** La Creación · Noé y el Diluvio · Los Patriarcas · Moisés y el Éxodo · Reyes y Profetas · La Vida de Jesús · Parábolas y Enseñanzas · Los Apóstoles · La Iglesia Primitiva · Valores Cristianos. Los tableros crecerán progresivamente.
+**Organización narrativa vigente:** cinco mundos del Antiguo Testamento (antes del Diluvio, Diluvio **en el tercer mundo**, después del Diluvio), seguidos de cinco mundos sobre la vida de Jesús y la continuidad de sus enseñanzas. Los títulos de mundos afinados y el reparto se documentan en [objetivos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md); el PNG conceptual aprobado representa una **maqueta visual anterior**, no una tabla de nombres definitiva.
 
-**Motivación aprobada:** hasta 3 estrellas por nivel (900 posibles), álbum de descubrimientos bíblicos, logros e insignias coleccionables offline.
+**Recompensas:** hasta 3 estrellas por nivel (900), álbum de descubrimientos y logros/insignias offline. **Pistas accesibles** y lenguaje español apto para niños y jóvenes, tomando como referencia bíblica la **Reina-Valera 1909** con verificación de edición y derechos para cualquier texto embebido.
 
-**Identidad visual propia:** la imagen conceptual de **cinco pantallas «Aventura Bíblica Moderna»**, elegida por el Humano; su lenguaje visual queda traducido a reglas textuales reproducibles. **La investigación de «Biblia para Jóvenes» se consulta solo para criterios editoriales/literarios, no para copiar su estilo visual.**
+**Entrega inicial:** APK propio, firmado, instalable y compartible; juego **sin cuenta online**, con apodo/perfil **local**, sin anuncios, compras, donaciones o red obligatoria. Se prevé escalabilidad futura hacia Google/Play Games y Google Play, **sin construir esos servicios ahora**.
 
-**Documentación vigente del producto:**
-- [Objetivo y los siete puntos aprobados](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
+**Arte:** identidad propia **Aventura Bíblica Moderna**, creada a partir de la imagen aprobada en esta conversación. **No** adoptar el estilo visual del repositorio «Biblia para Jóvenes». Sus investigaciones se usan **solo** como antecedentes editoriales/literarios.
+
+**Documentación de producto:**
+- [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
 - [Marco visual](docs/MARCO_VISUAL.md)
-- [Marco editorial](docs/MARCO_EDITORIAL.md)
-- [Marco literario](docs/MARCO_LITERARIO.md)
-- [Referencias visuales y estado del archivo](docs/REFERENCIAS_VISUALES.md)
+- [Marco editorial y fuente RV1909](docs/MARCO_EDITORIAL.md)
+- [Marco literario y progresión de dificultad](docs/MARCO_LITERARIO.md)
+- [Referencia visual aprobada y estado del PNG](docs/REFERENCIAS_VISUALES.md)
 
-**Estado:** decisiones documentadas; la adaptación cristiana **no está implementada**, no hay APK propio probado y el PNG original de referencia **no se ha verificado dentro de GitHub**. No confundir descripciones del proyecto del autor original con avances de esta adaptación.
+**Estado real:** definición documental actualizada; contenidos cristianos, pruebas, APK propio e integración visual aún pendientes. **PNG original de alta resolución verificado en chat, pendiente de archivo en GitHub.**
 
 ---
 

@@ -33,3 +33,21 @@ Usar campos mínimos a definir por el Supervisor: identificador estable, mundo, 
 No publicar una pista incorrecta, cita atribuida erróneamente o imagen que induzca a presentar un hecho ficticio como Escritura. Registrar correcciones para reproducibilidad. Probar contenido real en múltiples niveles y edades; registrar observaciones agregadas sin perfilar religión ni datos sensibles de menores.
 
 **Límite de autoridad:** este marco recoge pautas para futura ejecución y no modifica ni activa trabajos en Biblia para Jóvenes.
+
+---
+
+## 6. Actualización vinculante de producto (Human, 2026-11-01)
+
+**Referencia bíblica base:** **Reina-Valera 1909**, escogida expresamente por el Humano. Aplicar sus relatos, personajes y referencias como fundamento; **no** reproducir automáticamente texto completo ni asumir que cualquier digitalización tiene derechos de redistribución comprobados. La obra, edición digital, archivo concreto y atribuciones requieren verificación antes de citas literales para APK público.
+
+**Jesús como hilo pedagógico:** el juego puede acompañar a los niños mediante Jesús como guía de aprendizaje para comprender el Antiguo Testamento, sus patriarcas y profetas. **No transformar esa interfaz narrativa en afirmación de que Jesús estuvo físicamente en esos episodios, ni poner en su boca frases inventadas como Escritura.** En el Nuevo Testamento, los relatos sobre su infancia, familia, amigos/apóstoles, relación con el Padre, amor, redención y salvación deben distinguirse por fuente y contexto.
+
+**Fidelidad respecto a la vida de Jesús:** la RV1909 ofrece episodios de nacimiento e infancia; su biografía de juventud **no está detallada**. No rellenar silencios con hechos inventados. Para cercanos y familia, distinguir categorías: parentesco expresamente relatado, apóstol/discipulado y amistad mencionada, sin fusionarlas.
+
+**Complejidad infantil-juvenil:** modernizar **la redacción de pistas y explicaciones originales**, no reescribir versículos protegidos. Las palabras difíciles, arcaicas o menos frecuentes solo tendrán lugar cuando sean comprensibles mediante pistas y definiciones. Los grados avanzados deben seguir siendo alcanzables por niños con experiencia; no exigir edad o alfabetización teológica adulta.
+
+**Seguridad para menores:** la cruz, el pecado, la salvación, el Diluvio y acontecimientos difíciles son parte del sentido bíblico de este producto confesional, pero su presentación no incluirá violencia gráfica, miedo instrumentalizado ni castigos como entretenimiento. La esperanza, el amor y la relación con Dios Padre no deben conseguirse negando hechos bíblicos o sustituyéndolos por doctrinas inventadas.
+
+**Ámbito de publicación:** APK público gratuito y posible Google Play. Sin anuncios, compras, donaciones, chat, cuentas online ni seguimiento de actividad en la primera entrega. El jugador elige un **apodo local** (sin contraseña, correo ni enlace externo), modificable/eliminable. Revisar antes de publicación privacidad efectiva, respaldos Android, declaración de público infantil y políticas Play vigentes. La intención de conformidad no equivale a revisión legal efectuada.
+
+**Origen de esta actualización:** decisiones recientes del Humano; el repositorio `Biblia-para-j-venes-` se consultó solo por metodología de fidelidad y claridad, en **solo lectura**. No se le imputa autorización para trasladar una traducción, corpus o diseño visual a este juego.

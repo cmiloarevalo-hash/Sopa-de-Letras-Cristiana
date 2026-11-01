@@ -66,3 +66,17 @@ Cada pieza futura debe especificar: **mundo/uso, escena bíblica o personaje, co
 
 ## 7. Estado del archivo aprobado
 El archivo **PNG original 1536 × 1024** generado en la conversación existe como referencia del Humano fuera del repositorio en el entorno del chat. **No darlo por almacenado en GitHub a menos que aparezca su blob en la rama y ruta verificadas.** Ver [REFERENCIAS_VISUALES.md](REFERENCIAS_VISUALES.md).
+
+---
+
+## 8. Contraste visual con la imagen madre y nueva orientación narrativa
+
+**Comprobación de la imagen de conversación (1536 × 1024):** el concepto muestra **cinco pantallas** con (1) libro iluminado y cruz, (2) **dos exploradores infantiles** y controles de campaña/modes, (3) un **mapa ilustrado serpenteante** con mundos, (4) cuadrícula central de letras grandes con **bombilla de pista** en la barra superior y (5) victoria con estrellas, relato breve y referencia bíblica. La paleta visible es azul noche, violeta, turquesa, amarillo/dorado y marfil. Por tanto, **la figura de Jesús no aparece en esas cinco pantallas iniciales**: su introducción como guía es **una ampliación autorizada del concepto narrativo**, no una característica ya dibujada en el PNG.
+
+**Criterio de compatibilidad:** preservar el fondo paisajístico por capas, los bordes redondeados, el tablero claro, el mapa de mundos, la escala de controles y los exploradores que aparecen en el PNG. Incorporar tarjetas e ilustraciones sobre Jesús y el Padre **sin sustituir la apariencia base**, sin colocar un retrato de Jesús como botón repetitivo y sin presentar escenas ilustradas de su infancia/juventud como documentación histórica. Ante una representación de Jesús como maestro, usar una expresión respetuosa, amable, reconocible, no una caricatura ni una figura violenta. Los textos de ayuda serán del juego, no citas bíblicas atribuidas sin comprobación.
+
+**Pistas y accesibilidad:** la bombilla de la maqueta marca el acceso a pistas; su icono o denominación final pueden cambiar, pero debe existir un acceso **visible y textual**, apto para niños, y la ayuda no debe depender exclusivamente de imágenes o colores. Las pistas pueden complementarse con una tarjeta educativa con Jesús, siempre que encaje en la etapa y pase el control editorial.
+
+**Cronología visual, sin cambiar el ADN del arte:** mundos 1–2 jardín y primeros tiempos; mundo 3 agua/arca/arcoíris en el centro del AT; mundo 4 caminos y tiendas de patriarcas; mundo 5 paisajes de éxodo, liderazgo y profetas; mundos 6–8 escenas de infancia con familia y vida pública/entorno de Jesús; mundo 9 luz, camino, esperanza y resurrección, sin escenas gráficas de sufrimiento; mundo 10 comunidad y símbolos de servicio y amor. Esto **actualiza las etiquetas temáticas antiguas de la imagen**, no el arte canónico aprobado.
+
+**Estado del archivo visual:** se verificó el PNG en el entorno de la conversación. La descripción coincide en sus elementos esenciales, pero **el archivo PNG todavía no se ha verificado como archivo real en GitHub**. No citar una ruta de GitHub como si existiera; el procedimiento de incorporación y verificación permanece pendiente.
