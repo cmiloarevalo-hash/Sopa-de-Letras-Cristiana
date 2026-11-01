@@ -1,3 +1,18 @@
+<!-- PROYECTO: SOPA DE LETRAS CRISTIANA -->
+# Sopa de Letras Cristiana
+
+**Proyecto Android para niños y jóvenes:** adaptación del juego original a una aventura bíblica moderna, con **300 niveles (10 mundos de 30)** y el objetivo de obtener un **APK propio instalable**.
+
+**Decisión de producto del 1 de noviembre de 2026:** conservar el motor de sopa de letras y los niveles; adaptar vocabulario, pistas, mundos, interfaz y presentación al **español** y a una temática **cristiana**. El estilo visual elegido es **Aventura bíblica moderna**, basado en el concepto ilustrado aprobado en la conversación con el Humano.
+
+**Estado:** fase de definición y adaptación planificada. La rama `main` contiene aún el juego original; **no representa todavía una versión cristiana adaptada ni un APK propio probado**. La imagen visual original aprobada está pendiente de incorporación al repositorio.
+
+**[Objetivo, decisiones, criterios de éxito y alcance previsto](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)**
+
+> **Base original:** el README que sigue documenta el software del autor `SyscallBrain/SopaDeLetras`; se conserva como referencia técnica histórica. Las funciones descritas a continuación no acreditan que la adaptación cristiana ya esté implementada. La licencia y atribución originales se mantienen.
+
+---
+
 <div align="center">
 
 # Sopa de Letras
