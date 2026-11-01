@@ -17,7 +17,9 @@
 
 **Consulta requerida al trabajar con imágenes o documentos complementarios:** [Biblioteca, registro de recursos, nombres versionados y estados](docs/RECURSOS_DRIVE_VERSIONADO.md). Los archivos de Drive usan nombres `slc_<tipo>_<tema>_vNNN_AAAA-MM-DD.ext`; los documentos canónicos de GitHub mantienen su nombre y se versionan mediante **SHA del commit**. Ningún agente debe asumir que dispone de acceso a Drive o que una imagen ya está subida sin verificar su ID/URL.
 
-**Imagen madre `SLC-VIS-001`:** aprobada como referencia de diseño, pero **pendiente de carga real a Drive** según verificación del 2026-11-01; no hay archivo PNG verificable en `main`. El marco visual textual sigue disponible en GitHub y no reemplaza el PNG.
+**Imagen madre `SLC-VIS-001` (v001):** [PNG aprobado, verificado en Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk). Nombre real `aventura_biblica_moderna_aprobada.png`, formato PNG, 2.362.665 bytes. La imagen es **privada**, por lo que cada agente debe comprobar su acceso. No existe copia binaria comprobada en `main` de GitHub.
+
+**Paquete de definición para agentes:** [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). Estas especificaciones evitan dudas rutinarias, pero **no activan por sí solas agentes entre sesiones ni autorizan publicación pública**.
 
 **Documentación de producto:**
 - [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
@@ -26,7 +28,7 @@
 - [Marco literario y progresión de dificultad](docs/MARCO_LITERARIO.md)
 - [Referencia visual aprobada y estado del PNG](docs/REFERENCIAS_VISUALES.md)
 
-**Estado real:** definición documental actualizada; contenidos cristianos, pruebas, APK propio e integración visual aún pendientes. **PNG original de alta resolución verificado en chat, pendiente de archivo en GitHub.**
+**Estado real:** imagen aprobada disponible en Drive (no copiada a GitHub); documentación del producto definida. Los 300 niveles cristianos, pruebas, integración visual y APK propio siguen pendientes.
 
 ---
 
