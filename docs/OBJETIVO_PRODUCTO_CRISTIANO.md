@@ -66,3 +66,11 @@ Reutilizar el motor **Kotlin/Jetpack Compose**, generación de tableros, campañ
 **Autorizado en esta interacción:** actualizar **documentación de producto** en GitHub. **No autorizado:** implementar, generar tareas/Issues, cambiar la app o afirmar lanzamiento. Los marcos ofrecen una preinvestigación que el Supervisor podrá convertir más adelante en alcances técnicos y verificaciones siguiendo Workflow V3. **No se ha elaborado ni probado el contenido individual de los 300 niveles.**
 
 Investigación consultiva: [Biblia para Jóvenes](https://github.com/cmiloarevalo-hash/Biblia-para-j-venes-) `main@03efd98d` — **lectura editorial/literaria**, no fuente visual ni autorización para copiar corpus.
+
+## Biblioteca compartida, nombres y versiones
+
+La documentación normativa del juego **permanece en GitHub**. Los archivos de arte y materiales complementarios se organizan en [Google Drive: Sopa de Letras Cristiana](https://drive.google.com/drive/folders/1iENoEGadHyTbCkZlgjK1z2jf4FMQssrK) (con subcarpetas de [imágenes](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr) y [documentos](https://drive.google.com/drive/folders/1O5kEzYPuhzXwaKcQb8iRfasUfHx2Zb44)). Para que Jefe, Supervisor, Delfín y agentes asistentes puedan localizar los materiales, **consultar primero** el [Registro de recursos, versiones y disponibilidad](RECURSOS_DRIVE_VERSIONADO.md), respetando Workflow V3 y las autorizaciones del Humano.
+
+Los nuevos archivos de Drive utilizarán nombres versionados `slc_<tipo>_<descripcion>_vNNN_AAAA-MM-DD.ext`; cada versión debe conservar su procedencia, estado, ruta/ID verificados y relación con el marco que la rige. En GitHub los documentos canónicos conservan nombre y registran cambios mediante SHA/commit; no se duplican por versión.
+
+**Estado contrastado, 2026-11-01:** las carpetas Drive existen, pero las subcarpetas están vacías; el **PNG conceptual aprobado no ha sido subido**, por lo que ninguna IA debe describirlo como disponible en Drive ni afirmar haberlo descargado desde allí. Compartir un enlace a carpeta no acredita autorización de acceso de otros agentes.

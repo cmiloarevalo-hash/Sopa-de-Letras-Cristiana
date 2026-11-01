@@ -1,5 +1,7 @@
 # Marco editorial — Sopa de Letras Cristiana
 
+**Trazabilidad de fuentes y archivos complementarios:** los documentos canónicos y decisiones permanecen en GitHub; si se incorporan materiales editoriales a Google Drive, localizar su **nombre versionado, ID y origen verificables** en [Registro de recursos](RECURSOS_DRIVE_VERSIONADO.md). Las fuentes de «Biblia para Jóvenes» continúan siendo consulta de investigación, no corpus autorizado ni fuente visual de este juego.
+
 **Finalidad:** que cada palabra, pista, descubrimiento bíblico y ficha del álbum sea comprensible, verificable, apropiada para niños y jóvenes y fiel al sentido del texto fuente.
 
 **Alcance del antecedente:** se consultaron [EDITORIAL_CHARTER.md](https://github.com/cmiloarevalo-hash/Biblia-para-j-venes-/blob/03efd98d6ae3582f67793b6eaa783b4e1901a793/EDITORIAL_CHARTER.md), [TRANSLATION_STYLE_GUIDE.md](https://github.com/cmiloarevalo-hash/Biblia-para-j-venes-/blob/03efd98d6ae3582f67793b6eaa783b4e1901a793/TRANSLATION_STYLE_GUIDE.md), [EDITORIAL_REVIEW_CHECKLIST.md](https://github.com/cmiloarevalo-hash/Biblia-para-j-venes-/blob/03efd98d6ae3582f67793b6eaa783b4e1901a793/EDITORIAL_REVIEW_CHECKLIST.md) y [RESEARCH_DECISION_LOG.md](https://github.com/cmiloarevalo-hash/Biblia-para-j-venes-/blob/03efd98d6ae3582f67793b6eaa783b4e1901a793/RESEARCH_DECISION_LOG.md) del repositorio **Biblia para Jóvenes** (consulta \`main@03efd98d\`). Allí el estado es **STANDBY / ARCHIVO**: ninguna traducción, licencia de corpus ni plan de ejecución se transfiere al juego.

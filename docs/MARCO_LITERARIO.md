@@ -1,5 +1,7 @@
 # Marco literario y narrativo — Sopa de Letras Cristiana
 
+**Guía para colaboradores y agentes:** los recursos visuales y documentos auxiliares de cada mundo se indexan por versión y ubicación real en el [Registro de Google Drive](RECURSOS_DRIVE_VERSIONADO.md). El hecho de que exista la carpeta no certifica la presencia de un archivo.
+
 **Audiencia:** lectores iniciales que ya reconocen palabras, niños con mayor experiencia y jóvenes. **Meta:** que un niño pueda alcanzar los 300 niveles con aprendizaje, práctica y pistas; que el joven encuentre profundidad progresiva sin vocabulario académico innecesario.
 
 **Eje decidido por el Humano:** **Jesús como guía de nuestra aventura bíblica**. En el Antiguo Testamento nos ayuda a **aprender sobre los patriarcas, los primeros tiempos, el Diluvio, Moisés y los profetas**. En el Nuevo Testamento conocemos su niñez, entorno familiar y cercano, su vida adulta, amistad, enseñanza del amor y relación con Dios Padre; luego su entrega, resurrección, redención y salvación. El propósito religioso del juego incluye el acercamiento a **Dios Padre a través de Jesús**.

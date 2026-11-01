@@ -4,6 +4,8 @@
 
 **REGLA INNEGOCIABLE:** este diseño **NO se extrae ni copia** de «Biblia para Jóvenes». El repositorio externo es fuente de investigación *editorial* solamente. Sus colores, interfaz y «Calma viva» **no** son referencias visuales de este juego.
 
+**Biblioteca de archivos del proyecto:** [recursos en Google Drive, registro y versión vigente](RECURSOS_DRIVE_VERSIONADO.md) · [carpeta de imágenes](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr). La imagen conceptual aprobada se identifica en el registro como **SLC-VIS-001**, nombre Drive previsto `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png`. **A fecha de verificación, la carpeta sigue vacía**: el PNG aún no está alojado allí. Quien diseñe o implemente no debe reemplazarla por una imagen diferente ni afirmar haberla revisado en Drive mientras no exista enlace verificado.
+
 ## 1. Imagen madre y su interpretación textual
 
 La composición aprobada presenta cinco pantallas verticales dentro de un paisaje continuo con vegetación, montañas, cielo azul y luz dorada:

@@ -11,6 +11,14 @@
 
 **Arte:** identidad propia **Aventura Bíblica Moderna**, creada a partir de la imagen aprobada en esta conversación. **No** adoptar el estilo visual del repositorio «Biblia para Jóvenes». Sus investigaciones se usan **solo** como antecedentes editoriales/literarios.
 
+## Biblioteca de archivos e instrucciones para agentes
+
+**Google Drive del proyecto:** [Sopa de Letras Cristiana](https://drive.google.com/drive/folders/1iENoEGadHyTbCkZlgjK1z2jf4FMQssrK) · [Imágenes y referencias visuales](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr) · [Documentos del proyecto](https://drive.google.com/drive/folders/1O5kEzYPuhzXwaKcQb8iRfasUfHx2Zb44).
+
+**Consulta requerida al trabajar con imágenes o documentos complementarios:** [Biblioteca, registro de recursos, nombres versionados y estados](docs/RECURSOS_DRIVE_VERSIONADO.md). Los archivos de Drive usan nombres `slc_<tipo>_<tema>_vNNN_AAAA-MM-DD.ext`; los documentos canónicos de GitHub mantienen su nombre y se versionan mediante **SHA del commit**. Ningún agente debe asumir que dispone de acceso a Drive o que una imagen ya está subida sin verificar su ID/URL.
+
+**Imagen madre `SLC-VIS-001`:** aprobada como referencia de diseño, pero **pendiente de carga real a Drive** según verificación del 2026-11-01; no hay archivo PNG verificable en `main`. El marco visual textual sigue disponible en GitHub y no reemplaza el PNG.
+
 **Documentación de producto:**
 - [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
 - [Marco visual](docs/MARCO_VISUAL.md)
