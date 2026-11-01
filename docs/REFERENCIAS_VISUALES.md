@@ -6,9 +6,9 @@
 
 **Imagen canónica:** `SLC-VIS-001`, cuya denominación **versionada prevista para Drive** es `slc_visual_aventura_biblica_moderna_v001_2026-11-01.png`. Su archivo original de conversación se denomina `aventura_biblica_moderna_aprobada.png`, 1536 × 1024 píxeles. Es la imagen de cinco pantallas aprobada por el Humano; **no se genera una alternativa por cambiarle el nombre**.
 
-**Estado a 2026-11-01:** imagen aprobada, **pendiente de subida y verificación**. La carpeta de Drive para imágenes y la carpeta para documentos estaban **vacías** cuando se consultaron. Tampoco hay un PNG original confirmado en el repositorio GitHub. Por lo tanto, **NO EXISTE todavía un enlace directo verificado al PNG en Drive**. Quien no tenga acceso a la imagen del chat debe reconocer ese límite.
+**Estado actualizado a 2026-11-01:** imagen original [verificada en Drive como PNG](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk), ID `1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03`, nombre real `aventura_biblica_moderna_aprobada.png`, tamaño 2.362.665 bytes. El recurso `SLC-VIS-001 / v001` conserva el alias normalizado como metadato de catálogo, **sin cambio de nombre ni duplicación del archivo**. El PNG no está físicamente incorporado en GitHub.
 
-La **ubicación, el registro y la norma de nombres** para todos los recursos de arte/documentos están en [RECURSOS_DRIVE_VERSIONADO.md](RECURSOS_DRIVE_VERSIONADO.md). Una vez cargado el PNG, verificar ID y URL de archivo Drive, registrar su versión y cambiar este estado; solo entonces convertir este apartado en un enlace directo a la imagen.
+La **ubicación, el registro y la norma de nombres** están en [RECURSOS_DRIVE_VERSIONADO.md](RECURSOS_DRIVE_VERSIONADO.md). El [enlace directo a la imagen aprobada](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk) y su ID de Drive ya se comprobaron. Drive indica `shared:false`: los agentes necesitan permiso para abrirla.
 
 ## Imagen conceptual seleccionada por el Humano (2026-11-01)
 **Título:** Sopa de Letras Cristiana — Aventura Bíblica Moderna.  
@@ -16,7 +16,7 @@ La **ubicación, el registro y la norma de nombres** para todos los recursos de 
 
 **Archivo original de conversación:** `aventura_biblica_moderna_aprobada.png` (imagen creada y elegida en el chat). **Ruta local del chat:** `/mnt/data/aventura_biblica_moderna_aprobada.png` (no es una URL GitHub ni ruta del repositorio).
 
-**Estado de preservación GitHub:** documentación textual integrada en [MARCO_VISUAL.md](MARCO_VISUAL.md). **El PNG original todavía NO está probado como archivo dentro de GitHub**; una referencia local del chat no demuestra disponibilidad posterior para colaboradores. Para completar la preservación debe subirse el PNG a `docs/referencias/aventura_biblica_moderna_aprobada.png` por un canal de archivos autorizado y comprobarse el archivo en `main`.
+**Ubicación del recurso original:** [Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk), presencia confirmada por nombre, formato y tamaño. **Estado GitHub:** el marco textual [MARCO_VISUAL.md](MARCO_VISUAL.md) y el registro enlazan Drive; **no hay PNG original confirmado como blob de GitHub**. No inventar rutas de imágenes locales en `main`.
 
 **No confundir referencias:** las imágenes ilustrativas buscadas durante otras respuestas del chat eran inspiraciones externas, no assets de uso autorizado ni parte aprobada del repositorio. La imagen compuesta de cinco pantallas es la referencia de producto elegida explícitamente.
 
