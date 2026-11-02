@@ -76,6 +76,14 @@ Los nuevos archivos de Drive utilizarán nombres versionados `slc_<tipo>_<descri
 **Estado contrastado, 2026-11-01:** la imagen conceptual aprobada está [guardada en Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk) como `aventura_biblica_moderna_aprobada.png` (`SLC-VIS-001/v001`), con ubicación, formato y tamaño verificados. La carpeta de documentos sigue vacía. El PNG no consta como binario en GitHub y el acceso Drive no es público, por lo que cada agente debe comprobar permisos.
 
 
+## Gobierno de las cinco actividades y participación del Humano
+
+La dirección del Humano para esta primera APK queda formalizada en [PLAN_BASE_5_ACTIVIDADES_APK.md](PLAN_BASE_5_ACTIVIDADES_APK.md): **A1 Base Android; A2 Contenido bíblico; A3 Visual; A4 Funcionalidad y progreso offline; A5 Calidad y APK**. Son ejes de control y resultados, **no arquitectura técnica impuesta ni un nuevo protocolo**. El Supervisor mantiene autonomía de ingeniería, reutiliza el motor existente y evita infraestructura, seguridad desproporcionada y recursos gráficos excesivos. Medir el tamaño real del APK, sin prometer un peso no verificado.
+
+El Humano intervendrá **solamente para revisar la propuesta visual consolidada antes de cerrar el diseño** y para **instalar/probar la primera APK**; se evitan consultas rutinarias. Decisiones materiales, permisos y bloqueos irreductibles siguen las autoridades de Workflow V3.
+
+**Canal de dos IA interlocutoras:** **Jefe** y **Supervisor**. Las **IA publican sus handoffs completos en GitHub** cuando exista tarea/canal autorizado; el Humano **transporta exclusivamente el mensaje corto** con el enlace entre chats, sin publicar handoffs por ellas. El retorno técnico al Jefe es responsabilidad del Supervisor; no confundir ese destinatario con Delfín/Implementer ni inventar un `SEND_TO: ProjectLead` no verificado. Más detalles en [Continuidad del Supervisor](CONTINUIDAD_SUPERVISOR_APK_V1.md). Publicación != recepción.
+
 ## Preparación para la primera APK y continuidad del Supervisor
 
 Por petición del Humano, el hito operativo deseado es **una APK Android funcional para instalar y probar en su teléfono sin consultas rutinarias de producto**. La [especificación de alcance de la primera APK](ALCANCE_PRIMER_APK_V1.md) fija criterios observables: 300 niveles jugables, español cristiano basado en RV1909, pistas, perfil local, progreso, estrellas, álbum, logros y estilo visual aprobado. La [guía de continuidad del Supervisor](CONTINUIDAD_SUPERVISOR_APK_V1.md) distingue detalles técnicos delegables de decisiones materiales reservadas, conforme a Workflow V3.
