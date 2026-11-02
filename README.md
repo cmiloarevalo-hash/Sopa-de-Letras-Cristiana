@@ -19,7 +19,7 @@
 
 **Imagen madre `SLC-VIS-001` (v001):** [PNG aprobado, verificado en Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk). Nombre real `aventura_biblica_moderna_aprobada.png`, formato PNG, 2.362.665 bytes. La imagen es **privada**, por lo que cada agente debe comprobar su acceso. No existe copia binaria comprobada en `main` de GitHub.
 
-**Paquete de definición para agentes:** [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). Estas especificaciones evitan dudas rutinarias, pero **no activan por sí solas agentes entre sesiones ni autorizan publicación pública**.
+**Plan de trabajo para todas las IA actuales y futuras:** [Cinco actividades, ingeniería mínima, revisión visual y handoffs](docs/PLAN_BASE_5_ACTIVIDADES_APK.md) · [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). **Las IA publican sus handoffs completos en GitHub bajo el canal autorizado; el Humano transporta exclusivamente el aviso corto entre el Jefe y el Supervisor.** No se presupone entrega automática de un chat a otro. Estas especificaciones no activan agentes entre sesiones ni autorizan publicación pública.
 
 **Documentación de producto:**
 - [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
