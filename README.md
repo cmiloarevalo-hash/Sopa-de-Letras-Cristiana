@@ -11,6 +11,8 @@
 
 **Arte:** identidad propia **Aventura Bíblica Moderna**, creada a partir de la imagen aprobada en esta conversación. **No** adoptar el estilo visual del repositorio «Biblia para Jóvenes». Sus investigaciones se usan **solo** como antecedentes editoriales/literarios.
 
+**Decisión vigente del Humano (2026-11-02) — repositorio:** este proyecto debe ser **INDEPENDIENTE (no fork) y PÚBLICO**. La anterior petición de convertirlo en privado queda **revocada**. Mantener GitHub **Issues** habilitado para los Work Items de Workflow V3. **Repositorio público no significa APK públicamente distribuible**: publicar o distribuir la aplicación final sigue requiriendo autorización específica del Humano.
+
 ## Biblioteca de archivos e instrucciones para agentes
 
 **Google Drive del proyecto:** [Sopa de Letras Cristiana](https://drive.google.com/drive/folders/1iENoEGadHyTbCkZlgjK1z2jf4FMQssrK) · [Imágenes y referencias visuales](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr) · [Documentos del proyecto](https://drive.google.com/drive/folders/1O5kEzYPuhzXwaKcQb8iRfasUfHx2Zb44).
