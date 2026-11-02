@@ -21,6 +21,8 @@
 
 **Plan de trabajo para todas las IA actuales y futuras:** [Cinco actividades, ingeniería mínima, revisión visual y handoffs](docs/PLAN_BASE_5_ACTIVIDADES_APK.md) · [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). **Las IA publican sus handoffs completos en GitHub bajo el canal autorizado; el Humano transporta exclusivamente el aviso corto entre el Jefe y el Supervisor.** No se presupone entrega automática de un chat a otro. Estas especificaciones no activan agentes entre sesiones ni autorizan publicación pública.
 
+**Handoff documental vigente de arranque para el Supervisor (2026-11-02):** [leer mensaje completo publicado por el Jefe](docs/handoffs/2026-11-02_JEFE_A_SUPERVISOR_APK_V001.md). El Humano transporta solo el aviso corto con este enlace; la publicación no prueba recepción ni crea un Work Item.
+
 **Documentación de producto:**
 - [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
 - [Marco visual](docs/MARCO_VISUAL.md)
