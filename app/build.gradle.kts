@@ -44,6 +44,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Test-only identity; no release credentials or distribution change.
+            applicationIdSuffix = ".cristiana.debug"
+            versionNameSuffix = "-candidate-dev"
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(
