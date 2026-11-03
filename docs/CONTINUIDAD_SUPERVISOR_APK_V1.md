@@ -2,17 +2,29 @@
 
 **Versión:** v001, 2026-11-01. **Tipo:** orientación para preparar Work Items, no Work Item activo ni canal de entrega al Supervisor. **Intención del Humano:** los agentes han de avanzar con autonomía técnica suficiente hasta entregar una primera APK instalable, sin pedir aprobación del Humano por cada detalle menor.
 
+## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
+
+**Regla obligatoria para todos los agentes del proyecto (Jefe, Supervisor, Delfín/Implementer y otros agentes autorizados):** queda **PROHIBIDO agregar instrucciones, requisitos, condiciones, verificaciones, controles o responsabilidades inventadas por el agente que generen bloqueos, esperas o interrupciones** del desarrollo o de los programas. Las propuestas propias no son órdenes del Humano ni deben imponerse como condiciones de avance. Respetar Workflow V3 y los límites de autoridad y permisos realmente aplicables, sin añadir obstáculos por iniciativa propia.
+
+**Seguridad de los programas:** ante incidencias o riesgos ordinarios se deben emitir **avisos o alertas informativos**, sin impedir el funcionamiento del programa ni paralizar el trabajo autorizado. **Solo una situación de seguridad extrema, concreta y justificada puede motivar un bloqueo de seguridad.** No convertir una advertencia, una incertidumbre menor, una preferencia técnica o una comprobación opcional en veto. Las prohibiciones técnicas o de autorización que realmente sean obligatorias no quedan derogadas por esta regla.
+
+**Continuidad:** si existe un impedimento puntual, registrarlo y proseguir con las demás tareas autorizadas e independientes; resolverlo sin exigir al Humano activaciones o aprobaciones rutinarias. El Supervisor mantiene la dirección técnica; el Jefe no asigna por cuenta propia nuevos controles ni tareas de administración del transporte.
+
+**Transporte y límites del Jefe:** los agentes publican los handoffs por los Issues autorizados del repositorio; el software de Windows realiza su transporte mecánico según lo indicado por el Humano y **para el Jefe es solo lectura**. No imponer modificaciones ni reconfiguraciones de ese software. La publicación no demuestra por sí sola recepción.
+
+**Precedencia respecto de sugerencias anteriores:** cualquier propuesta del Jefe de añadir condiciones para el canal, supervisión de Windows o controles no autorizados que pudiera bloquear el desarrollo queda expresamente **sin efecto como instrucción**. Esta regla es una **decisión del Humano**, no una propuesta técnica del Jefe.
+
 ## Decisión vigente sobre interlocutores y handoffs (Humano, 2026-11-02)
 
 Este proyecto se comunica con **dos IA interlocutoras**: **Jefe de Agente IA** y **Supervisor**. El Supervisor gobierna la implementación técnica y las interacciones internas con Delfín/Implementer si corresponde; **los handoffs para el Jefe NO se dirigen al Implementer**.
 
 **Separar dos acciones:**
 1. **PUBLICACIÓN:** la IA que realiza el trabajo correspondiente **publica el handoff completo y sus referencias verificables en GitHub**, dentro del Work Item/canal y scopes realmente autorizados. El Humano no escribe ni publica esos handoffs. El Supervisor es responsable de su registro técnico de retorno al Jefe y del aviso corto; el Jefe registra las decisiones humanas que le corresponden cuando esté autorizado.
-2. **TRANSPORTE:** el Humano **solo copia el mensaje corto** de un chat al otro (Supervisor → Jefe o Jefe → Supervisor), con el enlace a lo publicado. No transporta informes completos. GitHub guarda evidencia, **no entrega por sí mismo al chat receptor**.
+2. **TRANSPORTE (decisión humana posterior, 2026-11-03):** el software de Windows realiza el transporte mecánico. Para el Jefe es de **solo lectura**. No exigir al Humano traslado o activación manual por Issue. GitHub conserva evidencia de publicación, pero esa publicación por sí sola no acredita recepción.
 
 **Aviso corto Supervisor → Jefe:** `PARA: Jefe`, `PROYECTO`, `WORK_ITEM/ACTIVIDAD`, `URL exacta del handoff publicado`, `HEAD/PR (si aplica)`, `acción solicitada`. Una publicación sin URL o destinatario verificable no equivale a handoff entregado.
 
-**V3 y ruta real:** `ProjectLead` es un **rol de referencia**, no un `SEND_TO` técnicamente acreditado. No fabricar mensajes enrutados `SEND_TO: ProjectLead`, ni usar `SEND_TO: Implementer` para un informe que va al Jefe. Ante falta de canal de enrutamiento automático comprobado, mantener la publicación documental autorizada y transportar **solo el aviso** por el Humano. Respetar la distinción `PUBLISHED != DELIVERED != RESPONDED != EXECUTED != ACCEPT`. El implementador, cuando exista, mantiene sus handoffs **separados e internos** conforme al contrato Supervisor ↔ Implementer de Workflow V3.
+**V3 y ruta real:** `ProjectLead` es un **rol de referencia**, no un `SEND_TO` técnicamente acreditado. No fabricar mensajes enrutados `SEND_TO: ProjectLead`, ni usar `SEND_TO: Implementer` para un informe que va al Jefe. Ante falta de recepción verificable, mantener el registro documental autorizado sin crear bloqueos, obligaciones nuevas sobre el software ni responsabilidades manuales para el Humano. Respetar la distinción `PUBLISHED != DELIVERED != RESPONDED != EXECUTED != ACCEPT`. El implementador, cuando exista, mantiene sus handoffs **separados e internos** conforme al contrato Supervisor ↔ Implementer de Workflow V3.
 
 **Esto no significa una IA trabajando sola en segundo plano.** Las IA realizan sus publicaciones en las sesiones/tareas efectivamente iniciadas y autorizadas. No crear bots, vigilancias, servicios de mensajes ni prometer reanudación automática.
 
