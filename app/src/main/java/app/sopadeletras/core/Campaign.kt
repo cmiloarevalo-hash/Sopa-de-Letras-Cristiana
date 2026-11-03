@@ -37,16 +37,16 @@ const val LEVELS_PER_WORLD = 30
 const val TOTAL_LEVELS = 300
 
 val WORLDS = listOf(
-    World("Ceu Noturno", category = 0, n = 6, minWords = 3, maxWords = 4, dirsCount = 2, decoy = 0.0),
-    World("Mar Profundo", category = 1, n = 8, minWords = 4, maxWords = 6, dirsCount = 3, decoy = 0.0),
-    World("Cozinha Aberta", category = 2, n = 8, minWords = 6, maxWords = 8, dirsCount = 5, decoy = 0.2),
-    World("Bicho Solto", category = 3, n = 10, minWords = 6, maxWords = 9, dirsCount = 3, decoy = 0.2),
-    World("Volta ao Mundo", category = 4, n = 10, minWords = 8, maxWords = 11, dirsCount = 5, decoy = 0.4),
-    World("Floresta Densa", category = 5, n = 10, minWords = 10, maxWords = 12, dirsCount = 8, decoy = 0.5),
-    World("Cidade Grande", category = 6, n = 12, minWords = 8, maxWords = 12, dirsCount = 5, decoy = 0.5),
-    World("Dia de Jogo", category = 7, n = 12, minWords = 10, maxWords = 14, dirsCount = 8, decoy = 0.6),
-    World("Casa Aberta", category = 8, n = 12, minWords = 12, maxWords = 16, dirsCount = 8, decoy = 0.8),
-    World("Corpo e Mente", category = 9, n = 12, minWords = 14, maxWords = 18, dirsCount = 8, decoy = 1.0),
+    World("La Creación", category = 0, n = 6, minWords = 3, maxWords = 4, dirsCount = 2, decoy = 0),
+    World("Los primeros tiempos", category = 1, n = 8, minWords = 4, maxWords = 6, dirsCount = 3, decoy = 0),
+    World("Noé y el Diluvio", category = 2, n = 8, minWords = 5, maxWords = 7, dirsCount = 5, decoy = 0.1),
+    World("Patriarcas y promesas", category = 3, n = 10, minWords = 5, maxWords = 8, dirsCount = 3, decoy = 0.15),
+    World("Moisés, reyes y profetas", category = 4, n = 10, minWords = 6, maxWords = 9, dirsCount = 5, decoy = 0.2),
+    World("Jesús, su infancia y familia", category = 5, n = 10, minWords = 7, maxWords = 10, dirsCount = 8, decoy = 0.25),
+    World("Jesús crece y enseña", category = 6, n = 12, minWords = 7, maxWords = 10, dirsCount = 5, decoy = 0.3),
+    World("Jesús, sus amigos y apóstoles", category = 7, n = 12, minWords = 8, maxWords = 11, dirsCount = 8, decoy = 0.35),
+    World("Redención, resurrección y salvación", category = 8, n = 12, minWords = 8, maxWords = 11, dirsCount = 8, decoy = 0.35),
+    World("Comunidad y valores cristianos", category = 9, n = 12, minWords = 9, maxWords = 12, dirsCount = 8, decoy = 0.4),
 )
 
 private fun dirsForCount(count: Int): List<Dir> = when (count) {

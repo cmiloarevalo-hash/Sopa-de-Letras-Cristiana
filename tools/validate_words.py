@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / "app" / "src" / "main" / "assets" / "words"
 WORD_RE = re.compile(r"^[A-Z]{3,12}$")
-LANGS = ["pt-PT", "en-US"]
+LANGS = ["pt-PT", "en-US", "es-ES"]
 
 BR_BLACKLIST = {
     "ONIBUS", "TREM", "CELULAR", "TELA", "SUCO", "TIME", "GOL", "MOCA",
@@ -44,9 +44,12 @@ def check_file(lang: str, path: Path) -> None:
         fail(f"{lang}/{path.name}: id {data.get('id')!r} != filename")
     if not data.get("name"):
         fail(f"{lang}/{path.name}: missing display name")
+    if lang == "es-ES" and (not data.get("reference") or not data.get("guide")):
+        fail(f"{lang}/{path.name}: biblical reference or original guide missing")
     words = data.get("words", [])
-    if len(words) < 80:
-        fail(f"{lang}/{path.name}: {len(words)} normal words, need >= 80")
+    minimum = 70 if lang == "es-ES" else 80
+    if len(words) < minimum:
+        fail(f"{lang}/{path.name}: {len(words)} normal words, need >= {minimum}")
     seen: set[str] = set()
     for word in words:
         if not isinstance(word, str) or not WORD_RE.match(word):
@@ -65,7 +68,7 @@ def check_file(lang: str, path: Path) -> None:
         fail(f"{lang}/{path.name}: mid words {mid}/{len(words)} < 40%")
     if long / total < 0.20:
         fail(f"{lang}/{path.name}: long words {long}/{len(words)} < 20%")
-    blacklist = (BR_BLACKLIST | AO_BLACKLIST) if lang == "pt-PT" else EN_BLACKLIST
+    blacklist = (BR_BLACKLIST | AO_BLACKLIST) if lang == "pt-PT" else (EN_BLACKLIST if lang == "en-US" else set())
     for word in words:
         if word in blacklist:
             fail(f"{lang}/{path.name}: blacklisted {word}")
