@@ -4,6 +4,18 @@
 
 **Propósito:** disponer de una **APK Android liviana, offline y jugable**, con 300 niveles bíblicos en español, experiencia infantil-juvenil y diseño «Aventura Bíblica Moderna». Reutilizar el proyecto original tanto como resulte viable. La ingeniería detallada y los Work Items corresponden al Supervisor bajo Workflow V3.
 
+## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
+
+**Regla obligatoria para todos los agentes del proyecto (Jefe, Supervisor, Delfín/Implementer y otros agentes autorizados):** queda **PROHIBIDO agregar instrucciones, requisitos, condiciones, verificaciones, controles o responsabilidades inventadas por el agente que generen bloqueos, esperas o interrupciones** del desarrollo o de los programas. Las propuestas propias no son órdenes del Humano ni deben imponerse como condiciones de avance. Respetar Workflow V3 y los límites de autoridad y permisos realmente aplicables, sin añadir obstáculos por iniciativa propia.
+
+**Seguridad de los programas:** ante incidencias o riesgos ordinarios se deben emitir **avisos o alertas informativos**, sin impedir el funcionamiento del programa ni paralizar el trabajo autorizado. **Solo una situación de seguridad extrema, concreta y justificada puede motivar un bloqueo de seguridad.** No convertir una advertencia, una incertidumbre menor, una preferencia técnica o una comprobación opcional en veto. Las prohibiciones técnicas o de autorización que realmente sean obligatorias no quedan derogadas por esta regla.
+
+**Continuidad:** si existe un impedimento puntual, registrarlo y proseguir con las demás tareas autorizadas e independientes; resolverlo sin exigir al Humano activaciones o aprobaciones rutinarias. El Supervisor mantiene la dirección técnica; el Jefe no asigna por cuenta propia nuevos controles ni tareas de administración del transporte.
+
+**Transporte y límites del Jefe:** los agentes publican los handoffs por los Issues autorizados del repositorio; el software de Windows realiza su transporte mecánico según lo indicado por el Humano y **para el Jefe es solo lectura**. No imponer modificaciones ni reconfiguraciones de ese software. La publicación no demuestra por sí sola recepción.
+
+**Precedencia respecto de sugerencias anteriores:** cualquier propuesta del Jefe de añadir condiciones para el canal, supervisión de Windows o controles no autorizados que pudiera bloquear el desarrollo queda expresamente **sin efecto como instrucción**. Esta regla es una **decisión del Humano**, no una propuesta técnica del Jefe.
+
 ## 1. Cinco actividades y sus resultados
 
 | ID | Actividad | Subcategorías mínimas | Resultado / evidencia de salida |
@@ -40,9 +52,9 @@
 **Dos IA interlocutoras con el Humano:** **Jefe de Agente IA** (producto/seguimiento solicitado) y **Supervisor** (dirección técnica). El Supervisor puede disponer de Delfín como implementador subordinado cuando Workflow V3 y el alcance lo autoricen, pero **Delfín no es destinatario de handoffs de gestión dirigidos al Jefe**.
 
 - **Las IA son responsables de publicar el handoff completo y la evidencia en GitHub cuando corresponda en su actividad autorizada**. No trasladar al Humano la obligación de redactar, publicar ni mantener handoffs.
-- **El Humano únicamente transporta MANUALMENTE el mensaje corto** entre chats, con los punteros al registro publicado. No transporta todo el informe ni es responsable de las publicaciones.
-- **Supervisor → Jefe:** el Supervisor deja un registro completo y verificable de su estado, hito o excepción en el Work Item/canal GitHub autorizado, y prepara un **aviso corto para el Jefe**. El Humano copia ese aviso en el chat del Jefe. El Jefe consulta la fuente durable cuando el Humano lo solicita; no presume recepción por un commit o comentario.
-- **Jefe → Supervisor:** cuando exista una decisión expresa del Humano, el Jefe conserva su texto como decisión humana y prepara un aviso corto con referencia a la documentación. El Humano transporta el aviso al chat del Supervisor. El Supervisor verifica autenticidad, autorización y alcance antes de actuar; luego registra las decisiones técnicas e instruye a su implementador si corresponde.
+- **Decisión humana posterior (2026-11-03):** el software de Windows realiza el transporte mecánico. No exigir al Humano trasladar mensajes, habilitar cada Issue o administrar dicho software, que para el Jefe es solo lectura.
+- **Supervisor → Jefe:** el Supervisor deja un registro completo y verificable de su estado, hito o excepción en el Work Item/canal GitHub autorizado, y prepara un **aviso corto para el Jefe**. Su transporte corresponde al mecanismo de Windows informado por el Humano, sin dar por probada la recepción. El Jefe consulta la fuente durable cuando el Humano lo solicita; no presume recepción por un commit o comentario.
+- **Jefe → Supervisor:** cuando exista una decisión expresa del Humano, el Jefe conserva su texto como decisión humana y prepara un aviso corto con referencia a la documentación. Su transporte corresponde al mecanismo de Windows informado por el Humano, sin dar por probada la recepción. El Supervisor verifica autenticidad, autorización y alcance antes de actuar; luego registra las decisiones técnicas e instruye a su implementador si corresponde.
 - **Intercambio Supervisor ↔ Implementer, si se usa:** permanece **interno bajo V3**, con sus roles reales y el contrato de su canal autorizado. No sustituirlo por un supuesto handoff Jefe ↔ Delfín.
 - **No inventar enrutamiento automático hacia Jefe:** Workflow V3 identifica `ProjectLead` como rol de referencia, **no prueba de un receptor compatible con `SEND_TO`**. Antes de un mensaje dirigido verificar canal, contrato, destinatario y permisos. Cuando el registro sea solo documentación para el transporte manual, **no emitir `SEND_TO: ProjectLead` ni otro encabezado de ruta no verificado**. Un comentario GitHub por sí solo no prueba entrega al otro chat.
 
