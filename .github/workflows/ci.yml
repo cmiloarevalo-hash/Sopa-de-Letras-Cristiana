@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'implementer/a5-*']
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -29,20 +30,26 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
+      # Produce the debug APK before exhaustive test/QA phases, per A5 plan.
+      # This is a technical build artifact until human visual review and
+      # independent Supervisor acceptance of the exact source SHA.
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Record APK identity
+        run: python3 tools/check_apk_candidate.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-integration-review
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
       - name: Validate word banks
         run: python3 tools/validate_words.py
 
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
-
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
         if: failure()

@@ -33,6 +33,7 @@ import app.sopadeletras.core.displayedStreak
 import app.sopadeletras.core.levelInfo
 import app.sopadeletras.core.levelParams
 import app.sopadeletras.data.CAMPAIGN_BANK_IDS
+import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.data.SavedGameData
 import app.sopadeletras.data.StartupSnapshot
 import app.sopadeletras.data.StoredResult
@@ -174,17 +175,17 @@ class MainActivity : ComponentActivity() {
                         )
                         val streakLine = daily?.let {
                             if (displayedStreak(it.lastDay, today, it.streak) > 0) {
-                                "🔥 ${displayedStreak(it.lastDay, today, it.streak)} dias seguidos"
+                                "🔥 ${displayedStreak(it.lastDay, today, it.streak)} días seguidos"
                             } else {
                                 null
                             }
                         }
                         GameScreen(
                             viewModel = vm,
-                            title = "Desafio diário",
+                            title = "Desafío diario",
                             subtitle = "${bank.name} · 10×10",
-                            winTitle = "Nível concluído",
-                            winPrimaryLabel = "Início",
+                            winTitle = "¡Nivel completado!",
+                            winPrimaryLabel = "Inicio",
                             winSecondaryLabel = null,
                             winExtraLine = streakLine,
                             onExit = { nav.popBackStack() },
@@ -282,10 +283,10 @@ class MainActivity : ComponentActivity() {
                         )
                         MysteryScreen(
                             viewModel = vm,
-                            title = "Palavra misteriosa",
+                            title = "Palabra misteriosa",
                             subtitle = "${bank.name} · $size×$size",
-                            winPrimaryLabel = "Próximo",
-                            winSecondaryLabel = "Início",
+                            winPrimaryLabel = "Siguiente",
+                            winSecondaryLabel = "Inicio",
                             onExit = { nav.popBackStack() },
                             onNext = { round++ },
                             onWin = { stars, seconds ->
@@ -333,7 +334,7 @@ class MainActivity : ComponentActivity() {
                         GameScreen(
                             viewModel = vm,
                             title = bank.name,
-                            subtitle = "Jogo livre · $size×$size · ${difficultyLabel(difficulty)}",
+                            subtitle = "Juego libre · $size×$size · ${difficultyLabel(difficulty)}",
                             onExit = { nav.popBackStack() },
                             onNext = { round++ },
                             onWin = { stars, seconds ->
@@ -451,13 +452,14 @@ class MainActivity : ComponentActivity() {
                                 viewModel = vm,
                                 title = worldName,
                                 subtitle = subtitle,
-                                winTitle = if (info.num == LEVELS_PER_WORLD) "Mundo ${info.world + 1} concluído" else "Nível concluído",
+                                winTitle = if (info.num == LEVELS_PER_WORLD) "¡Mundo ${info.world + 1} completado!" else "¡Nivel completado!",
                                 winPrimaryLabel = when {
                                     isLast -> "Mapa"
-                                    info.num == LEVELS_PER_WORLD -> "Próximo mundo"
-                                    else -> "Próximo nível"
+                                    info.num == LEVELS_PER_WORLD -> "Siguiente mundo"
+                                    else -> "Siguiente nivel"
                                 },
                                 winSecondaryLabel = "Mapa",
+                                winExtraLine = "Referencia bíblica: ${guideForLevel(level).reference} · RV1909",
                                 timeoutExitLabel = "Mapa",
                                 tutorialTip = tip,
                                 onTutorialAction = { dismissTip() },
