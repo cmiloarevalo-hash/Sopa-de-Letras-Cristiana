@@ -38,6 +38,18 @@ Imagen madre: [PNG original en Google Drive](https://drive.google.com/file/d/1Uo
 - Pistas escalonadas, accesibles sin conocimientos bíblicos previos ni penalizaciones que bloqueen a niños.
 - APK instalable con identidad propia, firma acorde al carácter de prueba, checksum y referencia SHA del código. El Humano realizará la prueba física; no inferir instalación desde el build.
 
+## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
+
+**Regla obligatoria para todos los agentes del proyecto (Jefe, Supervisor, Delfín/Implementer y otros agentes autorizados):** queda **PROHIBIDO agregar instrucciones, requisitos, condiciones, verificaciones, controles o responsabilidades inventadas por el agente que generen bloqueos, esperas o interrupciones** del desarrollo o de los programas. Las propuestas propias no son órdenes del Humano ni deben imponerse como condiciones de avance. Respetar Workflow V3 y los límites de autoridad y permisos realmente aplicables, sin añadir obstáculos por iniciativa propia.
+
+**Seguridad de los programas:** ante incidencias o riesgos ordinarios se deben emitir **avisos o alertas informativos**, sin impedir el funcionamiento del programa ni paralizar el trabajo autorizado. **Solo una situación de seguridad extrema, concreta y justificada puede motivar un bloqueo de seguridad.** No convertir una advertencia, una incertidumbre menor, una preferencia técnica o una comprobación opcional en veto. Las prohibiciones técnicas o de autorización que realmente sean obligatorias no quedan derogadas por esta regla.
+
+**Continuidad:** si existe un impedimento puntual, registrarlo y proseguir con las demás tareas autorizadas e independientes; resolverlo sin exigir al Humano activaciones o aprobaciones rutinarias. El Supervisor mantiene la dirección técnica; el Jefe no asigna por cuenta propia nuevos controles ni tareas de administración del transporte.
+
+**Transporte y límites del Jefe:** los agentes publican los handoffs por los Issues autorizados del repositorio; el software de Windows realiza su transporte mecánico según lo indicado por el Humano y **para el Jefe es solo lectura**. No imponer modificaciones ni reconfiguraciones de ese software. La publicación no demuestra por sí sola recepción.
+
+**Precedencia respecto de sugerencias anteriores:** cualquier propuesta del Jefe de añadir condiciones para el canal, supervisión de Windows o controles no autorizados que pudiera bloquear el desarrollo queda expresamente **sin efecto como instrucción**. Esta regla es una **decisión del Humano**, no una propuesta técnica del Jefe.
+
 ## Preparación de ejecución bajo Workflow V3
 El **Supervisor** identifica estado real, autoridad, baseline y scopes y prepara Work Items de investigación/implementación autorizados; decide soluciones técnicas, dirige a Delfín y revisa evidencia de manera independiente. El Jefe no suple la revisión ni emite estados técnicos. La intención humana es **evitar interrupciones por decisiones menores** hasta disponer de una APK candidata, pero **no activa agentes permanentemente entre chats** ni concede permiso para publicar en internet, gestionar cuentas o usar claves privadas. Ningún Work Item activo o Supervisor receptor se acredita por la publicación de este documento.
 
