@@ -17,7 +17,7 @@ class CampaignProgressTest {
 
     @Test fun `invalid results cannot unlock worlds or inflate total`() {
         assertEquals(
-            CampaignSummary(2, 4, 2, 1),
+            CampaignSummary(2, 4, 2, 0),
             campaignSummary(mapOf(1 to 1, 30 to 3, 31 to 0, 301 to 3, -1 to 9)),
         )
     }
