@@ -16,8 +16,8 @@ class GameLogicTest {
 
     @Test
     fun `victory summary uses singular for one word`() {
-        assertEquals("6 palavras em 2m 05s", victorySummary(6, 125))
-        assertEquals("1 palavra em 0m 09s", victorySummary(1, 9))
+        assertEquals("6 palabras en 2 min 05 s", victorySummary(6, 125))
+        assertEquals("1 palabra en 0 min 09 s", victorySummary(1, 9))
     }
 
     @Test

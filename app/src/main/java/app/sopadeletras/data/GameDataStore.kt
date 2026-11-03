@@ -39,7 +39,7 @@ class GameDataStore(context: Context) {
     }
 
     suspend fun saveNickname(value: String) {
-        val clean = value.trim().replace("\\n", " ").replace("\\r", " ").take(24)
+        val clean = value.trim().replace('\n', ' ').replace('\r', ' ').take(24)
         store.edit { prefs ->
             val key = stringPreferencesKey("profile_nickname")
             if (clean.isEmpty()) prefs.remove(key) else prefs[key] = clean
