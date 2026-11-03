@@ -37,6 +37,7 @@ import app.sopadeletras.data.SavedGameData
 import app.sopadeletras.data.StartupSnapshot
 import app.sopadeletras.data.StoredResult
 import app.sopadeletras.ui.album.AlbumScreen
+import app.sopadeletras.ui.cover.CoverScreen
 import app.sopadeletras.ui.campaign.CampaignScreen
 import app.sopadeletras.ui.game.GameScreen
 import app.sopadeletras.ui.game.GameViewModel
@@ -94,7 +95,12 @@ class MainActivity : ComponentActivity() {
                     animationSpec = tween(350),
                     label = "theme",
                 ) {
-                NavHost(navController = nav, startDestination = "home") {
+                NavHost(navController = nav, startDestination = "cover") {
+                    composable("cover") {
+                        CoverScreen(onStart = { nav.navigate("home") {
+                            popUpTo("cover") { inclusive = true }
+                        } })
+                    }
                     composable("home") {
                         HomeScreen(
                             container = container,

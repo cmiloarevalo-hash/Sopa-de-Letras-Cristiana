@@ -46,7 +46,7 @@ import app.sopadeletras.ui.theme.Figtree
 import app.sopadeletras.ui.theme.LocalSopaColors
 import java.time.LocalDate
 
-private val PT_MONTHS = listOf("JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ")
+private val ES_MONTHS = listOf("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC")
 
 @Composable
 fun HomeScreen(
@@ -87,8 +87,8 @@ fun HomeScreen(
             .padding(top = 18.dp, bottom = 22.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text("Sopa de Letras", fontFamily = Bricolage, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp, color = colors.text)
-        Text("Encontra palavras entre as estrelas.", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+        Text("Sopa de Letras Cristiana", fontFamily = Bricolage, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp, color = colors.text)
+        Text("Explora las historias y las palabras de la Biblia.", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
 
         CampaignCard(
             done = done,
@@ -96,7 +96,7 @@ fun HomeScreen(
             worldNumber = info.world + 1,
             worldName = world.name,
             line = resumeLine(saved, current),
-            buttonLabel = if (saved != null) "Retomar" else "Jogar nível $current",
+            buttonLabel = if (saved != null) "Retomar" else "Jugar nivel $current",
             onCard = onCampaign,
             onButton = { if (saved != null) onResume(saved!!.level) else onCampaign() },
         )
@@ -108,9 +108,9 @@ fun HomeScreen(
             summary = dailySummary(daily, today),
             onPlay = onDaily,
         )
-        ModeRow(title = "Jogo livre", desc = "Tamanho, categoria e dificuldade à escolha.", icon = Icons.Filled.PlayArrow, enabled = true, onClick = onFreeGame)
-        ModeRow(title = "Contra-relógio", desc = "Completa tabuleiros contra o tempo.", icon = null, glyph = "⏱", enabled = true, onClick = onTimeGame)
-        ModeRow(title = "Palavra misteriosa", desc = "Descobre a palavra final escondida.", icon = null, glyph = "?", enabled = true, onClick = onMysteryGame)
+        ModeRow(title = "Juego libre", desc = "Elige tamaño, categoría y dificultad.", icon = Icons.Filled.PlayArrow, enabled = true, onClick = onFreeGame)
+        ModeRow(title = "Contrarreloj", desc = "Encuentra las palabras antes de que termine el tiempo.", icon = null, glyph = "⏱", enabled = true, onClick = onTimeGame)
+        ModeRow(title = "Palabra misteriosa", desc = "Descubre la palabra especial del tablero.", icon = null, glyph = "?", enabled = true, onClick = onMysteryGame)
         Spacer(Modifier.weight(1f))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             SecondaryFooterButton(text = "Álbum", onClick = onAlbum, modifier = Modifier.weight(1f))
@@ -123,10 +123,10 @@ fun HomeScreen(
 private fun resumeLine(saved: SavedGameData?, current: Int): String {
     if (saved == null) {
         val info = levelInfo(current)
-        return "Nível $current · ${info.n}×${info.n}"
+        return "Nivel $current · ${info.n}×${info.n}"
     }
     val info = levelInfo(saved.level)
-    return "Retomar nível ${saved.level} · ${formatSavedTime(saved.elapsed)} · ${saved.foundWords.size} de ${info.words} palavras"
+    return "Continuar nivel ${saved.level} · ${formatSavedTime(saved.elapsed)} · ${saved.foundWords.size} de ${info.words} palabras"
 }
 
 private fun formatSavedTime(seconds: Int): String =
@@ -153,7 +153,7 @@ private fun CampaignCard(
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text("CAMPANHA · $done DE 300 NÍVEIS", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+        Text("CAMPAÑA · $done DE 300 NIVELES", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text("Mundo $worldNumber · $worldName", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = colors.text)
         Text(line, fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
         SopaProgress(progress = done / 300f)
@@ -179,7 +179,7 @@ private fun DailyCard(
     onPlay: () -> Unit,
 ) {
     val colors = LocalSopaColors.current
-    val label = "${today.dayOfMonth} ${PT_MONTHS[today.monthValue - 1]}"
+    val label = "${today.dayOfMonth} ${ES_MONTHS[today.monthValue - 1]}"
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -188,10 +188,10 @@ private fun DailyCard(
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text("DESAFIO DIÁRIO · $label", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+        Text("DESAFÍO DIARIO · $label", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text("$categoryName · 10×10", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = colors.text)
         if (streak > 0) {
-            Text("🔥 $streak dias seguidos", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = colors.accent)
+            Text("🔥 $streak días seguidos", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = colors.accent)
         }
         if (done && summary != null) {
             Box(
@@ -200,7 +200,7 @@ private fun DailyCard(
                     .background(colors.cell)
                     .padding(horizontal = 16.dp, vertical = 10.dp),
             ) {
-                Text("Concluído · $summary", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = colors.mute)
+                Text("Completado · $summary", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = colors.mute)
             }
         } else {
             Box(
@@ -210,14 +210,14 @@ private fun DailyCard(
                     .clickable { onPlay() }
                     .padding(horizontal = 16.dp, vertical = 10.dp),
             ) {
-                Text("Jogar", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = colors.onAccent)
+                Text("Jugar", fontFamily = Figtree, fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = colors.onAccent)
             }
         }
     }
 }
 
 private fun dailyCategoryName(today: LocalDate): String {
-    val names = listOf("Espaço", "Oceano", "Comida", "Animais", "Países")
+    val names = listOf("Creación", "Orígenes", "Diluvio", "Patriarcas", "Moisés")
     return names[dailyCategoryIndex(today.year, today.monthValue, today.dayOfMonth)]
 }
 
