@@ -119,7 +119,7 @@ class GameViewModel(
     fun useHint() {
         _state.update { current ->
             if (current.paused || current.victory || current.timedOut || current.hintsUsed >= MAX_HINTS) return@update current
-            val cell = hintTarget(current.puzzle.words, current.found.keys) ?: return@update current
+            val cell = hintTarget(current.puzzle.words, current.found.keys, current.hintsUsed) ?: return@update current
             current.copy(hintCell = cell, hintsUsed = current.hintsUsed + 1)
         }
     }

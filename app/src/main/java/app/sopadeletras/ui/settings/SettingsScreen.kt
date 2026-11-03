@@ -40,8 +40,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.sopadeletras.AppContainer
-import app.sopadeletras.core.Language
-import app.sopadeletras.ui.components.SegmentedPicker
 import app.sopadeletras.ui.theme.Bricolage
 import app.sopadeletras.ui.theme.Figtree
 import app.sopadeletras.ui.theme.LocalSopaColors
@@ -57,7 +55,6 @@ fun SettingsScreen(
 ) {
     val colors = LocalSopaColors.current
     val scope = rememberCoroutineScope()
-    val language by container.settings.language.collectAsState(initial = Language.PT_CODE)
     val theme by container.settings.theme.collectAsState(initial = "TINTA")
     val assist by container.settings.directionAssist.collectAsState(initial = true)
     val haptics by container.settings.haptics.collectAsState(initial = true)
@@ -80,25 +77,16 @@ fun SettingsScreen(
                 modifier = Modifier.size(38.dp).clip(RoundedCornerShape(13.dp)).background(colors.surface).clickable { onBack() },
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = colors.text)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = colors.text)
             }
-            Text("Definições", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
+            Text("Ajustes", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
         }
         Column(
             modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(18.dp)).background(colors.surface).padding(horizontal = 14.dp, vertical = 4.dp),
         ) {
             SettingBlock {
-                SettingLabel("Idioma das palavras")
-                SegmentedPicker(
-                    options = listOf("PT-PT", "EN-US"),
-                    selected = if (language == Language.EN_CODE) 1 else 0,
-                    onSelect = {
-                        scope.launch {
-                            container.settings.setLanguage(if (it == 1) Language.EN_CODE else Language.PT_CODE)
-                        }
-                    },
-                )
-                SettingCaption("Aplica-se aos próximos jogos.")
+                SettingLabel("Idioma de las palabras")
+                SettingCaption("Español · campaña bíblica sin conexión")
             }
             Divider()
             SettingBlock {
