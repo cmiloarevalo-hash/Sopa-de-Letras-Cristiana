@@ -14,8 +14,15 @@ fun victorySummary(words: Int, seconds: Int): String {
     return "$noun em ${seconds / 60}m %02dS".format(seconds % 60).lowercase()
 }
 
-fun hintTarget(words: List<PlacedWord>, foundWords: Set<String>): Int? =
-    words.firstOrNull { it.word !in foundWords }?.cells?.firstOrNull()
+fun hintTarget(words: List<PlacedWord>, foundWords: Set<String>, hintIndex: Int = 0): Int? {
+    val cells = words.firstOrNull { it.word !in foundWords }?.cells ?: return null
+    val index = when (hintIndex.coerceIn(0, 2)) {
+        0 -> 0
+        1 -> cells.lastIndex / 2
+        else -> cells.lastIndex
+    }
+    return cells.getOrNull(index)
+}
 
 fun timedLimit(words: Int, n: Int): Int = (parSeconds(words, n) * 1.3).toInt()
 

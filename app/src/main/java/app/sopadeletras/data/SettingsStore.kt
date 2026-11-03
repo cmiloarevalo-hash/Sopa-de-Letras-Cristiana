@@ -15,7 +15,6 @@ import app.sopadeletras.core.Language
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import java.util.Locale
 
 private val Context.settingsStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -122,5 +121,4 @@ class SettingsStore(context: Context) {
     }
 }
 
-fun defaultLanguageForSystem(): String =
-    if (Locale.getDefault().language == "en") Language.EN_CODE else Language.PT_CODE
+fun defaultLanguageForSystem(): String = Language.ES_CODE

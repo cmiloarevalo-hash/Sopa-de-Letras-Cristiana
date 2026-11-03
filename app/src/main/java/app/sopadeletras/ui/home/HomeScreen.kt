@@ -58,6 +58,7 @@ fun HomeScreen(
     onTimeGame: () -> Unit,
     onMysteryGame: () -> Unit,
     onDaily: () -> Unit,
+    onAlbum: () -> Unit,
     onStats: () -> Unit,
     onSettings: () -> Unit,
 ) {
@@ -111,9 +112,10 @@ fun HomeScreen(
         ModeRow(title = "Contra-relógio", desc = "Completa tabuleiros contra o tempo.", icon = null, glyph = "⏱", enabled = true, onClick = onTimeGame)
         ModeRow(title = "Palavra misteriosa", desc = "Descobre a palavra final escondida.", icon = null, glyph = "?", enabled = true, onClick = onMysteryGame)
         Spacer(Modifier.weight(1f))
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            SecondaryFooterButton(text = "Estatísticas", onClick = onStats, modifier = Modifier.weight(1f))
-            SecondaryFooterButton(text = "Definições", onClick = onSettings, modifier = Modifier.weight(1f))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            SecondaryFooterButton(text = "Álbum", onClick = onAlbum, modifier = Modifier.weight(1f))
+            SecondaryFooterButton(text = "Logros", onClick = onStats, modifier = Modifier.weight(1f))
+            SecondaryFooterButton(text = "Ajustes", onClick = onSettings, modifier = Modifier.weight(1f))
         }
     }
 }
