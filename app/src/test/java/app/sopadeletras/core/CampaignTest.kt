@@ -37,35 +37,33 @@ class CampaignTest {
     }
 
     @Test
-    fun `all 300 levels generate valid boards deterministically in both languages`() {
-        for (language in listOf("pt-PT", "en-US")) {
-            val fill = if (language == "pt-PT") PT_FILL_REF else EN_FILL_REF
-            for (level in 1..300) {
-                val info = levelInfo(level)
-                val seed = campaignSeed(level, language)
-                val bank = PT_BANKS[info.category % PT_BANKS.size]
-                val puzzle = if (info.kind == LevelKind.MYSTERY) {
-                    PuzzleGenerator.genMystery(minOf(info.n, 10), bank, PT_MYSTERIES, seed, fill)
-                } else {
-                    PuzzleGenerator.generate(levelParams(info), bank, seed, fill)
-                }
-                val again = if (info.kind == LevelKind.MYSTERY) {
-                    PuzzleGenerator.genMystery(minOf(info.n, 10), bank, PT_MYSTERIES, seed, fill)
-                } else {
-                    PuzzleGenerator.generate(levelParams(info), bank, seed, fill)
-                }
-                assertEquals("L$level letters", puzzle.letters, again.letters)
-                if (info.kind == LevelKind.MYSTERY) {
-                    assertTrue("L$level mystery", puzzle.mystery != null)
-                } else {
-                    assertEquals("L$level words", info.words, puzzle.words.size)
-                    // Strict uniqueness only where the category has a real bank
-                    // (worlds 1-5, like the reference levels test). Worlds 6-10
-                    // reuse the 5 reference banks until M8 delivers final banks.
-                    if (level <= 150) {
-                        for (w in puzzle.words) {
-                            assertEquals("L$level single $w", 1, PuzzleGenerator.countOccurrences(puzzle.letters, puzzle.n, w.word))
-                        }
+    fun `all 300 levels generate deterministic boards with PT reference fixtures`() {
+        // True two-language coverage uses the shipped banks in FullBanksTest.
+        // This lightweight test deliberately exercises only the PT reference fixtures.
+        val language = "pt-PT"
+        val fill = PT_FILL_REF
+        for (level in 1..300) {
+            val info = levelInfo(level)
+            val seed = campaignSeed(level, language)
+            val bank = PT_BANKS[info.category % PT_BANKS.size]
+            val puzzle = if (info.kind == LevelKind.MYSTERY) {
+                PuzzleGenerator.genMystery(minOf(info.n, 10), bank, PT_MYSTERIES, seed, fill)
+            } else {
+                PuzzleGenerator.generate(levelParams(info), bank, seed, fill)
+            }
+            val again = if (info.kind == LevelKind.MYSTERY) {
+                PuzzleGenerator.genMystery(minOf(info.n, 10), bank, PT_MYSTERIES, seed, fill)
+            } else {
+                PuzzleGenerator.generate(levelParams(info), bank, seed, fill)
+            }
+            assertEquals("L$level letters", puzzle.letters, again.letters)
+            if (info.kind == LevelKind.MYSTERY) {
+                assertTrue("L$level mystery", puzzle.mystery != null)
+            } else {
+                assertEquals("L$level words", info.words, puzzle.words.size)
+                if (level <= 150) {
+                    for (w in puzzle.words) {
+                        assertEquals("L$level single $w", 1, PuzzleGenerator.countOccurrences(puzzle.letters, puzzle.n, w.word))
                     }
                 }
             }
