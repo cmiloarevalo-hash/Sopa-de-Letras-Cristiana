@@ -116,7 +116,8 @@ object PuzzleGenerator {
         fill: String,
     ): Puzzle {
         var best: Puzzle? = null
-        for (a in 0 until 8) {
+        // Retry deterministic layouts when a chosen word has ambiguous occurrences.
+        for (a in 0 until 128) {
             val attempt = genOnce(params, bank, seed + a * 977L, fill)
             val ok = attempt.words.size >= params.words &&
                 attempt.words.all { countOccurrences(attempt.letters, attempt.n, it.word) == 1 }
