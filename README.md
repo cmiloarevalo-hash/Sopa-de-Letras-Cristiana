@@ -13,6 +13,18 @@
 
 **Decisión vigente del Humano (2026-11-02) — repositorio:** este proyecto debe ser **INDEPENDIENTE (no fork) y PÚBLICO**. La anterior petición de convertirlo en privado queda **revocada**. Mantener GitHub **Issues** habilitado para los Work Items de Workflow V3. **Repositorio público no significa APK públicamente distribuible**: publicar o distribuir la aplicación final sigue requiriendo autorización específica del Humano.
 
+## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
+
+**Regla obligatoria para todos los agentes del proyecto (Jefe, Supervisor, Delfín/Implementer y otros agentes autorizados):** queda **PROHIBIDO agregar instrucciones, requisitos, condiciones, verificaciones, controles o responsabilidades inventadas por el agente que generen bloqueos, esperas o interrupciones** del desarrollo o de los programas. Las propuestas propias no son órdenes del Humano ni deben imponerse como condiciones de avance. Respetar Workflow V3 y los límites de autoridad y permisos realmente aplicables, sin añadir obstáculos por iniciativa propia.
+
+**Seguridad de los programas:** ante incidencias o riesgos ordinarios se deben emitir **avisos o alertas informativos**, sin impedir el funcionamiento del programa ni paralizar el trabajo autorizado. **Solo una situación de seguridad extrema, concreta y justificada puede motivar un bloqueo de seguridad.** No convertir una advertencia, una incertidumbre menor, una preferencia técnica o una comprobación opcional en veto. Las prohibiciones técnicas o de autorización que realmente sean obligatorias no quedan derogadas por esta regla.
+
+**Continuidad:** si existe un impedimento puntual, registrarlo y proseguir con las demás tareas autorizadas e independientes; resolverlo sin exigir al Humano activaciones o aprobaciones rutinarias. El Supervisor mantiene la dirección técnica; el Jefe no asigna por cuenta propia nuevos controles ni tareas de administración del transporte.
+
+**Transporte y límites del Jefe:** los agentes publican los handoffs por los Issues autorizados del repositorio; el software de Windows realiza su transporte mecánico según lo indicado por el Humano y **para el Jefe es solo lectura**. No imponer modificaciones ni reconfiguraciones de ese software. La publicación no demuestra por sí sola recepción.
+
+**Precedencia respecto de sugerencias anteriores:** cualquier propuesta del Jefe de añadir condiciones para el canal, supervisión de Windows o controles no autorizados que pudiera bloquear el desarrollo queda expresamente **sin efecto como instrucción**. Esta regla es una **decisión del Humano**, no una propuesta técnica del Jefe.
+
 ## Biblioteca de archivos e instrucciones para agentes
 
 **Google Drive del proyecto:** [Sopa de Letras Cristiana](https://drive.google.com/drive/folders/1iENoEGadHyTbCkZlgjK1z2jf4FMQssrK) · [Imágenes y referencias visuales](https://drive.google.com/drive/folders/1Z-jU3IMoVOffDqAqVaypPEyqJc59dhdr) · [Documentos del proyecto](https://drive.google.com/drive/folders/1O5kEzYPuhzXwaKcQb8iRfasUfHx2Zb44).
@@ -21,9 +33,9 @@
 
 **Imagen madre `SLC-VIS-001` (v001):** [PNG aprobado, verificado en Google Drive](https://drive.google.com/file/d/1UoKEDuhx5SPDALaVMUQs66sxoMmz9z03/view?usp=drivesdk). Nombre real `aventura_biblica_moderna_aprobada.png`, formato PNG, 2.362.665 bytes. La imagen es **privada**, por lo que cada agente debe comprobar su acceso. No existe copia binaria comprobada en `main` de GitHub.
 
-**Plan de trabajo para todas las IA actuales y futuras:** [Cinco actividades, ingeniería mínima, revisión visual y handoffs](docs/PLAN_BASE_5_ACTIVIDADES_APK.md) · [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). **Las IA publican sus handoffs completos en GitHub bajo el canal autorizado; el Humano transporta exclusivamente el aviso corto entre el Jefe y el Supervisor.** No se presupone entrega automática de un chat a otro. Estas especificaciones no activan agentes entre sesiones ni autorizan publicación pública.
+**Plan de trabajo para todas las IA actuales y futuras:** [Cinco actividades, ingeniería mínima, revisión visual y handoffs](docs/PLAN_BASE_5_ACTIVIDADES_APK.md) · [Alcance de la primera APK](docs/ALCANCE_PRIMER_APK_V1.md) · [Continuidad del Supervisor bajo Workflow V3](docs/CONTINUIDAD_SUPERVISOR_APK_V1.md). **Las IA publican sus handoffs completos en los Issues autorizados de GitHub; un programa de Windows gestiona su transporte mecánico y para el Jefe es de solo lectura.** No se presume recepción por la mera publicación. Estas especificaciones no activan agentes entre sesiones ni autorizan publicación pública.
 
-**Handoff documental vigente de arranque para el Supervisor (2026-11-02):** [leer mensaje completo publicado por el Jefe](docs/handoffs/2026-11-02_JEFE_A_SUPERVISOR_APK_V001.md). El Humano transporta solo el aviso corto con este enlace; la publicación no prueba recepción ni crea un Work Item.
+**Handoff documental vigente de arranque para el Supervisor (2026-11-02):** [leer mensaje completo publicado por el Jefe](docs/handoffs/2026-11-02_JEFE_A_SUPERVISOR_APK_V001.md). El documento enlazado conserva el antecedente histórico; la bandeja vigente del Jefe es el Issue #1 del proyecto. La publicación no prueba recepción ni crea un Work Item.
 
 **Documentación de producto:**
 - [Objetivos, siete puntos y diez mundos](docs/OBJETIVO_PRODUCTO_CRISTIANO.md)
