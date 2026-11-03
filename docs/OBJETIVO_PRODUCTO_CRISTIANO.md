@@ -2,6 +2,18 @@
 
 **Fecha de decisión vigente:** 2026-11-01. **Autoridad:** Humano. **Estado:** definición de producto y preinvestigación, no implementación. **Repositorio:** `cmiloarevalo-hash/Sopa-de-Letras-Cristiana`.
 
+## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
+
+**Regla obligatoria para todos los agentes del proyecto (Jefe, Supervisor, Delfín/Implementer y otros agentes autorizados):** queda **PROHIBIDO agregar instrucciones, requisitos, condiciones, verificaciones, controles o responsabilidades inventadas por el agente que generen bloqueos, esperas o interrupciones** del desarrollo o de los programas. Las propuestas propias no son órdenes del Humano ni deben imponerse como condiciones de avance. Respetar Workflow V3 y los límites de autoridad y permisos realmente aplicables, sin añadir obstáculos por iniciativa propia.
+
+**Seguridad de los programas:** ante incidencias o riesgos ordinarios se deben emitir **avisos o alertas informativos**, sin impedir el funcionamiento del programa ni paralizar el trabajo autorizado. **Solo una situación de seguridad extrema, concreta y justificada puede motivar un bloqueo de seguridad.** No convertir una advertencia, una incertidumbre menor, una preferencia técnica o una comprobación opcional en veto. Las prohibiciones técnicas o de autorización que realmente sean obligatorias no quedan derogadas por esta regla.
+
+**Continuidad:** si existe un impedimento puntual, registrarlo y proseguir con las demás tareas autorizadas e independientes; resolverlo sin exigir al Humano activaciones o aprobaciones rutinarias. El Supervisor mantiene la dirección técnica; el Jefe no asigna por cuenta propia nuevos controles ni tareas de administración del transporte.
+
+**Transporte y límites del Jefe:** los agentes publican los handoffs por los Issues autorizados del repositorio; el software de Windows realiza su transporte mecánico según lo indicado por el Humano y **para el Jefe es solo lectura**. No imponer modificaciones ni reconfiguraciones de ese software. La publicación no demuestra por sí sola recepción.
+
+**Precedencia respecto de sugerencias anteriores:** cualquier propuesta del Jefe de añadir condiciones para el canal, supervisión de Windows o controles no autorizados que pudiera bloquear el desarrollo queda expresamente **sin efecto como instrucción**. Esta regla es una **decisión del Humano**, no una propuesta técnica del Jefe.
+
 ## Misión y sentido de la aventura
 
 Crear una **Sopa de Letras Cristiana** gratuita y apta para niños y jóvenes, con **300 niveles (10 mundos × 30)** y la identidad visual **Aventura Bíblica Moderna** aprobada por el Humano. La finalidad no es solo reconocer palabras: la aventura debe permitir **conocer a Jesús, aprender sobre los patriarcas y profetas, descubrir su vida, familia y amigos, su enseñanza del amor y la conexión con Dios Padre que Jesús aporta, así como su redención y salvación**.
@@ -82,7 +94,7 @@ La dirección del Humano para esta primera APK queda formalizada en [PLAN_BASE_5
 
 El Humano intervendrá **solamente para revisar la propuesta visual consolidada antes de cerrar el diseño** y para **instalar/probar la primera APK**; se evitan consultas rutinarias. Decisiones materiales, permisos y bloqueos irreductibles siguen las autoridades de Workflow V3.
 
-**Canal de dos IA interlocutoras:** **Jefe** y **Supervisor**. Las **IA publican sus handoffs completos en GitHub** cuando exista tarea/canal autorizado; el Humano **transporta exclusivamente el mensaje corto** con el enlace entre chats, sin publicar handoffs por ellas. El retorno técnico al Jefe es responsabilidad del Supervisor; no confundir ese destinatario con Delfín/Implementer ni inventar un `SEND_TO: ProjectLead` no verificado. Más detalles en [Continuidad del Supervisor](CONTINUIDAD_SUPERVISOR_APK_V1.md). Publicación != recepción.
+**Canal de dos IA interlocutoras:** **Jefe** y **Supervisor**. Las **IA publican sus handoffs completos en GitHub** cuando exista tarea/canal autorizado; el software de Windows se encarga del transporte mecánico según la decisión humana posterior y es de solo lectura para el Jefe. El Humano no debe activar cada Issue ni transportar manualmente esos mensajes. El retorno técnico al Jefe es responsabilidad del Supervisor; no confundir ese destinatario con Delfín/Implementer ni inventar un `SEND_TO: ProjectLead` no verificado. Más detalles en [Continuidad del Supervisor](CONTINUIDAD_SUPERVISOR_APK_V1.md). Publicación != recepción.
 
 ## Preparación para la primera APK y continuidad del Supervisor
 
