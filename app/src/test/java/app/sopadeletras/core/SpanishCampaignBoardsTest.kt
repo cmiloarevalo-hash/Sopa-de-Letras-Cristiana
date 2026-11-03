@@ -9,6 +9,10 @@ import java.io.File
 
 /** A2 gate: exercise real shipped es-ES banks, not just world metadata. */
 class SpanishCampaignBoardsTest {
+    private companion object {
+        const val SPANISH_FILL = "AAAEEEIIOOOSSNNRRLLTTCCDDMPUÑBG"
+    }
+
     private data class Bank(val words: List<String>, val mysteries: Map<Int, MysteryEntry>)
 
     private fun loadBank(id: String): Bank {
@@ -42,7 +46,7 @@ class SpanishCampaignBoardsTest {
         for (level in 1..300) {
             val info = levelInfo(level)
             val bank = banks[info.category]
-            val seed = campaignSeed(level, Language.ES_CODE)
+            val seed = campaignSeed(level, "es-ES")
             val size = if (info.kind == LevelKind.MYSTERY) minOf(info.n, 10) else info.n
             val puzzle = makeBoard(info, bank, seed)
             val again = makeBoard(info, bank, seed)
@@ -105,8 +109,8 @@ class SpanishCampaignBoardsTest {
     private fun makeBoard(info: LevelInfo, bank: Bank, seed: Long): Puzzle =
         if (info.kind == LevelKind.MYSTERY) {
             PuzzleGenerator.genMystery(minOf(info.n, 10), bank.words,
-                bank.mysteries, seed, Language.ES_FILL)
+                bank.mysteries, seed, SPANISH_FILL)
         } else {
-            PuzzleGenerator.generate(levelParams(info), bank.words, seed, Language.ES_FILL)
+            PuzzleGenerator.generate(levelParams(info), bank.words, seed, SPANISH_FILL)
         }
 }
