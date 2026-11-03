@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / "app" / "src" / "main" / "assets" / "words"
-WORD_RE = re.compile(r"^[A-Z]{3,12}$")
+WORD_RE = re.compile(r"^[A-ZÑ]{3,12}$")
 LANGS = ["pt-PT", "en-US", "es-ES"]
 
 BR_BLACKLIST = {
@@ -80,7 +80,7 @@ def check_file(lang: str, path: Path) -> None:
     for entry in mysteries:
         word = entry.get("word", "")
         clue = entry.get("clue", "")
-        if not isinstance(word, str) or not re.match(r"^[A-Z]+$", word):
+        if not isinstance(word, str) or not re.match(r"^[A-ZÑ]+$", word):
             fail(f"{lang}/{path.name}: bad mystery word {word!r}")
             continue
         if word in mystery_words:
