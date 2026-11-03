@@ -98,7 +98,11 @@ dependencies {
 tasks.register<Exec>("validateWords") {
     group = "verification"
     description = "Validates assets/words banks. Fails the build."
-    commandLine("python3", rootProject.file("tools/validate_words.py").absolutePath)
+    if (System.getProperty("os.name").startsWith("Windows", ignoreCase = true)) {
+        commandLine("py", "-3", rootProject.file("tools/validate_words.py").absolutePath)
+    } else {
+        commandLine("python3", rootProject.file("tools/validate_words.py").absolutePath)
+    }
 }
 
 afterEvaluate {
