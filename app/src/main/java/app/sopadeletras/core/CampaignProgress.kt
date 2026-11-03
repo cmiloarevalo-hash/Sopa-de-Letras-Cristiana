@@ -22,7 +22,8 @@ fun campaignSummary(starsByLevel: Map<Int, Int>): CampaignSummary {
         earnedStars = completed.values.sum(),
         nextLevel = next,
         completedWorlds = (1..WORLDS.size).count { world ->
-            (world * LEVELS_PER_WORLD) in completed
+            val first = (world - 1) * LEVELS_PER_WORLD + 1
+            (first until first + LEVELS_PER_WORLD).all { it in completed }
         },
     )
 }
