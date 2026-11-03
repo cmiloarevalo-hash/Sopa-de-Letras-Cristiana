@@ -16,19 +16,20 @@ data class SopaColors(
 )
 
 val TintaAmbar = SopaColors(
-    bg = Color(0xFF0F1424),
-    surface = Color(0xFF171E35),
-    cell = Color(0xFF1B2440),
-    text = Color(0xFFE8EAF4),
-    mute = Color(0xFF8B93B5),
-    accent = Color(0xFFF4B860),
-    onAccent = Color(0xFF1A1304),
+    // Aventura Bíblica Moderna: marfil, azul, violeta, turquesa y dorado.
+    bg = Color(0xFFE6F3FC),
+    surface = Color(0xFFF8F6EE),
+    cell = Color(0xFFCFDFEE),
+    text = Color(0xFF142446),
+    mute = Color(0xFF405878),
+    accent = Color(0xFFF2C45B),
+    onAccent = Color(0xFF142446),
     found = listOf(
-        Color(0xFFF4B860),
-        Color(0xFF7CC6FE),
-        Color(0xFFC3A6FF),
-        Color(0xFF8EE3C2),
-        Color(0xFFFF8FA3),
+        Color(0xFFF2C45B),
+        Color(0xFF35BFC3),
+        Color(0xFFA99BEF),
+        Color(0xFF9CDAA2),
+        Color(0xFFF4AAC4),
     ),
 )
 

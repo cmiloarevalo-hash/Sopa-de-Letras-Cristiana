@@ -10,8 +10,8 @@ fun formatElapsed(totalSeconds: Int): String {
 }
 
 fun victorySummary(words: Int, seconds: Int): String {
-    val noun = if (words == 1) "1 palavra" else "$words palavras"
-    return "$noun em ${seconds / 60}m %02dS".format(seconds % 60).lowercase()
+    val noun = if (words == 1) "1 palabra" else "$words palabras"
+    return "$noun en ${seconds / 60} min %02d s".format(seconds % 60)
 }
 
 fun hintTarget(words: List<PlacedWord>, foundWords: Set<String>, hintIndex: Int = 0): Int? {

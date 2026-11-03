@@ -92,10 +92,10 @@ fun SettingsScreen(
             SettingBlock {
                 SettingLabel("Tema")
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    ThemeCard(name = "Tinta & Âmbar", preview = TintaAmbar, selected = theme != "TOKYO", onClick = {
+                    ThemeCard(name = "Aventura Bíblica", preview = TintaAmbar, selected = theme != "TOKYO", onClick = {
                         scope.launch { container.settings.setTheme("TINTA") }
                     }, modifier = Modifier.weight(1f))
-                    ThemeCard(name = "Tokyo Night", preview = TokyoNight, selected = theme == "TOKYO", onClick = {
+                    ThemeCard(name = "Modo nocturno", preview = TokyoNight, selected = theme == "TOKYO", onClick = {
                         scope.launch { container.settings.setTheme("TOKYO") }
                     }, modifier = Modifier.weight(1f))
                 }
@@ -103,16 +103,16 @@ fun SettingsScreen(
             Divider()
             SettingBlock {
                 SwitchRow(
-                    label = "Ajuda de direção",
+                    label = "Ayuda de dirección",
                     checked = assist,
                     onChange = { scope.launch { container.settings.setDirectionAssist(it) } },
                 )
-                SettingCaption("Encaixa o arrasto na direção mais próxima.")
+                SettingCaption("Ajusta el trazo a la dirección más cercana.")
             }
             Divider()
             SettingBlock {
                 SwitchRow(
-                    label = "Vibração",
+                    label = "Vibración",
                     checked = haptics,
                     onChange = { scope.launch { container.settings.setHaptics(it) } },
                 )
@@ -120,14 +120,14 @@ fun SettingsScreen(
             Divider()
             SettingBlock {
                 SwitchRow(
-                    label = "Som",
+                    label = "Sonido",
                     checked = sound,
                     onChange = { scope.launch { container.settings.setSound(it) } },
                 )
             }
             Divider()
             SettingBlock {
-                SettingLabel("Tamanho das letras")
+                SettingLabel("Tamaño de las letras")
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier.size(44.dp).clip(RoundedCornerShape(10.dp)).background(colors.cell),
@@ -151,7 +151,7 @@ fun SettingsScreen(
             Divider()
             SettingBlock {
                 SwitchRow(
-                    label = "Modo para daltónicos",
+                    label = "Modo para daltonismo",
                     checked = colorblind,
                     onChange = { scope.launch { container.settings.setColorblind(it) } },
                 )

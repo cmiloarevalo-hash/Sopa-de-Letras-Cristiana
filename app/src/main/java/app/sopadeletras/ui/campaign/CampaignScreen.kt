@@ -50,6 +50,7 @@ import app.sopadeletras.core.isLevelUnlocked
 import app.sopadeletras.core.isWorldUnlocked
 import app.sopadeletras.core.levelInfo
 import app.sopadeletras.data.CAMPAIGN_BANK_IDS
+import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.ui.components.SopaProgress
 import app.sopadeletras.ui.theme.Bricolage
 import app.sopadeletras.ui.theme.Figtree
@@ -72,7 +73,7 @@ fun CampaignScreen(
     val scope = rememberCoroutineScope()
 
     fun lockedMessage(world: Int): String? {
-        if (!isWorldUnlocked(world, completed)) return "Completa o mundo anterior"
+        if (!isWorldUnlocked(world, completed)) return "Completa el mundo anterior"
         return null
     }
 
@@ -91,9 +92,9 @@ fun CampaignScreen(
                     modifier = Modifier.size(38.dp).clip(RoundedCornerShape(13.dp)).background(colors.surface).clickable { onBack() },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = colors.text)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = colors.text)
                 }
-                Text("Campanha", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
+                Text("Campaña", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
             }
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 items((0..9).toList()) { world ->
@@ -136,7 +137,7 @@ fun CampaignScreen(
                         locked = !isLevelUnlocked(level, completed),
                         onClick = {
                             if (!isLevelUnlocked(level, completed)) {
-                                scope.launch { snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa o nível anterior") }
+                                scope.launch { snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa el nivel anterior") }
                             } else {
                                 onPlayLevel(level)
                             }
@@ -145,7 +146,7 @@ fun CampaignScreen(
                 }
             }
             Text(
-                "Nível 10 cronometrado · 20 palavra misteriosa · 30 chefe",
+                "Nivel 10 contrarreloj · 20 misterio · 30 desafío final",
                 fontFamily = Figtree,
                 fontSize = 13.sp,
                 color = colors.mute,
@@ -164,14 +165,17 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>) {
     val range = (world * LEVELS_PER_WORLD + 1)..(world * LEVELS_PER_WORLD + 30)
     val done = range.count { it in progress }
     val stars = range.sumOf { progress[it] ?: 0 }
-    val bankName = CAMPAIGN_BANK_IDS.getOrNull(def.category)?.uppercase() ?: "EM BREVE"
+    val bankName = CAMPAIGN_BANK_IDS.getOrNull(def.category)?.uppercase() ?: "PRÓXIMAMENTE"
     Column(
         modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface).padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Text("MUNDO ${world + 1} · $bankName", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text(def.name, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text)
-        Text("${def.n}×${def.n} · ${def.minWords} a ${def.maxWords} palavras · ${def.dirsCount} direções", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+        val guide = guideForLevel(world * LEVELS_PER_WORLD + 1)
+        Text(guide.introduction, fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+        Text("Referencia: ${guide.reference}", fontFamily = Figtree, fontSize = 11.sp, color = colors.mute)
+        Text("${def.n}×${def.n} · ${def.minWords} a ${def.maxWords} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
         SopaProgress(progress = done / 30f)
         Text("$done de 30 · ★ $stars de 90", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
     }
