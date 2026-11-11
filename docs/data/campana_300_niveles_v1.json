@@ -486,9 +486,9 @@
       "boardSize": 6,
       "kind": "NORMAL",
       "words": [
-        "NUBE",
         "NUBES",
-        "BRISA"
+        "BRISA",
+        "DIA"
       ],
       "wordCount": 3
     },
@@ -780,10 +780,10 @@
       "boardSize": 6,
       "kind": "NORMAL",
       "words": [
-        "AVE",
         "AVES",
         "PEZ",
-        "PECES"
+        "PECES",
+        "OSO"
       ],
       "wordCount": 4
     },
@@ -800,10 +800,10 @@
       "boardSize": 6,
       "kind": "NORMAL",
       "words": [
-        "ALA",
         "ALAS",
         "NIDO",
-        "PATO"
+        "PATO",
+        "AVE"
       ],
       "wordCount": 4
     },
@@ -920,10 +920,10 @@
       "boardSize": 6,
       "kind": "NORMAL",
       "words": [
-        "AVE",
         "AVES",
         "PEZ",
-        "PECES"
+        "PECES",
+        "OSO"
       ],
       "wordCount": 4
     },
@@ -940,10 +940,10 @@
       "boardSize": 6,
       "kind": "NORMAL",
       "words": [
-        "ALA",
         "ALAS",
         "NIDO",
-        "PATO"
+        "PATO",
+        "AVE"
       ],
       "wordCount": 4
     },
@@ -1638,10 +1638,10 @@
       "kind": "NORMAL",
       "words": [
         "FAMILIA",
-        "ANIMAL",
         "ANIMALES",
-        "AVE",
-        "AVES"
+        "AVES",
+        "VIDA",
+        "BARCO"
       ],
       "wordCount": 5
     },
@@ -1743,10 +1743,10 @@
       "kind": "NORMAL",
       "words": [
         "FAMILIA",
-        "ANIMAL",
         "ANIMALES",
-        "AVE",
-        "AVES"
+        "AVES",
+        "VIDA",
+        "BARCO"
       ],
       "wordCount": 5
     },
@@ -2052,12 +2052,12 @@
       "boardSize": 8,
       "kind": "NORMAL",
       "words": [
-        "ARCO",
         "ARCOIRIS",
         "NUBE",
         "PALOMA",
         "OLIVO",
-        "HOJA"
+        "HOJA",
+        "LUZ"
       ],
       "wordCount": 6
     },
@@ -2119,13 +2119,13 @@
       "boardSize": 8,
       "kind": "NORMAL",
       "words": [
-        "COLOR",
         "COLORES",
         "LUZ",
         "AMOR",
         "FAMILIA",
-        "ARCO",
-        "ARCOIRIS"
+        "ARCOIRIS",
+        "VIDA",
+        "PACTO"
       ],
       "wordCount": 7
     },
@@ -2191,10 +2191,10 @@
         "CAMINO",
         "NUEVO",
         "FUTURO",
-        "COLOR",
         "COLORES",
         "LUZ",
-        "AMOR"
+        "AMOR",
+        "RAMA"
       ],
       "wordCount": 7
     },
@@ -2212,12 +2212,12 @@
       "kind": "NORMAL",
       "words": [
         "FAMILIA",
-        "ARCO",
         "ARCOIRIS",
         "NUBE",
         "PALOMA",
         "OLIVO",
-        "HOJA"
+        "HOJA",
+        "COLOR"
       ],
       "wordCount": 7
     },
@@ -2263,8 +2263,8 @@
         "CAMINO",
         "NUEVO",
         "FUTURO",
-        "COLOR",
-        "COLORES"
+        "COLORES",
+        "LUZ"
       ],
       "wordCount": 8
     },
@@ -6649,9 +6649,9 @@
         "COMPARTIR",
         "AMOR",
         "BUENAS",
-        "NOTICIA",
         "NOTICIAS",
-        "JESUS"
+        "JESUS",
+        "PAZ"
       ],
       "wordCount": 12
     },
@@ -6704,12 +6704,12 @@
         "COMPARTIR",
         "AMOR",
         "BUENAS",
-        "NOTICIA",
         "NOTICIAS",
         "JESUS",
         "TUMBA",
         "PIEDRA",
-        "MARIA"
+        "MARIA",
+        "PAZ"
       ],
       "wordCount": 13
     },
@@ -6759,7 +6759,6 @@
         "COMPARTIR",
         "AMOR",
         "BUENAS",
-        "NOTICIA",
         "NOTICIAS",
         "JESUS",
         "TUMBA",
@@ -6767,7 +6766,8 @@
         "MARIA",
         "VIVIR",
         "VIDA",
-        "ALEGRIA"
+        "ALEGRIA",
+        "PAZ"
       ],
       "wordCount": 13
     },
@@ -6814,7 +6814,6 @@
       "kind": "NORMAL",
       "words": [
         "BUENAS",
-        "NOTICIA",
         "NOTICIAS",
         "JESUS",
         "TUMBA",
@@ -6825,7 +6824,8 @@
         "ALEGRIA",
         "ESPERANZA",
         "PAZ",
-        "CONSUELO"
+        "CONSUELO",
+        "AMOR"
       ],
       "wordCount": 13
     },
@@ -6853,8 +6853,8 @@
         "COMPARTIR",
         "AMOR",
         "BUENAS",
-        "NOTICIA",
-        "NOTICIAS"
+        "NOTICIAS",
+        "PAZ"
       ],
       "wordCount": 13
     },
@@ -6904,7 +6904,6 @@
         "COMUNIDAD",
         "AMIGOS",
         "JUNTOS",
-        "UNIDAD",
         "AMOR",
         "AYUDA",
         "COMPARTIR",
@@ -6912,7 +6911,8 @@
         "CERCANIA",
         "SERVICIO",
         "RESPETO",
-        "BONDAD"
+        "BONDAD",
+        "PAZ"
       ],
       "wordCount": 12
     },
@@ -6960,7 +6960,6 @@
         "COMUNIDAD",
         "AMIGOS",
         "JUNTOS",
-        "UNIDAD",
         "AMOR",
         "AYUDA",
         "COMPARTIR",
@@ -6968,7 +6967,8 @@
         "CERCANIA",
         "SERVICIO",
         "RESPETO",
-        "BONDAD"
+        "BONDAD",
+        "PAZ"
       ],
       "wordCount": 12
     },
@@ -7016,7 +7016,6 @@
         "COMUNIDAD",
         "AMIGOS",
         "JUNTOS",
-        "UNIDAD",
         "AMOR",
         "AYUDA",
         "COMPARTIR",
@@ -7024,7 +7023,8 @@
         "CERCANIA",
         "SERVICIO",
         "RESPETO",
-        "BONDAD"
+        "BONDAD",
+        "PAZ"
       ],
       "wordCount": 12
     },
@@ -7072,7 +7072,6 @@
         "COMUNIDAD",
         "AMIGOS",
         "JUNTOS",
-        "UNIDAD",
         "AMOR",
         "AYUDA",
         "COMPARTIR",
@@ -7080,7 +7079,8 @@
         "CERCANIA",
         "SERVICIO",
         "RESPETO",
-        "BONDAD"
+        "BONDAD",
+        "PAZ"
       ],
       "wordCount": 12
     },
@@ -7128,7 +7128,6 @@
         "COMUNIDAD",
         "AMIGOS",
         "JUNTOS",
-        "UNIDAD",
         "AMOR",
         "AYUDA",
         "COMPARTIR",
@@ -7137,7 +7136,8 @@
         "SERVICIO",
         "RESPETO",
         "BONDAD",
-        "ALEGRIA"
+        "ALEGRIA",
+        "PAZ"
       ],
       "wordCount": 13
     },
@@ -7450,13 +7450,13 @@
         "SOLIDARIDAD",
         "GENEROSIDAD",
         "COMPARTIR",
-        "AYUDAR",
         "APOYAR",
         "SERVICIO",
         "CORDIALIDAD",
         "RESPETO",
         "AMISTAD",
-        "CONSUELO"
+        "CONSUELO",
+        "BONDAD"
       ],
       "wordCount": 13,
       "mystery": {
@@ -7763,5 +7763,10 @@
       ],
       "wordCount": 15
     }
-  ]
+  ],
+  "validationNotes": {
+    "dataChecks": "300 niveles, palabras <= ancho, sin duplicados, sin palabras normales incluidas una dentro de otra y sin solapamiento con misterio.",
+    "palindromes": "Conservar ANA, ALA, OSO por contenido; el generador Kotlin debe contar trayectorias no dirigidas una sola vez (evitar doble cómputo de palíndromos).",
+    "actualAndroid": "NOT_RUN. La asignación aún no está consumida por el motor."
+  }
 }
