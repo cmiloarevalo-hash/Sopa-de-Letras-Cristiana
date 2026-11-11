@@ -43,10 +43,13 @@ class MysteryViewModel(
     private val fill: String,
     private val directionAssist: Boolean = true,
     initial: SavedPlayState? = null,
+    private val fixedMystery: MysteryEntry? = null,
 ) : ViewModel() {
     private val _state = MutableStateFlow(
         MysteryUiState(
-            puzzle = PuzzleGenerator.genMystery(boardSize, bankWords, mysteries, seed, fill),
+            puzzle = if (fixedMystery != null)
+                PuzzleGenerator.genCampaignMystery(boardSize, bankWords, fixedMystery, seed, fill)
+            else PuzzleGenerator.genMystery(boardSize, bankWords, mysteries, seed, fill),
             found = rebuildFound(initial?.foundWords.orEmpty()),
             elapsed = initial?.elapsed ?: 0,
             hintsUsed = initial?.hints ?: 0,
@@ -127,10 +130,10 @@ class MysteryViewModel(
         _state.update { current ->
             val answer = current.puzzle.mystery?.word ?: return@update current
             if (text.length < answer.length) {
-                return@update current.copy(guessError = "Faltam letras.", shakeKey = current.shakeKey + 1)
+                return@update current.copy(guessError = "Faltan letras.", shakeKey = current.shakeKey + 1)
             }
             if (!isMysteryGuessCorrect(text, answer)) {
-                return@update current.copy(guessError = "Ainda não é essa.", shakeKey = current.shakeKey + 1)
+                return@update current.copy(guessError = "Todavía no es esa.", shakeKey = current.shakeKey + 1)
             }
             current.copy(
                 sheetOpen = false,
@@ -160,7 +163,9 @@ class MysteryViewModel(
 
     fun restart(newSeed: Long) {
         _state.value = MysteryUiState(
-            puzzle = PuzzleGenerator.genMystery(boardSize, bankWords, mysteries, newSeed, fill),
+            puzzle = if (fixedMystery != null)
+                PuzzleGenerator.genCampaignMystery(boardSize, bankWords, fixedMystery, newSeed, fill)
+            else PuzzleGenerator.genMystery(boardSize, bankWords, mysteries, newSeed, fill),
         )
     }
 
@@ -178,10 +183,11 @@ class MysteryViewModelFactory(
     private val fill: String,
     private val directionAssist: Boolean = true,
     private val initial: SavedPlayState? = null,
+    private val fixedMystery: MysteryEntry? = null,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass.isAssignableFrom(MysteryViewModel::class.java))
-        return MysteryViewModel(bankWords, mysteries, boardSize, seed, fill, directionAssist, initial) as T
+        return MysteryViewModel(bankWords, mysteries, boardSize, seed, fill, directionAssist, initial, fixedMystery) as T
     }
 }
