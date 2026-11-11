@@ -72,6 +72,29 @@ class GameDataStore(context: Context) {
     }
 
 
+    /**
+     * Bind this local progress to ONE Google account after the player expressly
+     * chooses to save there. Refuse a different account: never silently upload
+     * the previous player's stars to another person's private Drive folder.
+     * This guard does not prevent offline gameplay.
+     */
+    suspend fun associateGoogleAccount(uniqueId: String, playerConfirmed: Boolean): Boolean {
+        if (uniqueId.isBlank() || !playerConfirmed) return false
+        val digest = java.security.MessageDigest.getInstance("SHA-256")
+            .digest(uniqueId.toByteArray(Charsets.UTF_8))
+            .joinToString("") { "%02x".format(it) }
+        val key = stringPreferencesKey("sync_account_hash")
+        var permitted = false
+        store.edit { prefs ->
+            val current = prefs[key]
+            if (current == null || current == digest) {
+                prefs[key] = digest
+                permitted = true
+            }
+        }
+        return permitted
+    }
+
     /** Snapshot requested only after choosing a Google account.
      * Contains no email or tokens and uses the same local DataStore as gameplay.
      */
