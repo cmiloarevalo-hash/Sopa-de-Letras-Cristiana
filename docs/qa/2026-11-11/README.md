@@ -46,3 +46,12 @@
 - El emulador Android compartido del otro proyecto fue usado temporalmente **sin alterar datos de Lago-1**; restaurar su aplicación anterior después de esta QA.
 
 **Decisión operativa:** el Supervisor puede seguir corrigiendo defectos reales y preparar la app sin esperar aprobaciones intermedias; **no declarará definitivos ni publicados** la UI, Google o el lanzamiento antes de la evidencia requerida.
+
+## Variante release optimizada verificada en emulador
+
+- Se ejecutó `gradlew :app:assembleRelease --no-daemon --console=plain` en Windows: **BUILD SUCCESSFUL** tras descargar una dependencia de Compose que no figuraba en la caché offline.
+- Archivo generado: `app/build/outputs/apk/release/app-release.apk`, **2.509.150 bytes**, SHA256 **`40CD8A6DE0FFEA82A8FF9004476639B9BF40D73F767124D218CA3E0769A7D904`**.
+- Identidad `app.sopadeletras.cristiana`, versionName `1.0.6`, versionCode `25`, minSdk26/targetSdk36, firma Android v2 verificada; **se compiló con clave de depuración por ausencia de credenciales de producción durante esa ejecución**, por lo que **NO es APK definitiva de distribución**.
+- Instalación `adb install -r` → **Success**, apertura de Activity y tablero del nivel 1 en emulador 320×640 → **PASS**, sin fallo fatal en registros examinados.
+- Se creó una **clave de firma de producción distinta** bajo directorio privado del computador autorizado, fuera de GitHub; la ejecución que necesita leer su contraseña local está pendiente de autorización del equipo. La clave y su contraseña deben ser respaldadas por el propietario; **jamás compartirlas en repositorio**.
+- La revisión humana consolidada de estas ocho capturas sigue pendiente de confirmación.
