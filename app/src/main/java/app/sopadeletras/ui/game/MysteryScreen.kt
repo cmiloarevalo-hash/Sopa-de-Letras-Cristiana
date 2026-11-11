@@ -81,7 +81,7 @@ fun MysteryScreen(
     onExit: () -> Unit,
     onNext: () -> Unit,
     onWin: (stars: Int, seconds: Int) -> Unit = { _, _ -> },
-    winPrimaryLabel: String = "Próximo",
+    winPrimaryLabel: String = "Siguiente",
     winSecondaryLabel: String = "Mapa",
     haptics: Boolean = true,
     letterScale: Float = 1f,
@@ -406,7 +406,7 @@ private fun GuessSheet(
             modifier = Modifier.padding(horizontal = 20.dp).padding(bottom = 22.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text("Qual é a palavra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
+            Text("¿Cuál es la palabra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
             Text("$clue · $answerLength letras", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             TextField(
                 value = text,
