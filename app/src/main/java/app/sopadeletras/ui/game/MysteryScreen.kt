@@ -7,6 +7,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,6 +50,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -58,6 +60,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
 import app.sopadeletras.ui.components.HintButton
+import app.sopadeletras.ui.components.BiblicalHintDialog
+import app.sopadeletras.core.mysteryLetterSlots
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.PrimaryButton
 import app.sopadeletras.ui.components.SecondaryButton
@@ -88,6 +92,8 @@ fun MysteryScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    bibleReference: String = "Génesis 1",
+    onReadBible: (String) -> Unit = {},
 ) {
     val colors = LocalSopaColors.current
     val context = LocalContext.current
@@ -102,11 +108,13 @@ fun MysteryScreen(
     val state by viewModel.state.collectAsState()
     val puzzle = state.puzzle
     val mystery = puzzle.mystery
+    val mysteryReference = mystery?.reference?.takeIf { it.isNotBlank() } ?: bibleReference
     val progress = if (puzzle.words.isEmpty()) 0f else state.found.size / puzzle.words.size.toFloat()
 
     var pop by remember { mutableStateOf(setOf<Int>()) }
     val popAnim = remember { Animatable(0f) }
     var showVictory by remember { mutableStateOf(false) }
+    var showBibleHint by remember { mutableStateOf(false) }
     var winReported by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
@@ -171,7 +179,10 @@ fun MysteryScreen(
                 clue = mystery.clue,
                 answerLength = mystery.word.length,
                 revealed = state.revealed || state.victory,
-                answer = if (state.revealed || state.victory) mystery.word else null,
+                answer = mystery.word,
+                revealedLetters = state.found.size,
+                reference = mysteryReference,
+                onShowHint = { showBibleHint = true },
             )
         }
     }
@@ -192,6 +203,16 @@ fun MysteryScreen(
                 Column(Modifier.weight(1f)) {
                     Text(title, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
                     Text(subtitle, fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
+                    if (mystery != null) {
+                        val slots = mysteryLetterSlots(mystery.word, state.found.size, state.revealed)
+                        Text(
+                            "Misterio: " + slots.joinToString("") { it?.toString() ?: "□" },
+                            fontFamily = Bricolage,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = colors.accent,
+                        )
+                    }
                 }
                 TimerChip(seconds = state.elapsed)
             }
@@ -240,7 +261,7 @@ fun MysteryScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     HintButton(
                         hintsLeft = MAX_HINTS - state.hintsUsed,
-                        onClick = viewModel::useHint,
+                        onClick = { showBibleHint = true },
                         modifier = Modifier.weight(1f),
                     )
                     SecondaryButton(text = "Pausa", onClick = viewModel::pause, modifier = Modifier.weight(1f))
@@ -261,6 +282,7 @@ fun MysteryScreen(
                 MysteryWinOverlay(
                     stars = viewModel.stars(),
                     answer = mystery?.word ?: "",
+                    reference = mysteryReference,
                     seconds = state.elapsed,
                     primaryLabel = winPrimaryLabel,
                     secondaryLabel = winSecondaryLabel,
@@ -268,9 +290,21 @@ fun MysteryScreen(
                     onSecondary = onExit,
                 )
             }
+            if (showBibleHint && mystery != null) {
+                BiblicalHintDialog(
+                    clue = mystery.clue,
+                    reference = mysteryReference,
+                    remaining = MAX_HINTS - state.hintsUsed,
+                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(mysteryReference) },
+                    onReveal = { showBibleHint = false; viewModel.useHint() },
+                    onDismiss = { showBibleHint = false },
+                )
+            }
             if (state.sheetOpen && mystery != null) {
                 GuessSheet(
                     clue = mystery.clue,
+                    reference = mysteryReference,
+                    onReadBible = { viewModel.pause(); onReadBible(mysteryReference) },
                     answerLength = mystery.word.length,
                     error = state.guessError,
                     shakeKey = state.shakeKey,
@@ -288,6 +322,9 @@ private fun MysteryClueCard(
     answerLength: Int,
     revealed: Boolean,
     answer: String?,
+    revealedLetters: Int,
+    reference: String,
+    onShowHint: () -> Unit,
 ) {
     val colors = LocalSopaColors.current
     val fontScale = androidx.compose.ui.platform.LocalDensity.current.fontScale
@@ -300,14 +337,38 @@ private fun MysteryClueCard(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(
-            text = "Pista · $clue",
+            text = "Pista bíblica · $clue",
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
             fontFamily = Figtree,
             fontSize = 15.sp,
             color = colors.text,
         )
+        Text(
+            text = "Referencia: " + reference,
+            fontFamily = Figtree,
+            fontSize = 12.sp,
+            color = colors.mute,
+        )
+        Text(
+            text = "Leer pista y Biblia RV1909",
+            fontFamily = Figtree,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold,
+            color = colors.accent,
+            modifier = Modifier.clickable(onClick = onShowHint),
+        )
+        Text(
+            text = if (revealed) "¡Lo descubriste!" else "¡Muy bien! " +
+                minOf(revealedLetters, answerLength) + " de " + answerLength + " letras descubiertas.",
+            fontFamily = Figtree,
+            fontSize = 13.sp,
+            color = colors.accent,
+        )
+        val visible = mysteryLetterSlots(answer.orEmpty(), revealedLetters, revealed)
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             repeat(answerLength) { index ->
-                val letter = if (revealed) answer?.getOrNull(index)?.toString() ?: "" else ""
+                val letter = visible.getOrNull(index)?.toString().orEmpty()
                 Box(
                     modifier = Modifier
                         .width(30.dp)
@@ -378,6 +439,8 @@ private fun MysteryWordChip(length: Int, word: String, colorIndex: Int?, colorbl
 @Composable
 private fun GuessSheet(
     clue: String,
+    reference: String,
+    onReadBible: () -> Unit,
     answerLength: Int,
     error: String?,
     shakeKey: Int,
@@ -408,9 +471,13 @@ private fun GuessSheet(
         ) {
             Text("¿Cuál es la palabra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
             Text("$clue · $answerLength letras", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
+            Text("Referencia: " + reference, fontFamily = Figtree,
+                fontSize = 13.sp, color = colors.accent)
+            SecondaryButton(text = "Leer en Biblia RV1909",
+                onClick = { onDismiss(); onReadBible() })
             TextField(
                 value = text,
-                onValueChange = { text = it.uppercase().filter { c -> c in 'A'..'Z' } },
+                onValueChange = { text = it.uppercase().filter { c -> c in 'A'..'Z' || c == 'Ñ' } },
                 singleLine = true,
                 textStyle = TextStyle(
                     fontFamily = Bricolage,
@@ -453,6 +520,7 @@ private fun GuessSheet(
 private fun MysteryWinOverlay(
     stars: Int,
     answer: String,
+    reference: String,
     seconds: Int,
     primaryLabel: String,
     secondaryLabel: String,
@@ -489,6 +557,10 @@ private fun MysteryWinOverlay(
                     }
                 }
             }
+            Text("Descubriste una palabra del camino bíblico.",
+                fontFamily = Figtree, fontSize = 14.sp, color = colors.text)
+            Text("Lee también: " + reference,
+                fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
             Text(formatElapsed(seconds), fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             PrimaryButton(text = primaryLabel, onClick = onPrimary)
             SecondaryButton(text = secondaryLabel, onClick = onSecondary)

@@ -39,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
+import app.sopadeletras.ui.components.BiblicalHintDialog
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.SecondaryButton
 import app.sopadeletras.ui.components.SopaProgress
@@ -70,6 +71,9 @@ fun TimeAttackScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    bibleHint: String = "Descubre el valor de la ayuda en este relato.",
+    bibleReference: String = "Génesis 1",
+    onReadBible: (String) -> Unit = {},
 ) {
     val colors = LocalSopaColors.current
     val context = LocalContext.current
@@ -82,6 +86,7 @@ fun TimeAttackScreen(
     val progress = if (state.total == 0) 0f else state.remaining / state.total.toFloat()
 
     var pop by remember { mutableStateOf(setOf<Int>()) }
+    var showBibleHint by remember { mutableStateOf(false) }
     val popAnim = remember { Animatable(0f) }
     var finishReported by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -128,12 +133,12 @@ fun TimeAttackScreen(
         header = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("Contra-relógio", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
+                    Text("Contrarreloj", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
                     Text(
                         buildAnnotatedString {
-                            append("Pontos ")
+                            append("Puntos ")
                             withStyle(SpanStyle(color = colors.accent)) { append("${state.points}") }
-                            append(" · Tabuleiro ${state.boards + 1}")
+                            append(" · Tablero ${state.boards + 1}")
                         },
                         fontFamily = Figtree, fontSize = 14.sp, color = colors.mute,
                     )
@@ -184,14 +189,28 @@ fun TimeAttackScreen(
         actions = {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 SecondaryButton(
-                    text = "Pista −5 s",
-                    onClick = viewModel::useHint,
+                    text = "Pista bíblica",
+                    onClick = { viewModel.pause(); showBibleHint = true },
                     modifier = Modifier.weight(1f),
                 )
                 SecondaryButton(text = "Pausa", onClick = viewModel::pause, modifier = Modifier.weight(1f))
             }
         },
         overlays = {
+        if (showBibleHint) {
+            BiblicalHintDialog(
+                clue = bibleHint,
+                reference = bibleReference,
+                remaining = if (state.remaining > 5) 1 else 0,
+                onRead = { showBibleHint = false; onReadBible(bibleReference) },
+                onReveal = {
+                    showBibleHint = false
+                    viewModel.resume()
+                    viewModel.useHint()
+                },
+                onDismiss = { showBibleHint = false; viewModel.resume() },
+            )
+        }
         if (state.bonusVisible) {
             Box(Modifier.align(Alignment.TopCenter).padding(top = 90.dp)) {
                 Text(
@@ -204,9 +223,9 @@ fun TimeAttackScreen(
                 )
             }
         }
-        if (state.paused && !state.finished) {
+        if (state.paused && !state.finished && !showBibleHint) {
             PauseOverlay(
-                subtitle = "$categoryName · restam ${formatElapsed(state.remaining)}",
+                subtitle = "$categoryName · quedan ${formatElapsed(state.remaining)}",
                 onContinue = viewModel::resume,
                 onRestart = { viewModel.restart(duration, kotlin.random.Random.nextLong()) },
                 onExit = onExit,

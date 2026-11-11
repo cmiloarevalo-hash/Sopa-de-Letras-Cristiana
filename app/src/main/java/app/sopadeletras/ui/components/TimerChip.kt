@@ -52,7 +52,7 @@ fun TimerChip(
             .background(colors.surface)
             .padding(horizontal = 15.dp, vertical = 8.dp)
             .alpha(if (urgent) blink else 1f)
-            .semantics { contentDescription = "Tempo: ${formatElapsed(seconds)}" },
+            .semantics { contentDescription = "Tiempo: ${formatElapsed(seconds)}" },
     ) {
         ClockIcon(modifier = Modifier.size(18.dp))
         Spacer(Modifier.width(6.dp))
