@@ -1,4 +1,7 @@
 # ESPECIFICACIÓN MAESTRA · SOPA DE LETRAS CRISTIANA · APK V1
+
+> **DECISIÓN HUMANA DE NOMBRE OFICIAL · 11-11-2026:** la aplicación se llama exactamente **«Sopa de letras -Biblia Rv-1909»**. Es el nombre visible en Android, portada, Inicio y material de distribución; **NO se renombra el identificador interno** `applicationId` para proteger las instalaciones y el progreso previos. La integración nueva de lector bíblico offline y pista misteriosa progresiva se desarrolla en rama `supervisor/biblia-pistas-progresivas-20261111` sobre la APK RC1, con 66 libros RV1909 de dominio público. El nuevo contenido y QA deben demostrarse antes de declarar la versión definitiva.
+
 **Work Item Google:** [A6 #15](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15) · **PR documental:** [#14](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/pull/14).
 **Fecha:** 11-11-2026 · **Responsable:** Supervisor · **Estado:** propuesta de integración documental en rama independiente, pendiente de revisión/merge. No confundir con código probado ni con aceptación humana de textos nuevos.
 
