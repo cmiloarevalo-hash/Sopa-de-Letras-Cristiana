@@ -1,3 +1,5 @@
+> **Actualización de continuidad (2026-11-11):** [Especificación maestra unificada](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md) concentra los 10 mundos, catálogos editoriales, referencias, árbol de ramas, pruebas y nueva necesidad de Google; las propuestas de palabras no equivalen aún a implementación. Para cualquier reanudación, consultar la rama/PR documental y el estado real de HEAD de A1–A5. No reabrir objetivos ya aprobados.
+
 # Continuidad de ejecución para el Supervisor — primera APK
 
 **Versión:** v001, 2026-11-01. **Tipo:** orientación para preparar Work Items, no Work Item activo ni canal de entrega al Supervisor. **Intención del Humano:** los agentes han de avanzar con autonomía técnica suficiente hasta entregar una primera APK instalable, sin pedir aprobación del Humano por cada detalle menor.
