@@ -48,7 +48,6 @@ import app.sopadeletras.core.WORLDS
 import app.sopadeletras.core.isLevelUnlocked
 import app.sopadeletras.core.isWorldUnlocked
 import app.sopadeletras.core.levelInfo
-import app.sopadeletras.data.CAMPAIGN_BANK_IDS
 import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.ui.components.SopaProgress
 import app.sopadeletras.ui.theme.Bricolage
@@ -119,7 +118,16 @@ fun CampaignScreen(
                     }
                 }
             }
-            WorldCard(world = openWorld, progress = progress)
+            val wordCounts = remember(openWorld) {
+                (1..30).map { index ->
+                    container.words.loadCampaignLevel(openWorld * LEVELS_PER_WORLD + index).words.size
+                }
+            }
+            WorldCard(
+                world = openWorld,
+                progress = progress,
+                wordRange = (wordCounts.minOrNull() ?: 0) to (wordCounts.maxOrNull() ?: 0),
+            )
             // Five complete rows remain accessible on compact phones.
             // Do not place the grid in a zero-height weighted LazyVerticalGrid.
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -166,23 +174,22 @@ fun CampaignScreen(
 }
 
 @Composable
-private fun WorldCard(world: Int, progress: Map<Int, Int>) {
+private fun WorldCard(world: Int, progress: Map<Int, Int>, wordRange: Pair<Int, Int>) {
     val colors = LocalSopaColors.current
     val def = WORLDS[world]
     val range = (world * LEVELS_PER_WORLD + 1)..(world * LEVELS_PER_WORLD + 30)
     val done = range.count { it in progress }
     val stars = range.sumOf { progress[it] ?: 0 }
-    val bankName = CAMPAIGN_BANK_IDS.getOrNull(def.category)?.uppercase() ?: "PRÓXIMAMENTE"
     Column(
         modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface).padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        Text("MUNDO ${world + 1} · $bankName", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+        Text("MUNDO ${world + 1} · 30 NIVELES", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text(def.name, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text)
         val guide = guideForLevel(world * LEVELS_PER_WORLD + 1)
         Text(guide.introduction, fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text("Referencia: ${guide.reference}", fontFamily = Figtree, fontSize = 11.sp, color = colors.mute)
-        Text("${def.n}×${def.n} · ${def.minWords} a ${def.maxWords} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+        Text("${def.n}×${def.n} · ${wordRange.first} a ${wordRange.second} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
         SopaProgress(progress = done / 30f)
         Text("$done de 30 · ★ $stars de 90", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
     }
