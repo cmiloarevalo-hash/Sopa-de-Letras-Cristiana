@@ -92,6 +92,10 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3.windowsizeclass)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play)
+    implementation(libs.google.identity.googleid)
+    implementation(libs.google.play.services.auth)
     testImplementation(libs.junit)
 }
 
