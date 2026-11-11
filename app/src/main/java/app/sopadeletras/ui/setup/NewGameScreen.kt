@@ -49,9 +49,9 @@ import app.sopadeletras.ui.theme.LocalSopaColors
 import kotlinx.coroutines.launch
 
 private val DIFFICULTY_NOTES = mapOf(
-    Difficulty.EASY to "Menos palavras, só para a direita e para baixo.",
-    Difficulty.NORMAL to "O equilíbrio habitual para o tamanho.",
-    Difficulty.HARD to "Mais palavras, todas as direções e letras enganadoras.",
+    Difficulty.EASY to "Menos palabras; solo hacia la derecha y hacia abajo.",
+    Difficulty.NORMAL to "Una dificultad equilibrada para el tablero.",
+    Difficulty.HARD to "Más palabras, todas las direcciones y letras para despistar.",
 )
 
 enum class SetupMode {
@@ -94,9 +94,9 @@ fun NewGameScreen(
     val duration = DURATIONS[durationIndex]
     val params = diffParams(size, difficulty)
     val title = when (mode) {
-        SetupMode.FREE -> "Jogo livre"
-        SetupMode.TIME -> "Contra-relógio"
-        SetupMode.MYSTERY -> "Palavra misteriosa"
+        SetupMode.FREE -> "Juego libre"
+        SetupMode.TIME -> "Contrarreloj"
+        SetupMode.MYSTERY -> "Palabra misteriosa"
     }
 
     Column(
@@ -114,12 +114,12 @@ fun NewGameScreen(
                 modifier = Modifier.size(38.dp).clip(RoundedCornerShape(13.dp)).background(colors.surface).clickable { onBack() },
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = colors.text)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = colors.text)
             }
             Text(title, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
         }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            SectionLabel("TAMANHO")
+            SectionLabel("TAMAÑO")
             SegmentedPicker(options = sizes.map { "$it×$it" }, selected = sizeIndex, onSelect = { sizeIndex = it })
             Text(
                 sizeDescription(mode, size, params),
@@ -128,26 +128,26 @@ fun NewGameScreen(
         }
         if (mode == SetupMode.FREE) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                SectionLabel("DIFICULDADE")
+                SectionLabel("DIFICULTAD")
                 SegmentedPicker(options = listOf("Fácil", "Normal", "Difícil"), selected = difficultyIndex, onSelect = { difficultyIndex = it })
                 Text(DIFFICULTY_NOTES[difficulty].orEmpty(), fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
             }
         }
         if (mode == SetupMode.TIME) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                SectionLabel("DURAÇÃO")
+                SectionLabel("DURACIÓN")
                 SegmentedPicker(options = listOf("02:00", "03:00", "05:00"), selected = durationIndex, onSelect = { durationIndex = it })
-                Text("Cada tabuleiro completo dá +50 pontos e +10 s.", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+                Text("Cada tablero completo suma 50 puntos y 10 segundos.", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
             }
         }
         if (mode == SetupMode.MYSTERY) {
             Text(
-                "As letras que sobram, lidas por ordem, formam a palavra final.",
+                "Las letras restantes permiten descubrir una palabra final.",
                 fontFamily = Figtree, fontSize = 13.sp, color = colors.mute,
             )
         }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            SectionLabel("CATEGORIA")
+            SectionLabel("CATEGORÍA")
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 for (row in categories.chunked(2)) {
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -169,7 +169,7 @@ fun NewGameScreen(
         }
         Spacer(Modifier.weight(1f))
         PrimaryButton(
-            text = "Começar",
+            text = "Comenzar",
             onClick = {
                 scope.launch {
                     container.settings.setBoardSize(size)
@@ -190,9 +190,9 @@ fun NewGameScreen(
 private fun sizeDescription(mode: SetupMode, size: Int, params: GenParams): String {
     if (mode == SetupMode.MYSTERY) {
         val dirs = BoardConfig.normalDirs(size).size
-        return "$size×$size · $dirs direções · palavras escondidas"
+        return "$size×$size · $dirs direcciones · palabras ocultas"
     }
-    return "$size×$size · ${params.words} palavras · ${params.dirs.size} direções"
+    return "$size×$size · ${params.words} palabras · ${params.dirs.size} direcciones"
 }
 
 @Composable
@@ -217,7 +217,7 @@ private fun CategoryCard(
         Box(Modifier.size(18.dp).clip(RoundedCornerShape(5.dp)).background(colors.found[colorIndex % colors.found.size]))
         Column {
             Text(cat.name, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = colors.text)
-            Text("${cat.words.size} palavras", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+            Text("${cat.words.size} palabras", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         }
     }
 }
