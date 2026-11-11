@@ -24,7 +24,7 @@ class FixedCampaignBoardsTest {
     @Test fun all300FixedLevelsAreExactSolvableAndDeterministic() {
         val source = File("src/main/assets/campaign/es-ES/levels-v1.json")
         assertTrue("Missing shipped fixed campaign asset", source.isFile)
-        val blocks = source.readText(Charsets.UTF_8)
+        val blocks = source.readText(Charsets.UTF_8).replace("\r\n", "\n")
             .substringAfter("\"levels\": [")
             .split("\n    {\n")
             .drop(1)
