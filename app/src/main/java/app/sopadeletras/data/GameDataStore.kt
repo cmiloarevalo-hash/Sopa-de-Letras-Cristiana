@@ -72,11 +72,35 @@ class GameDataStore(context: Context) {
     }
 
 
-    /** Snapshot requested only after the player chooses an authorized Google account.
-     *  The app continues to use DataStore offline; this contains no email or tokens.
+    /** Snapshot requested only after choosing a Google account.
+     * Contains no email or tokens and uses the same local DataStore as gameplay.
      */
-    suspend fun exportProgressBackup(): ProgressBackup {
-        val prefs = store.data.first()
+    suspend fun exportProgressBackup(): ProgressBackup = backupFrom(store.data.first())
+
+    /**
+     * This is atomic with local victories, so a concurrent local game update
+     * cannot be overwritten by an older cloud snapshot.
+     *
+     * Caller must first verify the selected account and explicit guest-to-
+     * account consent. Different Google accounts must use separate profiles.
+     */
+    suspend fun mergeAuthorizedBackup(remote: ProgressBackup): ProgressBackup {
+        var merged: ProgressBackup? = null
+        store.edit { prefs ->
+            val result = ProgressMerge.combine(backupFrom(prefs), remote)
+            for ((level, entry) in result.levels) {
+                prefs[intPreferencesKey(progressStarsKey("es-ES", level))] = entry.stars
+                prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] = entry.bestSeconds
+            }
+            if (result.nickname.isNotBlank()) {
+                prefs[stringPreferencesKey("profile_nickname")] = result.nickname
+            }
+            merged = result
+        }
+        return requireNotNull(merged)
+    }
+
+    private fun backupFrom(prefs: androidx.datastore.preferences.core.Preferences): ProgressBackup {
         val levels = (1..300).mapNotNull { level ->
             val stars = prefs[intPreferencesKey(progressStarsKey("es-ES", level))] ?: return@mapNotNull null
             val seconds = prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] ?: 0
@@ -87,26 +111,6 @@ class GameDataStore(context: Context) {
             nickname = prefs[stringPreferencesKey("profile_nickname")] ?: "",
             levels = levels,
         )
-    }
-
-    /**
-     * Called only after an explicit account choice and account-scoped backup read.
-     * Merge by the same monotonic rules as a normal game victory.
-     * Return the current merged snapshot for upload; never upload local-only tokens.
-     */
-    suspend fun mergeAuthorizedBackup(remote: ProgressBackup): ProgressBackup {
-        val local = exportProgressBackup()
-        val merged = ProgressMerge.combine(local, remote)
-        store.edit { prefs ->
-            for ((level, entry) in merged.levels) {
-                prefs[intPreferencesKey(progressStarsKey("es-ES", level))] = entry.stars
-                prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] = entry.bestSeconds
-            }
-            if (merged.nickname.isNotBlank()) {
-                prefs[stringPreferencesKey("profile_nickname")] = merged.nickname
-            }
-        }
-        return merged
     }
 
     fun savedGameFlow(): Flow<SavedGameData?> = store.data.map { prefs ->
