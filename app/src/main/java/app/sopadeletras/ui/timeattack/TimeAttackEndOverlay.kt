@@ -45,12 +45,12 @@ fun TimeAttackEndOverlay(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Tempo esgotado", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 32.sp, color = colors.text)
+            Text("¡Se acabó el tiempo!", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 32.sp, color = colors.text)
             Text("$points", fontFamily = Bricolage, fontWeight = FontWeight.ExtraBold, fontSize = 48.sp, color = colors.accent)
-            Text("pontos", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
+            Text("puntos", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             if (isRecord && points > 0) {
                 Text(
-                    "Novo recorde",
+                    "¡Nuevo récord!",
                     fontFamily = Figtree,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
@@ -60,14 +60,14 @@ fun TimeAttackEndOverlay(
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             } else {
-                Text("Recorde: $record", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
+                Text("Récord: $record", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             }
             Text(
-                "$boards tabuleiros completos · $categoryName $boardSize×$boardSize",
+                "$boards tableros completados · $categoryName $boardSize×$boardSize",
                 fontFamily = Figtree, fontSize = 14.sp, color = colors.mute,
             )
-            PrimaryButton(text = "Jogar outra vez", onClick = onReplay)
-            SecondaryButton(text = "Início", onClick = onHome)
+            PrimaryButton(text = "Jugar otra vez", onClick = onReplay)
+            SecondaryButton(text = "Inicio", onClick = onHome)
         }
     }
 }
