@@ -33,7 +33,6 @@ import app.sopadeletras.core.displayedStreak
 import app.sopadeletras.core.levelInfo
 import app.sopadeletras.core.levelParams
 import app.sopadeletras.data.CAMPAIGN_BANK_IDS
-import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.data.SavedGameData
 import app.sopadeletras.data.StartupSnapshot
 import app.sopadeletras.data.StoredResult
@@ -365,12 +364,17 @@ class MainActivity : ComponentActivity() {
                     ) { entry ->
                         val level = entry.arguments?.getInt("level") ?: 1
                         val resume = entry.arguments?.getBoolean("resume") ?: false
-                        val info = remember(level) { levelInfo(level) }
+                        val campaignLevel = remember(level) { container.words.loadCampaignLevel(level) }
+                        val info = remember(level) {
+                            levelInfo(level).copy(
+                                n = campaignLevel.boardSize,
+                                words = campaignLevel.words.size,
+                            )
+                        }
                         val bankId = CAMPAIGN_BANK_IDS[info.category]
                         val assist by container.settings.directionAssist.collectAsState(initial = true)
                         val seen by container.settings.tutorialSeen.collectAsState(initial = emptySet())
                         val saved by container.gameData.savedGameFlow().collectAsState(initial = null)
-                        val bank = remember(bankId) { container.words.loadCategory(lang, bankId) }
                         val seed = remember(level) { campaignSeed(level, lang) }
                         val tip = tutorialTip(level, seen)
                         val dismissTip = {
@@ -379,10 +383,10 @@ class MainActivity : ComponentActivity() {
                         val suffix = when (info.kind) {
                             LevelKind.TIMED -> " · Cronometrado"
                             LevelKind.MYSTERY -> " · Misteriosa"
-                            LevelKind.BOSS -> " · Chefe"
+                            LevelKind.BOSS -> " · Final"
                             LevelKind.NORMAL -> ""
                         }
-                        val subtitle = "Nível $level · ${info.n}×${info.n}$suffix"
+                        val subtitle = "Nivel $level · ${campaignLevel.topic} · ${info.n}×${info.n}$suffix"
                         val worldName = WORLDS[info.world].name
 
                         if (info.kind == LevelKind.MYSTERY) {
@@ -390,8 +394,8 @@ class MainActivity : ComponentActivity() {
                             val vm: app.sopadeletras.ui.game.MysteryViewModel = viewModel(
                                 key = "mys-$level-$resume",
                                 factory = MysteryViewModelFactory(
-                                    bank.words, bank.mysteries, minOf(info.n, 10), seed,
-                                    Language.fillFor(lang), assist, initial,
+                                    campaignLevel.words, emptyMap(), campaignLevel.boardSize, seed,
+                                    Language.ES_FILL, assist, initial, campaignLevel.mystery,
                                 ),
                             )
                             MysteryScreen(
@@ -421,7 +425,7 @@ class MainActivity : ComponentActivity() {
                                         container.gameData.addResult(
                                             StoredResult(
                                                 mode = "MYSTERY", language = lang, difficulty = "",
-                                                level = level, n = minOf(info.n, 10), category = bankId,
+                                                level = level, n = campaignLevel.boardSize, category = bankId,
                                                 seconds = seconds, hints = vm.state.value.hintsUsed,
                                                 stars = stars, score = 0, words = vm.state.value.found.size,
                                                 finishedAt = System.currentTimeMillis(),
@@ -444,7 +448,7 @@ class MainActivity : ComponentActivity() {
                             val vm: GameViewModel = viewModel(
                                 key = "camp-$level-$resume",
                                 factory = GameViewModelFactory(
-                                    bank.words, params, seed, Language.fillFor(lang), assist, limit, initial,
+                                    campaignLevel.words, params, seed, Language.ES_FILL, assist, limit, initial,
                                 ),
                             )
                             val isLast = level >= 300
@@ -459,7 +463,7 @@ class MainActivity : ComponentActivity() {
                                     else -> "Siguiente nivel"
                                 },
                                 winSecondaryLabel = "Mapa",
-                                winExtraLine = "Referencia bíblica: ${guideForLevel(level).reference} · RV1909",
+                                winExtraLine = "${campaignLevel.learningMessage}\n${campaignLevel.reference} · RV1909",
                                 timeoutExitLabel = "Mapa",
                                 tutorialTip = tip,
                                 onTutorialAction = { dismissTip() },
