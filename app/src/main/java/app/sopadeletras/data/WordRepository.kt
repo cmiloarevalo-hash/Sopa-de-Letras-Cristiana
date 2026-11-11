@@ -12,7 +12,46 @@ data class WordCategoryData(
     val mysteries: Map<Int, MysteryEntry>,
 )
 
+/** V1: fixed editorial content for one of the 300 campaign levels. */
+data class CampaignLevelData(
+    val level: Int,
+    val world: Int,
+    val title: String,
+    val topic: String,
+    val reference: String,
+    val value: String,
+    val learningMessage: String,
+    val boardSize: Int,
+    val words: List<String>,
+    val mystery: MysteryEntry?,
+)
+
 class WordRepository(private val context: Context) {
+    private val campaignLevels: Map<Int, CampaignLevelData> by lazy {
+        val json = context.assets.open("campaign/es-ES/levels-v1.json")
+            .bufferedReader(Charsets.UTF_8).use { it.readText() }
+        val levels = JSONObject(json).getJSONArray("levels")
+        (0 until levels.length()).map { i ->
+            val row = levels.getJSONObject(i)
+            val hidden = row.optJSONObject("mystery")
+            CampaignLevelData(
+                level = row.getInt("level"),
+                world = row.getInt("world"),
+                title = row.getString("title"),
+                topic = row.getString("topic"),
+                reference = row.getString("reference"),
+                value = row.getString("value"),
+                learningMessage = row.getString("learningMessage"),
+                boardSize = row.getInt("boardSize"),
+                words = row.getJSONArray("words").toStringList(),
+                mystery = hidden?.let { MysteryEntry(it.getString("word"), it.getString("clue")) },
+            )
+        }.associateBy { it.level }.also { require(it.size == 300) }
+    }
+
+    fun loadCampaignLevel(level: Int): CampaignLevelData =
+        requireNotNull(campaignLevels[level]) { "Nivel fuera del catálogo: $level" }
+
     fun loadCategory(language: String, id: String): WordCategoryData {
         val text = context.assets.open("words/$language/$id.json").bufferedReader().use { it.readText() }
         return parseCategory(text)
