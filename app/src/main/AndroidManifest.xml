@@ -3,6 +3,8 @@
 
     <!-- Normal install-time permission for direct Vibrator control. -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Only the optional, user-authorized Google backup needs internet. -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".SopaApp"
