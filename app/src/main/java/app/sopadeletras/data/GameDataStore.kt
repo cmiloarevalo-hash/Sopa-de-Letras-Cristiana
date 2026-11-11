@@ -33,6 +33,19 @@ data class DailyData(
 class GameDataStore(context: Context) {
     private val store = context.applicationContext.gameStore
 
+    /** Only an optional local nickname; no login, email, or network access. */
+    val nicknameFlow: Flow<String> = store.data.map {
+        it[stringPreferencesKey("profile_nickname")] ?: ""
+    }
+
+    suspend fun saveNickname(value: String) {
+        val clean = value.trim().replace("\\n", " ").replace("\\r", " ").take(24)
+        store.edit { prefs ->
+            val key = stringPreferencesKey("profile_nickname")
+            if (clean.isEmpty()) prefs.remove(key) else prefs[key] = clean
+        }
+    }
+
     fun progressFlow(language: String): Flow<Map<Int, Int>> = store.data.map { prefs ->
         (1..300).mapNotNull { level ->
             prefs[intPreferencesKey(progressStarsKey(language, level))]?.let { stars -> level to stars }
@@ -40,6 +53,7 @@ class GameDataStore(context: Context) {
     }
 
     suspend fun recordWin(language: String, level: Int, stars: Int, seconds: Int) {
+        require(level in 1..300 && stars in 1..3 && seconds >= 0)
         store.edit { prefs ->
             val starsKey = intPreferencesKey(progressStarsKey(language, level))
             val secondsKey = intPreferencesKey(progressSecondsKey(language, level))

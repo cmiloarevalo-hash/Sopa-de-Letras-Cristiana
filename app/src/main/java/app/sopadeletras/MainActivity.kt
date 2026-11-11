@@ -36,6 +36,7 @@ import app.sopadeletras.data.CAMPAIGN_BANK_IDS
 import app.sopadeletras.data.SavedGameData
 import app.sopadeletras.data.StartupSnapshot
 import app.sopadeletras.data.StoredResult
+import app.sopadeletras.ui.album.AlbumScreen
 import app.sopadeletras.ui.campaign.CampaignScreen
 import app.sopadeletras.ui.game.GameScreen
 import app.sopadeletras.ui.game.GameViewModel
@@ -72,7 +73,7 @@ class MainActivity : ComponentActivity() {
             val startup = runBlocking {
                 withTimeoutOrNull(800) { container.settings.snapshot() }
             } ?: StartupSnapshot(
-                language = Language.PT_CODE,
+                language = Language.ES_CODE,
                 theme = "TINTA",
                 assist = true,
                 haptics = true,
@@ -104,6 +105,7 @@ class MainActivity : ComponentActivity() {
                             onTimeGame = { nav.navigate("newGame/TIME") },
                             onMysteryGame = { nav.navigate("newGame/MYSTERY") },
                             onDaily = { nav.navigate("gameDaily") },
+                            onAlbum = { nav.navigate("album") },
                             onStats = { nav.navigate("stats") },
                             onSettings = { nav.navigate("settings") },
                         )
@@ -142,6 +144,9 @@ class MainActivity : ComponentActivity() {
                                 nav.navigate("gameMystery/$size/$category")
                             },
                         )
+                    }
+                    composable("album") {
+                        AlbumScreen(container = container, onBack = { nav.popBackStack() })
                     }
                     composable("stats") {
                         StatsScreen(container = container, language = lang, onBack = { nav.popBackStack() })
