@@ -3,6 +3,8 @@ package app.sopadeletras.ui.campaign
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,9 +18,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -84,7 +83,7 @@ fun CampaignScreen(
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 18.dp, bottom = 22.dp),
+            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 18.dp, bottom = 22.dp),
             verticalArrangement = Arrangement.spacedBy(15.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -121,28 +120,36 @@ fun CampaignScreen(
                 }
             }
             WorldCard(world = openWorld, progress = progress)
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(6),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.weight(1f),
-            ) {
-                items((1..30).toList()) { num ->
-                    val level = openWorld * LEVELS_PER_WORLD + num
-                    LevelNode(
-                        level = level,
-                        world = openWorld,
-                        stars = progress[level] ?: 0,
-                        isCurrent = level == current,
-                        locked = !isLevelUnlocked(level, completed),
-                        onClick = {
-                            if (!isLevelUnlocked(level, completed)) {
-                                scope.launch { snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa el nivel anterior") }
-                            } else {
-                                onPlayLevel(level)
-                            }
-                        },
-                    )
+            // Five complete rows remain accessible on compact phones.
+            // Do not place the grid in a zero-height weighted LazyVerticalGrid.
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                for (row in 0 until 5) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        for (col in 0 until 6) {
+                            val num = row * 6 + col + 1
+                            val level = openWorld * LEVELS_PER_WORLD + num
+                            LevelNode(
+                                modifier = Modifier.weight(1f),
+                                level = level,
+                                world = openWorld,
+                                stars = progress[level] ?: 0,
+                                isCurrent = level == current,
+                                locked = !isLevelUnlocked(level, completed),
+                                onClick = {
+                                    if (!isLevelUnlocked(level, completed)) {
+                                        scope.launch {
+                                            snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa el nivel anterior")
+                                        }
+                                    } else {
+                                        onPlayLevel(level)
+                                    }
+                                },
+                            )
+                        }
+                    }
                 }
             }
             Text(
@@ -183,6 +190,7 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>) {
 
 @Composable
 private fun LevelNode(
+    modifier: Modifier = Modifier,
     level: Int,
     world: Int,
     stars: Int,
@@ -206,7 +214,7 @@ private fun LevelNode(
         else -> null
     }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .aspectRatio(1f)
             .clip(RoundedCornerShape(16.dp))
             .background(bg)
