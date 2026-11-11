@@ -1,5 +1,8 @@
 # Objetivo oficial de producto — Sopa de Letras Cristiana
 
+**Actualización humana de producto · 11-11-2026:** la prioridad educativa es amor, esperanza, cordialidad, amistad, solidaridad, entusiasmo, paz y palabras amables en lenguaje actual, con enfoque cristiano general sin denominación; además se ha solicitado inicio Google simple y respaldo/restauración de progreso **sin perder el juego offline como invitado**. La fuente unificada de los diez mundos, sus palabras y el alcance técnico actualizado está en [ESPECIFICACIÓN MAESTRA V1](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md) (PR #14, pendiente de integración). Este aviso es posterior a las frases históricas «sin cuentas/sin internet» y las modifica **solo en la sincronización opcional**. No reabrir otras decisiones.
+
+
 **Fecha de decisión vigente:** 2026-11-01. **Autoridad:** Humano. **Estado:** definición de producto y preinvestigación, no implementación. **Repositorio:** `cmiloarevalo-hash/Sopa-de-Letras-Cristiana`.
 
 ## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas
