@@ -47,7 +47,9 @@ object PuzzleGenerator {
                 }
             }
         }
-        return count
+        // A palindrome reads the same in both directions on exactly one path.
+        // Count its geometric path once (ANA, ALA, OSO), not twice.
+        return if (word.length > 1 && word == word.reversed()) count / 2 else count
     }
 
     private fun tryPlace(
@@ -125,6 +127,43 @@ object PuzzleGenerator {
             if (best == null || attempt.words.size > best.words.size) best = attempt
         }
         return best!!
+    }
+
+    /**
+     * Campaign mystery: fixed visible vocabulary and ONE editorial answer per level.
+     * The hidden letters occupy unclaimed cells, as in the inherited mystery UI.
+     * Free-play mystery mode is intentionally left unchanged.
+     */
+    fun genCampaignMystery(
+        n: Int,
+        visibleWords: List<String>,
+        answer: MysteryEntry,
+        seed: Long,
+        fill: String,
+    ): Puzzle {
+        require(answer.word.length in 3..n)
+        val params = GenParams(n, visibleWords.size, BoardConfig.normalDirs(n), 0.0)
+        for (attempt in 0 until 96) {
+            val candidate = generate(params, visibleWords, seed + attempt * 9973L, fill)
+            if (candidate.words.size != visibleWords.size) continue
+            val claimed = candidate.words.flatMap { it.cells }.toSet()
+            val free = (0 until n * n).filter { it !in claimed }
+            if (free.size < answer.word.length) continue
+            val random = Mulberry32(seed + attempt * 1039L + 17)
+            // Sort the selected cells for predictable reading/revealing in the UI.
+            val secretCells = shuffled(free, random).take(answer.word.length).sorted()
+            val letters = candidate.letters.toMutableList()
+            secretCells.forEachIndexed { index, cell ->
+                letters[cell] = answer.word[index]
+            }
+            if (candidate.words.any { countOccurrences(letters, n, it.word) != 1 }) continue
+            return candidate.copy(
+                letters = letters,
+                mystery = Mystery(answer.word, answer.clue, secretCells),
+                seed = seed,
+            )
+        }
+        error("No se pudo construir el misterio fijo del nivel con seed=$seed")
     }
 
     fun genMystery(
