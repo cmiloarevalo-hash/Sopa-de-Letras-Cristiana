@@ -1,5 +1,8 @@
 # Alcance de la primera APK — Sopa de Letras Cristiana
 
+**Extensión expresa del Humano · 11-11-2026:** se añade **Google opcional + recuperación de avance asociado a la cuenta** (Work Item [A6 #15](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15)). Esta decisión modifica el alcance histórico «sin cuentas» pero mantiene **campaña offline e invitado sin cuenta**. Se propone Google Credential Manager + Drive appDataFolder **sin backend propio**. Las configuraciones Google Cloud reales y pruebas de segundo dispositivo aún no están acreditadas. Ver [especificación maestra única](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md), PR #14 pendiente de revisión. El resto del alcance aprobado y los A1–A5 permanece.
+
+
 **Fecha:** 2026-11-01. **Estado:** especificación de producto y orientación de preparación, NO implementación. **Autoridad:** decisiones del Humano del proyecto. **Protocolo:** Workflow V3.
 
 ## Resultado solicitado
