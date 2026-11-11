@@ -1,4 +1,5 @@
 # ESPECIFICACIÓN MAESTRA · SOPA DE LETRAS CRISTIANA · APK V1
+**Work Item Google:** [A6 #15](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15) · **PR documental:** [#14](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/pull/14).
 **Fecha:** 11-11-2026 · **Responsable:** Supervisor · **Estado:** propuesta de integración documental en rama independiente, pendiente de revisión/merge. No confundir con código probado ni con aceptación humana de textos nuevos.
 
 > **Punto único de entrada para agentes nuevos.** Recoger aquí requisitos, diez mundos, catálogo concreto de 700 palabras normales y 150 misterios existentes, arquitectura, Google, alcance, pruebas, fuentes y handoffs. Ningún agente debe reinterpretar decisiones humanas ni afirmar que esta propuesta editorial está integrada sin verificar HEAD. Este documento es una especificación de trabajo autorizada por solicitud directa humana; las listas de sustituciones son **decisiones editoriales propuestas por el Supervisor**, no palabras ya revisadas por el propietario.
@@ -365,9 +366,10 @@ MainActivity/NavHost (Compose) -> pantallas Cover/Home/Campaign/Game/Album/Setti
 | 2 · A3 #4 | Delfín | Comparativa real seis pantallas, mantener PNG y hacer correcciones focalizadas | paquete visual único para revisión humana |
 | 3 · A4 #5 | Delfín | Progreso local, pistas, recompensas, invitado, precisión de datos | JVM y pruebas Android offline |
 | 4 · A5 #6 | Delfín | Reconciliar PR #9–#13, mantener 128 intentos del generador; corregir residuos de portugués `Nível`, `Chefe` | build, test, APK técnica, checks |
-| 5 · A6 NUEVO | Delfín | Google Credential Manager, Drive appDataFolder, sync seguro local-first, ajustes de cuenta | tests sin cuenta, con cuenta, offline y restauración Android |
+| 5 · A6 #15 | Delfín | Google Credential Manager, Drive appDataFolder, sync seguro local-first, ajustes de cuenta | tests sin cuenta, con cuenta, offline y restauración Android |
 | 6 | Supervisor | Revisión independiente por SHA y evidencia; coordinar única revisión visual humana | `ACCEPT/REWORK/BLOCK/ESCALATE` fundamentado |
 | 7 | Humano | Instalar y probar la APK privada cuando esté revisada | feedback material y confirmación real |
+**A6 #15:** https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15.
 **A6 justificación:** decisión nueva de cuenta/sync modifica dependencias y rutas fuera de A2–A5; requiere Work Item propio, scopes autorizados y **no debe obstaculizar** implementación independiente del resto. Ninguna tarea obliga a activar cada Issue en Windows: usar canal fijo #8.
 
 ## 10 · Gobernanza y handoff para un agente completamente nuevo
