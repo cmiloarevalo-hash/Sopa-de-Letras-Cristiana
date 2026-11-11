@@ -8,6 +8,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import app.sopadeletras.core.updateStreak
+import app.sopadeletras.sync.LevelBackup
+import app.sopadeletras.sync.ProgressBackup
+import app.sopadeletras.sync.ProgressMerge
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -66,6 +69,44 @@ class GameDataStore(context: Context) {
                 if (best == null || seconds < best) prefs[secondsKey] = seconds
             }
         }
+    }
+
+
+    /** Snapshot requested only after the player chooses an authorized Google account.
+     *  The app continues to use DataStore offline; this contains no email or tokens.
+     */
+    suspend fun exportProgressBackup(): ProgressBackup {
+        val prefs = store.data.first()
+        val levels = (1..300).mapNotNull { level ->
+            val stars = prefs[intPreferencesKey(progressStarsKey("es-ES", level))] ?: return@mapNotNull null
+            val seconds = prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] ?: 0
+            if (stars !in 1..3 || seconds < 0) return@mapNotNull null
+            level to LevelBackup(stars, seconds)
+        }.toMap()
+        return ProgressBackup(
+            nickname = prefs[stringPreferencesKey("profile_nickname")] ?: "",
+            levels = levels,
+        )
+    }
+
+    /**
+     * Called only after an explicit account choice and account-scoped backup read.
+     * Merge by the same monotonic rules as a normal game victory.
+     * Return the current merged snapshot for upload; never upload local-only tokens.
+     */
+    suspend fun mergeAuthorizedBackup(remote: ProgressBackup): ProgressBackup {
+        val local = exportProgressBackup()
+        val merged = ProgressMerge.combine(local, remote)
+        store.edit { prefs ->
+            for ((level, entry) in merged.levels) {
+                prefs[intPreferencesKey(progressStarsKey("es-ES", level))] = entry.stars
+                prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] = entry.bestSeconds
+            }
+            if (merged.nickname.isNotBlank()) {
+                prefs[stringPreferencesKey("profile_nickname")] = merged.nickname
+            }
+        }
+        return merged
     }
 
     fun savedGameFlow(): Flow<SavedGameData?> = store.data.map { prefs ->
