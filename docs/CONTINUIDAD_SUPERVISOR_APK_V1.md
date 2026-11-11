@@ -1,3 +1,5 @@
+**Handoff actualizado 11-11-2026 — PRIORIDAD DE EXPERIENCIA:** implementar las listas EXACTAS de [los 300 niveles](CATALOGO_300_NIVELES_V1.md) a partir del [JSON](data/campana_300_niveles_v1.json), no de los 70 términos aleatorios anteriores. 30 episodios, tamaño 6×6 a 12×12, 10 misterios, 2.545 apariciones de palabras y simulación de colocación 300/300 independiente (NO test Android). Integrar Google A6 #15 **solo al final** cuando el juego principal y APK offline estén listos. [Especificación maestra](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md).
+
 > **Actualización de continuidad (2026-11-11):** [Especificación maestra unificada](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md) concentra los 10 mundos, catálogos editoriales, referencias, árbol de ramas, pruebas y nueva necesidad de Google; las propuestas de palabras no equivalen aún a implementación. Para cualquier reanudación, consultar la rama/PR documental y el estado real de HEAD de A1–A5. No reabrir objetivos ya aprobados.
 
 # Continuidad de ejecución para el Supervisor — primera APK
