@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.sopadeletras.ui.theme.LocalSopaColors
+import app.sopadeletras.ui.theme.TokyoNight
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
@@ -46,7 +47,11 @@ fun AdaptiveGameScaffold(
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
         if (worldIndex != null) {
-            WorldBackground(worldIndex, modifier = Modifier.fillMaxSize(), alpha = 0.23f)
+            WorldBackground(
+                worldIndex,
+                modifier = Modifier.fillMaxSize(),
+                alpha = if (colors.bg == TokyoNight.bg) 0.16f else 0.60f,
+            )
         }
         if (wide) {
             Column(

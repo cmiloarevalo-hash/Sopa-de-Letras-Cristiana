@@ -184,10 +184,16 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>, wordRange: Pair<Int, 
     Box(
         modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface),
     ) {
-        WorldBackground(worldIndex = world, modifier = Modifier.matchParentSize(), alpha = 0.56f)
+        WorldBackground(
+            worldIndex = world,
+            modifier = Modifier.matchParentSize(),
+            alpha = if (colors.bg == app.sopadeletras.ui.theme.TokyoNight.bg) 0.18f else 0.90f,
+        )
         Column(
             modifier = Modifier.fillMaxWidth()
-                .background(colors.surface.copy(alpha = 0.70f)).padding(14.dp),
+                .background(
+                    colors.surface.copy(alpha = if (colors.bg == app.sopadeletras.ui.theme.TokyoNight.bg) 0.85f else 0.50f),
+                ).padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
         Text("MUNDO ${world + 1} · 30 NIVELES", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)

@@ -1,77 +1,98 @@
 package app.sopadeletras.ui.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.sopadeletras.ui.theme.Bricolage
 import app.sopadeletras.ui.theme.Figtree
 import app.sopadeletras.ui.theme.LocalSopaColors
+import app.sopadeletras.ui.theme.TokyoNight
 
-/** Leer una pista bíblica es gratuito. Solo iluminar una casilla consume una ayuda. */
+/** A short biblical clue: the highlighted verse reference is the Bible action. */
 @Composable
 fun BiblicalHintDialog(
     clue: String,
     reference: String,
-    remaining: Int,
     onRead: () -> Unit,
-    onReveal: (() -> Unit)?,
     onDismiss: () -> Unit,
-    autoRevealed: Boolean = false,
 ) {
     val colors = LocalSopaColors.current
+    // Amber that stays readable against ivory. Preserve the existing board/highlight palette.
+    val verseLinkColor = if (colors.bg == TokyoNight.bg) colors.accent else Color(0xFF94600C)
+    val shortClue = clue
+        .removePrefix("En la RV1909, completa la expresión de este pasaje: ")
+        .removePrefix("En la RV1909, completa la palabra de este pasaje: ")
+        .trim()
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("Pista bíblica", fontFamily = Bricolage,
-                fontWeight = FontWeight.Bold, fontSize = 22.sp, color = colors.text)
+            Text(
+                "Pista bíblica",
+                fontFamily = Bricolage,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = colors.text,
+            )
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(11.dp)) {
-                Text(clue, fontFamily = Figtree, fontSize = 16.sp,
-                    lineHeight = 22.sp, color = colors.text)
-                Text("Encuentra el relato en:", fontFamily = Figtree,
-                    fontSize = 13.sp, color = colors.mute)
-                Text(reference, fontFamily = Bricolage,
-                    fontWeight = FontWeight.Bold, fontSize = 15.sp, color = colors.accent)
-                Text(if (autoRevealed) "Ya iluminamos una casilla en el tablero. Leer la Biblia no gasta pistas." else "Leer la Biblia no consume pistas ni quita estrellas.",
-                    fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                Text(
+                    shortClue,
+                    fontFamily = Figtree,
+                    fontSize = 15.sp,
+                    lineHeight = 21.sp,
+                    color = colors.text,
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(colors.cell.copy(alpha = 0.42f))
+                        .clickable(role = Role.Button, onClick = onRead)
+                        .padding(horizontal = 10.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    Text(
+                        reference,
+                        modifier = Modifier.weight(1f),
+                        fontFamily = Bricolage,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = verseLinkColor,
+                        textDecoration = TextDecoration.Underline,
+                    )
+                    Text(
+                        "Leer la Biblia",
+                        fontFamily = Figtree,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 13.sp,
+                        color = verseLinkColor,
+                    )
+                }
             }
         },
         confirmButton = {
-            Column(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 6.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                Button(onClick = onRead, modifier = Modifier.fillMaxWidth()) {
-                    Text("Leer en Biblia RV1909")
-                }
-                if (onReveal != null && !autoRevealed) {
-                    OutlinedButton(
-                        onClick = onReveal, enabled = remaining > 0,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = colors.text, disabledContentColor = colors.mute,
-                        ),
-                    ) { Text("Iluminar una casilla · quedan " + remaining) }
-                }
-                TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
-                    Text("Seguir jugando")
-                }
+            TextButton(onClick = onDismiss) {
+                Text("Seguir jugando", color = colors.text)
             }
         },
         containerColor = colors.surface,
     )
 }
-

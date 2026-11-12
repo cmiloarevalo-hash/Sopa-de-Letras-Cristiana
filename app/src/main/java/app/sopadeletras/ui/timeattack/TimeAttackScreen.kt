@@ -214,11 +214,8 @@ fun TimeAttackScreen(
             BiblicalHintDialog(
                 clue = wordHint?.clue ?: bibleHint,
                 reference = targetReference,
-                remaining = 0,
                 onRead = { showBibleHint = false; onReadBible(targetReference) },
-                onReveal = null,
                 onDismiss = { showBibleHint = false; viewModel.resume() },
-                autoRevealed = true,
             )
         }
         if (state.bonusVisible) {
