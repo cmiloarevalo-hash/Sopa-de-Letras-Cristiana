@@ -32,6 +32,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
+import app.sopadeletras.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,6 +58,7 @@ fun SettingsScreen(
     onBack: () -> Unit,
 ) {
     val colors = LocalSopaColors.current
+    val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
     val theme by container.settings.theme.collectAsState(initial = "TINTA")
     val assist by container.settings.directionAssist.collectAsState(initial = true)
@@ -156,6 +161,44 @@ fun SettingsScreen(
                     onChange = { scope.launch { container.settings.setColorblind(it) } },
                 )
             }
+        }
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp))
+                .background(colors.surface)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(7.dp),
+        ) {
+            Text(
+                "Acerca de esta aplicación",
+                fontFamily = Bricolage,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = colors.text,
+            )
+            SettingCaption("Sopa de letras -Biblia Rv-1909")
+            SettingLabel("Desarrollador: " + stringResource(R.string.developer_name))
+            Text(
+                text = stringResource(R.string.support_email),
+                modifier = Modifier.clickable {
+                    uriHandler.openUri("mailto:apkcristiana@gmail.com")
+                },
+                fontFamily = Figtree,
+                fontSize = 14.sp,
+                color = colors.accent,
+                textDecoration = TextDecoration.Underline,
+            )
+            SettingLabel("Otra aplicación del desarrollador")
+            Text(
+                stringResource(R.string.related_app_name),
+                fontFamily = Bricolage,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = colors.text,
+            )
+            SettingCaption(
+                "Guía de lectura y formación bíblica. Consulta su disponibilidad escribiendo al correo de contacto.",
+            )
         }
     }
 }

@@ -1,0 +1,541 @@
+{
+  "schemaVersion": 1,
+  "description": "Tableros del modo Palabra misteriosa por tamaño seleccionado; no sustituyen los niveles de campaña",
+  "layouts": [
+    {
+      "categoryId": "creacion",
+      "world": 1,
+      "size": 6,
+      "words": [
+        "CAMPO",
+        "UNIDOS",
+        "INICIO",
+        "DIOS",
+        "ARBOL",
+        "RAIZ"
+      ],
+      "mystery": {
+        "word": "CUIDAR",
+        "clue": "Génesis 1:11–12 describe plantas, semillas y frutos. ¿Qué acción demuestra respeto por todo lo que vive?",
+        "reference": "Génesis 1:11–12"
+      }
+    },
+    {
+      "categoryId": "creacion",
+      "world": 1,
+      "size": 8,
+      "words": [
+        "CAMPO",
+        "UNIDOS",
+        "INICIO",
+        "DIOS",
+        "ARBOL",
+        "RAIZ"
+      ],
+      "mystery": {
+        "word": "CUIDAR",
+        "clue": "Génesis 1:11–12 describe plantas, semillas y frutos. ¿Qué acción demuestra respeto por todo lo que vive?",
+        "reference": "Génesis 1:11–12"
+      }
+    },
+    {
+      "categoryId": "creacion",
+      "world": 1,
+      "size": 10,
+      "words": [
+        "CAMPO",
+        "UNIDOS",
+        "INICIO",
+        "DIOS",
+        "ARBOL",
+        "RAIZ"
+      ],
+      "mystery": {
+        "word": "CUIDAR",
+        "clue": "Génesis 1:11–12 describe plantas, semillas y frutos. ¿Qué acción demuestra respeto por todo lo que vive?",
+        "reference": "Génesis 1:11–12"
+      }
+    },
+    {
+      "categoryId": "origenes",
+      "world": 2,
+      "size": 6,
+      "words": [
+        "PADRES",
+        "EVA",
+        "REGLAS",
+        "DAR",
+        "ORIGEN",
+        "NOMBRE"
+      ],
+      "mystery": {
+        "word": "PERDON",
+        "clue": "Génesis 3 relata decisiones y sus consecuencias. ¿Qué actitud nos ayuda a reconocer el daño y reconciliarnos?",
+        "reference": "Génesis 3:8–13"
+      }
+    },
+    {
+      "categoryId": "origenes",
+      "world": 2,
+      "size": 8,
+      "words": [
+        "PADRES",
+        "ESCUCHA",
+        "REGLAS",
+        "DECIDIR",
+        "ORIGEN",
+        "NOMBRE"
+      ],
+      "mystery": {
+        "word": "PERDON",
+        "clue": "Génesis 3 relata decisiones y sus consecuencias. ¿Qué actitud nos ayuda a reconocer el daño y reconciliarnos?",
+        "reference": "Génesis 3:8–13"
+      }
+    },
+    {
+      "categoryId": "origenes",
+      "world": 2,
+      "size": 10,
+      "words": [
+        "PADRES",
+        "ESCUCHA",
+        "REGLAS",
+        "DECIDIR",
+        "ORIGEN",
+        "NOMBRE"
+      ],
+      "mystery": {
+        "word": "PERDON",
+        "clue": "Génesis 3 relata decisiones y sus consecuencias. ¿Qué actitud nos ayuda a reconocer el daño y reconciliarnos?",
+        "reference": "Génesis 3:8–13"
+      }
+    },
+    {
+      "categoryId": "diluvio",
+      "world": 3,
+      "size": 6,
+      "words": [
+        "PALOMA",
+        "AGUA",
+        "CIELO",
+        "TIEMPO",
+        "OLAS"
+      ],
+      "mystery": {
+        "word": "PACTO",
+        "clue": "Génesis 9 presenta el arcoíris como señal de un compromiso entre Dios y los seres vivos. ¿Cómo se llama ese compromiso?",
+        "reference": "Génesis 9:12–17"
+      }
+    },
+    {
+      "categoryId": "diluvio",
+      "world": 3,
+      "size": 8,
+      "words": [
+        "PALOMA",
+        "AGUA",
+        "CIELO",
+        "TIEMPO",
+        "OLAS"
+      ],
+      "mystery": {
+        "word": "PACTO",
+        "clue": "Génesis 9 presenta el arcoíris como señal de un compromiso entre Dios y los seres vivos. ¿Cómo se llama ese compromiso?",
+        "reference": "Génesis 9:12–17"
+      }
+    },
+    {
+      "categoryId": "diluvio",
+      "world": 3,
+      "size": 10,
+      "words": [
+        "PALOMA",
+        "AGUA",
+        "CIELO",
+        "TIEMPO",
+        "OLAS"
+      ],
+      "mystery": {
+        "word": "PACTO",
+        "clue": "Génesis 9 presenta el arcoíris como señal de un compromiso entre Dios y los seres vivos. ¿Cómo se llama ese compromiso?",
+        "reference": "Génesis 9:12–17"
+      }
+    },
+    {
+      "categoryId": "patriarcas",
+      "world": 4,
+      "size": 6,
+      "words": [
+        "UNIDOS",
+        "NUEVO",
+        "ISAAC",
+        "REBECA"
+      ],
+      "mystery": {
+        "word": "UNIR",
+        "clue": "En Génesis, Jacob y Esaú vuelven a encontrarse. ¿Qué verbo significa volver a estar juntos?",
+        "reference": "Génesis 33:4"
+      }
+    },
+    {
+      "categoryId": "patriarcas",
+      "world": 4,
+      "size": 8,
+      "words": [
+        "PADRE",
+        "EGIPTO",
+        "RESPETO",
+        "DESIERTO",
+        "ORACION",
+        "NUEVO"
+      ],
+      "mystery": {
+        "word": "PERDON",
+        "clue": "En Génesis 50, los hermanos de José buscan reconciliarse. ¿Qué palabra expresa dejar atrás una ofensa sin negar el daño?",
+        "reference": "Génesis 50:17–21"
+      }
+    },
+    {
+      "categoryId": "patriarcas",
+      "world": 4,
+      "size": 10,
+      "words": [
+        "PADRE",
+        "EGIPTO",
+        "RESPETO",
+        "DESIERTO",
+        "ORACION",
+        "NUEVO"
+      ],
+      "mystery": {
+        "word": "PERDON",
+        "clue": "En Génesis 50, los hermanos de José buscan reconciliarse. ¿Qué palabra expresa dejar atrás una ofensa sin negar el daño?",
+        "reference": "Génesis 50:17–21"
+      }
+    },
+    {
+      "categoryId": "exodo",
+      "world": 5,
+      "size": 6,
+      "words": [
+        "SABER",
+        "IGUAL",
+        "NUBE",
+        "AVANCE",
+        "ISAIAS"
+      ],
+      "mystery": {
+        "word": "SINAI",
+        "clue": "Según Éxodo, ¿en qué monte recibió Moisés importantes enseñanzas para su pueblo?",
+        "reference": "Éxodo 19:11"
+      }
+    },
+    {
+      "categoryId": "exodo",
+      "world": 5,
+      "size": 8,
+      "words": [
+        "JUNTOS",
+        "UNIDOS",
+        "SINAI",
+        "TABLA",
+        "IGUAL",
+        "CUIDADO",
+        "ISAIAS",
+        "AVANCE"
+      ],
+      "mystery": {
+        "word": "JUSTICIA",
+        "clue": "Éxodo 23:6 llama a no torcer el derecho de quien lo necesita. ¿Qué valor protege el trato digno?",
+        "reference": "Éxodo 23:6"
+      }
+    },
+    {
+      "categoryId": "exodo",
+      "world": 5,
+      "size": 10,
+      "words": [
+        "JUNTOS",
+        "UNIDOS",
+        "SINAI",
+        "TABLA",
+        "IGUAL",
+        "CUIDADO",
+        "ISAIAS",
+        "AVANCE"
+      ],
+      "mystery": {
+        "word": "JUSTICIA",
+        "clue": "Éxodo 23:6 llama a no torcer el derecho de quien lo necesita. ¿Qué valor protege el trato digno?",
+        "reference": "Éxodo 23:6"
+      }
+    },
+    {
+      "categoryId": "infancia",
+      "world": 6,
+      "size": 6,
+      "words": [
+        "MADRE",
+        "ANGEL",
+        "REYES",
+        "ISRAEL",
+        "ANA"
+      ],
+      "mystery": {
+        "word": "MARIA",
+        "clue": "El ángel Gabriel visita a una mujer de Nazaret. ¿Cómo se llamaba?",
+        "reference": "Lucas 1:27"
+      }
+    },
+    {
+      "categoryId": "infancia",
+      "world": 6,
+      "size": 8,
+      "words": [
+        "ANGEL",
+        "LUNA",
+        "ESPERAR",
+        "GRACIA",
+        "REYES",
+        "ISRAEL",
+        "APRENDER"
+      ],
+      "mystery": {
+        "word": "ALEGRIA",
+        "clue": "Lucas 2:10 anuncia a los pastores buenas noticias de gran gozo. ¿Qué emoción positiva aparece en esa noticia?",
+        "reference": "Lucas 2:10"
+      }
+    },
+    {
+      "categoryId": "infancia",
+      "world": 6,
+      "size": 10,
+      "words": [
+        "ANGEL",
+        "LUNA",
+        "ENCUENTRO",
+        "GRACIA",
+        "RESPONDER",
+        "ISRAEL",
+        "APRENDER"
+      ],
+      "mystery": {
+        "word": "ALEGRIA",
+        "clue": "Lucas 2:10 anuncia a los pastores buenas noticias de gran gozo. ¿Qué emoción positiva aparece en esa noticia?",
+        "reference": "Lucas 2:10"
+      }
+    },
+    {
+      "categoryId": "ensenanzas",
+      "world": 7,
+      "size": 6,
+      "words": [
+        "PAZ",
+        "AYUDA",
+        "NUEVO"
+      ],
+      "mystery": {
+        "word": "PAN",
+        "clue": "Jesús habla del alimento de vida. ¿Qué alimento sencillo menciona?",
+        "reference": "Juan 6:35"
+      }
+    },
+    {
+      "categoryId": "ensenanzas",
+      "world": 7,
+      "size": 8,
+      "words": [
+        "BIEN",
+        "ORACION",
+        "NOTICIA",
+        "DAR",
+        "AYUDA",
+        "DIGNIDAD"
+      ],
+      "mystery": {
+        "word": "BONDAD",
+        "clue": "Lucas 10 relata cómo el samaritano ayuda a alguien herido. ¿Qué virtud muestran sus acciones?",
+        "reference": "Lucas 10:33–37"
+      }
+    },
+    {
+      "categoryId": "ensenanzas",
+      "world": 7,
+      "size": 10,
+      "words": [
+        "BENDICION",
+        "ORACION",
+        "NOTICIA",
+        "DAR",
+        "AYUDA",
+        "DISCIPULO"
+      ],
+      "mystery": {
+        "word": "BONDAD",
+        "clue": "Lucas 10 relata cómo el samaritano ayuda a alguien herido. ¿Qué virtud muestran sus acciones?",
+        "reference": "Lucas 10:33–37"
+      }
+    },
+    {
+      "categoryId": "amigos",
+      "world": 8,
+      "size": 6,
+      "words": [
+        "PEDRO",
+        "AMABLE",
+        "NAVES"
+      ],
+      "mystery": {
+        "word": "PAN",
+        "clue": "Jesús bendice y comparte un alimento sencillo con mucha gente. ¿Cuál es?",
+        "reference": "Lucas 9:16"
+      }
+    },
+    {
+      "categoryId": "amigos",
+      "world": 8,
+      "size": 8,
+      "words": [
+        "PEDRO",
+        "EQUIPO",
+        "SEGUIR",
+        "COMER",
+        "AMABLE",
+        "REDES"
+      ],
+      "mystery": {
+        "word": "PESCAR",
+        "clue": "Jesús invita a echar las redes en el lago. ¿Qué actividad realizan los pescadores?",
+        "reference": "Lucas 5:4"
+      }
+    },
+    {
+      "categoryId": "amigos",
+      "world": 8,
+      "size": 10,
+      "words": [
+        "AMABLE",
+        "MARTA",
+        "IMAGEN",
+        "SEGUIR",
+        "TOMAS",
+        "ALEGRIA",
+        "DISCIPULOS"
+      ],
+      "mystery": {
+        "word": "AMISTAD",
+        "clue": "En Juan 15, Jesús habla del amor entre amigos. ¿Cómo llamamos a ese vínculo de cariño y confianza?",
+        "reference": "Juan 15:12–15"
+      }
+    },
+    {
+      "categoryId": "resurreccion",
+      "world": 9,
+      "size": 6,
+      "words": [
+        "CENA",
+        "AMOR",
+        "MANO",
+        "INICIO",
+        "NUEVO",
+        "OLIVO"
+      ],
+      "mystery": {
+        "word": "CAMINO",
+        "clue": "Dos discípulos van hacia Emaús. ¿Cómo se llama la vía por la que avanzan?",
+        "reference": "Lucas 24:13"
+      }
+    },
+    {
+      "categoryId": "resurreccion",
+      "world": 9,
+      "size": 8,
+      "words": [
+        "CENA",
+        "OLIVO",
+        "NOTICIA",
+        "SEPULCRO",
+        "UNIDOS",
+        "ESPIRITU",
+        "LUCAS",
+        "OIR"
+      ],
+      "mystery": {
+        "word": "CONSUELO",
+        "clue": "En Juan 14 Jesús ofrece palabras de confianza a quienes están preocupados. ¿Cómo llamamos al alivio que damos ante la tristeza?",
+        "reference": "Juan 14:1–3"
+      }
+    },
+    {
+      "categoryId": "resurreccion",
+      "world": 9,
+      "size": 10,
+      "words": [
+        "COMPANEROS",
+        "OLIVO",
+        "NOTICIA",
+        "SEPULCRO",
+        "UNIDOS",
+        "ESPIRITU",
+        "LUCAS",
+        "OSCURIDAD"
+      ],
+      "mystery": {
+        "word": "CONSUELO",
+        "clue": "En Juan 14 Jesús ofrece palabras de confianza a quienes están preocupados. ¿Cómo llamamos al alivio que damos ante la tristeza?",
+        "reference": "Juan 14:1–3"
+      }
+    },
+    {
+      "categoryId": "comunidad",
+      "world": 10,
+      "size": 6,
+      "words": [
+        "AMOR",
+        "YUGO",
+        "UNIDOS",
+        "DAR",
+        "APOYO"
+      ],
+      "mystery": {
+        "word": "AYUDA",
+        "clue": "En Hechos 4 los creyentes comparten con quienes necesitan apoyo. ¿Qué palabra nombra la acción de colaborar?",
+        "reference": "Hechos 4:32–35"
+      }
+    },
+    {
+      "categoryId": "comunidad",
+      "world": 10,
+      "size": 8,
+      "words": [
+        "APRENDER",
+        "YUGO",
+        "UNIDOS",
+        "DIGNIDAD",
+        "AMOR"
+      ],
+      "mystery": {
+        "word": "AYUDA",
+        "clue": "En Hechos 4 los creyentes comparten con quienes necesitan apoyo. ¿Qué palabra nombra la acción de colaborar?",
+        "reference": "Hechos 4:32–35"
+      }
+    },
+    {
+      "categoryId": "comunidad",
+      "world": 10,
+      "size": 10,
+      "words": [
+        "APRENDER",
+        "YUGO",
+        "UNIDOS",
+        "DIGNIDAD",
+        "ACOMPANAR"
+      ],
+      "mystery": {
+        "word": "AYUDA",
+        "clue": "En Hechos 4 los creyentes comparten con quienes necesitan apoyo. ¿Qué palabra nombra la acción de colaborar?",
+        "reference": "Hechos 4:32–35"
+      }
+    }
+  ]
+}
