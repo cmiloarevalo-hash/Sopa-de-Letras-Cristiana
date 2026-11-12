@@ -40,6 +40,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
 import app.sopadeletras.ui.components.BiblicalHintDialog
+import app.sopadeletras.data.BiblicalWordHint
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.SecondaryButton
 import app.sopadeletras.ui.components.SopaProgress
@@ -71,9 +72,11 @@ fun TimeAttackScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    wordHints: Map<String, BiblicalWordHint> = emptyMap(),
     bibleHint: String = "Descubre el valor de la ayuda en este relato.",
     bibleReference: String = "Génesis 1",
     onReadBible: (String) -> Unit = {},
+    worldIndex: Int? = null,
 ) {
     val colors = LocalSopaColors.current
     val context = LocalContext.current
@@ -130,6 +133,7 @@ fun TimeAttackScreen(
     }
 
     AdaptiveGameScaffold(
+        worldIndex = worldIndex,
         header = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
@@ -190,7 +194,13 @@ fun TimeAttackScreen(
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 SecondaryButton(
                     text = "Pista bíblica",
-                    onClick = { viewModel.pause(); showBibleHint = true },
+                    onClick = {
+                        viewModel.useHint()
+                        if (viewModel.state.value.hintCell != null) {
+                            viewModel.pause()
+                            showBibleHint = true
+                        }
+                    },
                     modifier = Modifier.weight(1f),
                 )
                 SecondaryButton(text = "Pausa", onClick = viewModel::pause, modifier = Modifier.weight(1f))
@@ -198,17 +208,17 @@ fun TimeAttackScreen(
         },
         overlays = {
         if (showBibleHint) {
+            val target = state.puzzle.words.firstOrNull { it.word !in state.found }
+            val wordHint = wordHints[target?.word]
+            val targetReference = wordHint?.reference ?: bibleReference
             BiblicalHintDialog(
-                clue = bibleHint,
-                reference = bibleReference,
-                remaining = if (state.remaining > 5) 1 else 0,
-                onRead = { showBibleHint = false; onReadBible(bibleReference) },
-                onReveal = {
-                    showBibleHint = false
-                    viewModel.resume()
-                    viewModel.useHint()
-                },
+                clue = wordHint?.clue ?: bibleHint,
+                reference = targetReference,
+                remaining = 0,
+                onRead = { showBibleHint = false; onReadBible(targetReference) },
+                onReveal = null,
                 onDismiss = { showBibleHint = false; viewModel.resume() },
+                autoRevealed = true,
             )
         }
         if (state.bonusVisible) {

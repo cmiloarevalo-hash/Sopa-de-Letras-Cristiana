@@ -26,8 +26,9 @@ fun BiblicalHintDialog(
     reference: String,
     remaining: Int,
     onRead: () -> Unit,
-    onReveal: () -> Unit,
+    onReveal: (() -> Unit)?,
     onDismiss: () -> Unit,
+    autoRevealed: Boolean = false,
 ) {
     val colors = LocalSopaColors.current
     AlertDialog(
@@ -44,7 +45,7 @@ fun BiblicalHintDialog(
                     fontSize = 13.sp, color = colors.mute)
                 Text(reference, fontFamily = Bricolage,
                     fontWeight = FontWeight.Bold, fontSize = 15.sp, color = colors.accent)
-                Text("Leer la Biblia no consume pistas ni quita estrellas.",
+                Text(if (autoRevealed) "Ya iluminamos una casilla en el tablero. Leer la Biblia no gasta pistas." else "Leer la Biblia no consume pistas ni quita estrellas.",
                     fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
             }
         },
@@ -56,12 +57,14 @@ fun BiblicalHintDialog(
                 Button(onClick = onRead, modifier = Modifier.fillMaxWidth()) {
                     Text("Leer en Biblia RV1909")
                 }
-                OutlinedButton(
-                    onClick = onReveal, enabled = remaining > 0,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = colors.text, disabledContentColor = colors.mute),
-                ) {
-                    Text("Iluminar una casilla · quedan " + remaining)
+                if (onReveal != null && !autoRevealed) {
+                    OutlinedButton(
+                        onClick = onReveal, enabled = remaining > 0,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = colors.text, disabledContentColor = colors.mute,
+                        ),
+                    ) { Text("Iluminar una casilla · quedan " + remaining) }
                 }
                 TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
                     Text("Seguir jugando")

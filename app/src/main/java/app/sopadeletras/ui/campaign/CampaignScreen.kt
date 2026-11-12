@@ -52,6 +52,7 @@ import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.ui.components.SopaProgress
 import app.sopadeletras.ui.theme.Bricolage
 import app.sopadeletras.ui.theme.Figtree
+import app.sopadeletras.ui.components.WorldBackground
 import app.sopadeletras.ui.theme.LocalSopaColors
 import kotlinx.coroutines.launch
 
@@ -180,10 +181,15 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>, wordRange: Pair<Int, 
     val range = (world * LEVELS_PER_WORLD + 1)..(world * LEVELS_PER_WORLD + 30)
     val done = range.count { it in progress }
     val stars = range.sumOf { progress[it] ?: 0 }
-    Column(
-        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface).padding(14.dp),
-        verticalArrangement = Arrangement.spacedBy(6.dp),
+    Box(
+        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface),
     ) {
+        WorldBackground(worldIndex = world, modifier = Modifier.matchParentSize(), alpha = 0.56f)
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .background(colors.surface.copy(alpha = 0.70f)).padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
         Text("MUNDO ${world + 1} · 30 NIVELES", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text(def.name, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text)
         val guide = guideForLevel(world * LEVELS_PER_WORLD + 1)
@@ -192,6 +198,7 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>, wordRange: Pair<Int, 
         Text("${def.n}×${def.n} · ${wordRange.first} a ${wordRange.second} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
         SopaProgress(progress = done / 30f)
         Text("$done de 30 · ★ $stars de 90", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+    }
     }
 }
 

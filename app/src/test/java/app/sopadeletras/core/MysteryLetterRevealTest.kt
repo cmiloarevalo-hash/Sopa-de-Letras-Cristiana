@@ -15,5 +15,18 @@ class MysteryLetterRevealTest {
         assertEquals("AMOR".toList(), mysteryLetterSlots("AMOR", 0, true))
         assertEquals(listOf(null,null,null,null), mysteryLetterSlots("AMOR", -5, false))
     }
+    @Test fun acrosticRevealsOnlyPositionsWhoseWordsWereFound() {
+        val ordered = listOf("CAMPO", "UNIDOS", "INICIO", "DIOS", "ARBOL", "RAIZ")
+        val slots = mysteryLetterSlots("CUIDAR", setOf("ARBOL", "UNIDOS"), ordered, false)
+        assertEquals(listOf(null, 'U', null, null, 'A', null), slots)
+        assertEquals("CUIDAR".toList(), mysteryLetterSlots("CUIDAR", emptySet(), ordered, true))
+    }
+
+    @Test fun rejectsInconsistentAcrosticInsteadOfInventingLetters() {
+        val invalid = listOf("CAMPO", "AGUA", "INICIO", "DIOS", "ARBOL", "RAIZ")
+        org.junit.Assert.assertThrows(IllegalArgumentException::class.java) {
+            mysteryLetterSlots("CUIDAR", setOf("AGUA"), invalid, false)
+        }
+    }
 }
 

@@ -36,6 +36,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
 import app.sopadeletras.ui.components.HintButton
 import app.sopadeletras.ui.components.BiblicalHintDialog
+import app.sopadeletras.data.BiblicalWordHint
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.SecondaryButton
 import app.sopadeletras.ui.components.SopaProgress
@@ -73,9 +74,11 @@ fun GameScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    wordHints: Map<String, BiblicalWordHint> = emptyMap(),
     bibleHint: String = "La Biblia nos enseña a cuidar a las personas.",
     bibleReference: String = "Génesis 1",
     onReadBible: (String) -> Unit = {},
+    worldIndex: Int? = null,
 ) {
     val colors = LocalSopaColors.current
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -144,6 +147,7 @@ fun GameScreen(
     }
 
     AdaptiveGameScaffold(
+        worldIndex = worldIndex,
         header = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
@@ -229,7 +233,10 @@ fun GameScreen(
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 HintButton(
                     hintsLeft = MAX_HINTS - state.hintsUsed,
-                    onClick = { showBibleHint = true },
+                    onClick = {
+                        viewModel.useHint()
+                        if (viewModel.state.value.hintWord != null) showBibleHint = true
+                    },
                     modifier = Modifier.weight(1f),
                 )
                 SecondaryButton(
@@ -241,17 +248,16 @@ fun GameScreen(
         },
         overlays = {
             if (showBibleHint) {
+                val wordHint = wordHints[state.hintWord]
+                val targetReference = wordHint?.reference ?: bibleReference
                 BiblicalHintDialog(
-                    clue = bibleHint,
-                    reference = bibleReference,
+                    clue = wordHint?.clue ?: bibleHint,
+                    reference = targetReference,
                     remaining = MAX_HINTS - state.hintsUsed,
-                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(bibleReference) },
-                    onReveal = {
-                        showBibleHint = false
-                        viewModel.useHint()
-                        onTutorialAction()
-                    },
-                    onDismiss = { showBibleHint = false },
+                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(targetReference) },
+                    onReveal = null,
+                    onDismiss = { showBibleHint = false; onTutorialAction() },
+                    autoRevealed = true,
                 )
             }
             if (state.paused && !state.victory && !state.timedOut) {

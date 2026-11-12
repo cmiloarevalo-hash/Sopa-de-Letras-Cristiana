@@ -26,6 +26,7 @@ data class GameUiState(
     val found: Map<String, Int> = emptyMap(),
     val hintsUsed: Int = 0,
     val hintCell: Int? = null,
+    val hintWord: String? = null,
     val elapsed: Int = 0,
     val paused: Boolean = false,
     val victory: Boolean = false,
@@ -109,6 +110,7 @@ class GameViewModel(
                     selected = emptyList(),
                     found = found,
                     hintCell = null,
+                    hintWord = null,
                     victory = found.size == it.puzzle.words.size,
                 )
             }
@@ -119,8 +121,9 @@ class GameViewModel(
     fun useHint() {
         _state.update { current ->
             if (current.paused || current.victory || current.timedOut || current.hintsUsed >= MAX_HINTS) return@update current
+            val target = current.puzzle.words.firstOrNull { it.word !in current.found } ?: return@update current
             val cell = hintTarget(current.puzzle.words, current.found.keys, current.hintsUsed) ?: return@update current
-            current.copy(hintCell = cell, hintsUsed = current.hintsUsed + 1)
+            current.copy(hintCell = cell, hintWord = target.word, hintsUsed = current.hintsUsed + 1)
         }
     }
 

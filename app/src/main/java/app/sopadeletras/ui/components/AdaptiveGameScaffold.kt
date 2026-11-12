@@ -34,6 +34,7 @@ fun AdaptiveGameScaffold(
     side: @Composable () -> Unit,
     actions: @Composable () -> Unit,
     overlays: @Composable BoxScope.() -> Unit = {},
+    worldIndex: Int? = null,
 ) {
     val colors = LocalSopaColors.current
     val activity = LocalContext.current as Activity
@@ -44,6 +45,9 @@ fun AdaptiveGameScaffold(
             .background(colors.bg)
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
+        if (worldIndex != null) {
+            WorldBackground(worldIndex, modifier = Modifier.fillMaxSize(), alpha = 0.23f)
+        }
         if (wide) {
             Column(
                 modifier = Modifier
