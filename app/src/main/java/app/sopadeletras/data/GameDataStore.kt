@@ -8,6 +8,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import app.sopadeletras.core.updateStreak
+import app.sopadeletras.sync.LevelBackup
+import app.sopadeletras.sync.ProgressBackup
+import app.sopadeletras.sync.ProgressMerge
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -66,6 +69,71 @@ class GameDataStore(context: Context) {
                 if (best == null || seconds < best) prefs[secondsKey] = seconds
             }
         }
+    }
+
+
+    /**
+     * Bind this local progress to ONE Google account after the player expressly
+     * chooses to save there. Refuse a different account: never silently upload
+     * the previous player's stars to another person's private Drive folder.
+     * This guard does not prevent offline gameplay.
+     */
+    suspend fun associateGoogleAccount(uniqueId: String, playerConfirmed: Boolean): Boolean {
+        if (uniqueId.isBlank() || !playerConfirmed) return false
+        val digest = java.security.MessageDigest.getInstance("SHA-256")
+            .digest(uniqueId.toByteArray(Charsets.UTF_8))
+            .joinToString("") { "%02x".format(it) }
+        val key = stringPreferencesKey("sync_account_hash")
+        var permitted = false
+        store.edit { prefs ->
+            val current = prefs[key]
+            if (current == null || current == digest) {
+                prefs[key] = digest
+                permitted = true
+            }
+        }
+        return permitted
+    }
+
+    /** Snapshot requested only after choosing a Google account.
+     * Contains no email or tokens and uses the same local DataStore as gameplay.
+     */
+    suspend fun exportProgressBackup(): ProgressBackup = backupFrom(store.data.first())
+
+    /**
+     * This is atomic with local victories, so a concurrent local game update
+     * cannot be overwritten by an older cloud snapshot.
+     *
+     * Caller must first verify the selected account and explicit guest-to-
+     * account consent. Different Google accounts must use separate profiles.
+     */
+    suspend fun mergeAuthorizedBackup(remote: ProgressBackup): ProgressBackup {
+        var merged: ProgressBackup? = null
+        store.edit { prefs ->
+            val result = ProgressMerge.combine(backupFrom(prefs), remote)
+            for ((level, entry) in result.levels) {
+                prefs[intPreferencesKey(progressStarsKey("es-ES", level))] = entry.stars
+                prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] = entry.bestSeconds
+            }
+            if (result.nickname.isNotBlank()) {
+                prefs[stringPreferencesKey("profile_nickname")] = result.nickname
+            }
+            merged = result
+        }
+        return requireNotNull(merged)
+    }
+
+    private fun backupFrom(prefs: androidx.datastore.preferences.core.Preferences): ProgressBackup {
+        val levels = (1..300).mapNotNull { level ->
+            val stars = prefs[intPreferencesKey(progressStarsKey("es-ES", level))] ?: return@mapNotNull null
+            val seconds = prefs[intPreferencesKey(progressSecondsKey("es-ES", level))] ?: 0
+            if (stars !in 1..3 || seconds < 0) return@mapNotNull null
+            level to LevelBackup(stars, seconds)
+        }.toMap()
+        return ProgressBackup(
+            nickname = prefs[stringPreferencesKey("profile_nickname")] ?: "",
+            levels = levels,
+        )
     }
 
     fun savedGameFlow(): Flow<SavedGameData?> = store.data.map { prefs ->

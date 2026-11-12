@@ -11,8 +11,19 @@ android {
         }
     }
 
+    // OAuth client ID is public configuration, NOT a password or client secret.
+    // Without a project-specific client ID the optional Google control remains hidden.
+    val configuredGoogleId = providers.gradleProperty("sopa.googleWebClientId")
+        .orElse(providers.environmentVariable("SOPA_GOOGLE_WEB_CLIENT_ID"))
+        .orElse("")
+        .get()
+    val webClientId = configuredGoogleId.takeIf {
+        it.matches(Regex("[A-Za-z0-9-]+\\.apps\\.googleusercontent\\.com"))
+    } ?: ""
+
     defaultConfig {
         applicationId = "app.sopadeletras.cristiana"
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$webClientId\"")
         minSdk = 26
         targetSdk = 36
         versionCode = 25
@@ -69,6 +80,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     // Keep native libraries unstripped so the APK is identical whether or not the
     // build machine has the NDK (needed for F-Droid reproducible builds).
@@ -92,6 +104,10 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3.windowsizeclass)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play)
+    implementation(libs.google.identity.googleid)
+    implementation(libs.google.play.services.auth)
     testImplementation(libs.junit)
 }
 
