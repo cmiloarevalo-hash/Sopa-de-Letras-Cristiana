@@ -20,6 +20,7 @@ fun diffParams(n: Int, difficulty: Difficulty): GenParams {
             words = minOf(BoardConfig.maxWords(n), base + 2),
             dirs = BoardConfig.D8,
             decoy = 0.8,
+            requireCrossing = n >= 10,
         )
         Difficulty.NORMAL -> GenParams(
             n = n,

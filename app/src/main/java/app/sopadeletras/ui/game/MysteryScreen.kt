@@ -61,6 +61,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
 import app.sopadeletras.ui.components.HintButton
 import app.sopadeletras.ui.components.BiblicalHintDialog
+import app.sopadeletras.data.BiblicalWordHint
 import app.sopadeletras.core.mysteryLetterSlots
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.PrimaryButton
@@ -92,8 +93,10 @@ fun MysteryScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    wordHints: Map<String, BiblicalWordHint> = emptyMap(),
     bibleReference: String = "Génesis 1",
     onReadBible: (String) -> Unit = {},
+    worldIndex: Int? = null,
 ) {
     val colors = LocalSopaColors.current
     val context = LocalContext.current
@@ -108,6 +111,9 @@ fun MysteryScreen(
     val state by viewModel.state.collectAsState()
     val puzzle = state.puzzle
     val mystery = puzzle.mystery
+    val mysterySlots = if (mystery != null)
+        mysteryLetterSlots(mystery.word, state.found.keys, mystery.orderedWords, state.revealed)
+    else emptyList()
     val mysteryReference = mystery?.reference?.takeIf { it.isNotBlank() } ?: bibleReference
     val progress = if (puzzle.words.isEmpty()) 0f else state.found.size / puzzle.words.size.toFloat()
 
@@ -180,7 +186,8 @@ fun MysteryScreen(
                 answerLength = mystery.word.length,
                 revealed = state.revealed || state.victory,
                 answer = mystery.word,
-                revealedLetters = state.found.size,
+                revealedLetters = mysterySlots.count { it != null },
+                visibleSlots = mysterySlots,
                 reference = mysteryReference,
                 onShowHint = { showBibleHint = true },
             )
@@ -191,20 +198,22 @@ fun MysteryScreen(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            for (word in puzzle.words) {
-                val foundIndex = state.found[word.word]
-                MysteryWordChip(length = word.word.length, word = word.word, colorIndex = foundIndex, colorblind = colorblind)
+            val ordered = mystery?.orderedWords.orEmpty().ifEmpty { puzzle.words.map { it.word } }
+            for (word in ordered) {
+                val foundIndex = state.found[word]
+                MysteryWordChip(length = word.length, word = word, colorIndex = foundIndex, colorblind = colorblind)
             }
         }
     }
     AdaptiveGameScaffold(
+        worldIndex = worldIndex,
         header = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(title, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
                     Text(subtitle, fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
                     if (mystery != null) {
-                        val slots = mysteryLetterSlots(mystery.word, state.found.size, state.revealed)
+                        val slots = mysterySlots
                         Text(
                             "Misterio: " + slots.joinToString("") { it?.toString() ?: "□" },
                             fontFamily = Bricolage,
@@ -261,7 +270,10 @@ fun MysteryScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     HintButton(
                         hintsLeft = MAX_HINTS - state.hintsUsed,
-                        onClick = { showBibleHint = true },
+                        onClick = {
+                            viewModel.useHint()
+                            if (viewModel.state.value.hintWord != null) showBibleHint = true
+                        },
                         modifier = Modifier.weight(1f),
                     )
                     SecondaryButton(text = "Pausa", onClick = viewModel::pause, modifier = Modifier.weight(1f))
@@ -291,13 +303,16 @@ fun MysteryScreen(
                 )
             }
             if (showBibleHint && mystery != null) {
+                val wordHint = wordHints[state.hintWord]
+                val targetReference = wordHint?.reference ?: mysteryReference
                 BiblicalHintDialog(
-                    clue = mystery.clue,
-                    reference = mysteryReference,
+                    clue = wordHint?.clue ?: mystery.clue,
+                    reference = targetReference,
                     remaining = MAX_HINTS - state.hintsUsed,
-                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(mysteryReference) },
-                    onReveal = { showBibleHint = false; viewModel.useHint() },
+                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(targetReference) },
+                    onReveal = null,
                     onDismiss = { showBibleHint = false },
+                    autoRevealed = true,
                 )
             }
             if (state.sheetOpen && mystery != null) {
@@ -323,6 +338,7 @@ private fun MysteryClueCard(
     revealed: Boolean,
     answer: String?,
     revealedLetters: Int,
+    visibleSlots: List<Char?>,
     reference: String,
     onShowHint: () -> Unit,
 ) {
@@ -365,7 +381,7 @@ private fun MysteryClueCard(
             fontSize = 13.sp,
             color = colors.accent,
         )
-        val visible = mysteryLetterSlots(answer.orEmpty(), revealedLetters, revealed)
+        val visible = visibleSlots
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             repeat(answerLength) { index ->
                 val letter = visible.getOrNull(index)?.toString().orEmpty()

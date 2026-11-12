@@ -12,7 +12,13 @@ data class WordCategoryData(
     val mysteries: Map<Int, MysteryEntry>,
 )
 
-/** V1: fixed editorial content for one of the 300 campaign levels. */
+/** Association between a playable word and its own biblical verse. */
+data class BiblicalWordHint(
+    val word: String,
+    val clue: String,
+    val reference: String,
+)
+
 data class CampaignLevelData(
     val level: Int,
     val world: Int,
@@ -24,6 +30,7 @@ data class CampaignLevelData(
     val bibleHint: String,
     val boardSize: Int,
     val words: List<String>,
+    val wordHints: Map<String, BiblicalWordHint>,
     val mystery: MysteryEntry?,
 )
 
@@ -46,6 +53,15 @@ class WordRepository(private val context: Context) {
                 bibleHint = row.optString("bibleHint", row.getString("learningMessage")),
                 boardSize = row.getInt("boardSize"),
                 words = row.getJSONArray("words").toStringList(),
+                wordHints = row.optJSONArray("wordHints")?.let { entries ->
+                    (0 until entries.length()).map { entry ->
+                        val item = entries.getJSONObject(entry)
+                        val hint = BiblicalWordHint(
+                            item.getString("word"), item.getString("clue"), item.getString("reference"),
+                        )
+                        hint.word to hint
+                    }.toMap()
+                }.orEmpty(),
                 mystery = hidden?.let { MysteryEntry(it.getString("word"), it.getString("clue"), it.optString("reference")) },
             )
         }.associateBy { it.level }.also { require(it.size == 300) }
@@ -53,6 +69,22 @@ class WordRepository(private val context: Context) {
 
     fun loadCampaignLevel(level: Int): CampaignLevelData =
         requireNotNull(campaignLevels[level]) { "Nivel fuera del catálogo: $level" }
+
+    /** All free-play words come from the documented campaign word-reference matrix. */
+    fun campaignWordsForCategory(category: String): List<String> {
+        val world = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0)
+        return ((world * 30 + 1)..((world + 1) * 30))
+            .flatMap { requireNotNull(campaignLevels[it]).words }
+            .distinct()
+    }
+
+    fun wordHintsForCategory(category: String): Map<String, BiblicalWordHint> {
+        val index = CAMPAIGN_BANK_IDS.indexOf(category)
+        val levels = if (index >= 0)
+            ((index * 30 + 1)..((index + 1) * 30)).mapNotNull(campaignLevels::get)
+        else campaignLevels.values.toList()
+        return levels.flatMap { it.wordHints.values }.associateBy { it.word }
+    }
 
     fun loadCategory(language: String, id: String): WordCategoryData {
         val text = context.assets.open("words/$language/$id.json").bufferedReader().use { it.readText() }

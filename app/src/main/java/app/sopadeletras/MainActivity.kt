@@ -197,7 +197,7 @@ class MainActivity : ComponentActivity() {
                         }
                         val vm: GameViewModel = viewModel(
                             key = "daily-$today",
-                            factory = GameViewModelFactory(bank.words, params, seed, Language.fillFor(lang), assist),
+                            factory = GameViewModelFactory(container.words.campaignWordsForCategory(bankId), params, seed, Language.fillFor(lang), assist),
                         )
                         val streakLine = daily?.let {
                             if (displayedStreak(it.lastDay, today, it.streak) > 0) {
@@ -235,9 +235,11 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            wordHints = container.words.wordHintsForCategory(bankId),
                             bibleHint = bankBible(bankId).bibleHint,
                             bibleReference = bankBible(bankId).reference,
                             onReadBible = openBible,
+                                worldIndex = CAMPAIGN_BANK_IDS.indexOf(bankId).coerceAtLeast(0),
                         )
                     }
                     composable(
@@ -262,7 +264,7 @@ class MainActivity : ComponentActivity() {
                         val seed = remember(round) { Random.nextLong() }
                         val vm: TimeAttackViewModel = viewModel(
                             key = "time-$size-$category-$duration-$round",
-                            factory = TimeAttackViewModelFactory(bank.words, params, seed, Language.fillFor(lang), duration, assist),
+                            factory = TimeAttackViewModelFactory(container.words.campaignWordsForCategory(category), params, seed, Language.fillFor(lang), duration, assist),
                         )
                         TimeAttackScreen(
                             viewModel = vm,
@@ -291,9 +293,11 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            wordHints = container.words.wordHintsForCategory(category),
                             bibleHint = bankBible(category).bibleHint,
                             bibleReference = bankBible(category).reference,
                             onReadBible = openBible,
+                                worldIndex = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0),
                         )
                     }
                     composable(
@@ -307,16 +311,24 @@ class MainActivity : ComponentActivity() {
                         val category = entry.arguments?.getString("category").orEmpty()
                         val assist by container.settings.directionAssist.collectAsState(initial = true)
                         val bank = remember(category) { container.words.loadCategory(lang, category) }
+                        val challenge = remember(category) {
+                            val world = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0)
+                            container.words.loadCampaignLevel(world * 30 + 20)
+                        }
+                        val board = challenge.boardSize
                         var round by remember { mutableIntStateOf(0) }
                         val seed = remember(round) { Random.nextLong() }
                         val vm: app.sopadeletras.ui.game.MysteryViewModel = viewModel(
                             key = "freemys-$size-$category-$round",
-                            factory = MysteryViewModelFactory(bank.words, bank.mysteries, size, seed, Language.fillFor(lang), assist),
+                            factory = MysteryViewModelFactory(
+                                challenge.words, emptyMap(), board, seed,
+                                Language.ES_FILL, assist, fixedMystery = challenge.mystery,
+                            ),
                         )
                         MysteryScreen(
                             viewModel = vm,
                             title = "Palabra misteriosa",
-                            subtitle = "${bank.name} · $size×$size",
+                            subtitle = "${bank.name} · $board×$board · acróstico bíblico",
                             winPrimaryLabel = "Siguiente",
                             winSecondaryLabel = "Inicio",
                             onExit = { nav.popBackStack() },
@@ -326,7 +338,7 @@ class MainActivity : ComponentActivity() {
                                     container.gameData.addResult(
                                         StoredResult(
                                             mode = "MYSTERY", language = lang, difficulty = "",
-                                            level = null, n = size, category = category,
+                                            level = null, n = board, category = category,
                                             seconds = seconds, hints = vm.state.value.hintsUsed,
                                             stars = stars, score = 0, words = vm.state.value.found.size,
                                             finishedAt = System.currentTimeMillis(),
@@ -339,8 +351,10 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
-                            bibleReference = bankBible(category).reference,
+                            wordHints = challenge.wordHints,
+                            bibleReference = challenge.reference,
                             onReadBible = openBible,
+                                worldIndex = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0),
                         )
                     }
                     composable(
@@ -363,7 +377,7 @@ class MainActivity : ComponentActivity() {
                         val seed = remember(round) { Random.nextLong() }
                         val vm: GameViewModel = viewModel(
                             key = "free-$size-$category-${difficulty.name}-$round",
-                            factory = GameViewModelFactory(bank.words, params, seed, Language.fillFor(lang), assist),
+                            factory = GameViewModelFactory(container.words.campaignWordsForCategory(category), params, seed, Language.fillFor(lang), assist),
                         )
                         GameScreen(
                             viewModel = vm,
@@ -388,9 +402,11 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            wordHints = container.words.wordHintsForCategory(category),
                             bibleHint = bankBible(category).bibleHint,
                             bibleReference = bankBible(category).reference,
                             onReadBible = openBible,
+                                worldIndex = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0),
                         )
                     }
                     composable(
@@ -476,8 +492,10 @@ class MainActivity : ComponentActivity() {
                                 colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                                wordHints = campaignLevel.wordHints,
                                 bibleReference = campaignLevel.reference,
                                 onReadBible = openBible,
+                                worldIndex = info.world,
                             )
                         } else {
                             val params = remember(level) { levelParams(info) }
@@ -545,9 +563,11 @@ class MainActivity : ComponentActivity() {
                                 colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                                wordHints = campaignLevel.wordHints,
                                 bibleHint = campaignLevel.bibleHint,
                                 bibleReference = campaignLevel.reference,
                                 onReadBible = openBible,
+                                worldIndex = info.world,
                             )
                         }
                     }

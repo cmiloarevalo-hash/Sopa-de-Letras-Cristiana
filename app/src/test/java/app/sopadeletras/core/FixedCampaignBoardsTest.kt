@@ -62,6 +62,10 @@ class FixedCampaignBoardsTest {
             assertEquals("L$level board size", boardSize, puzzle.n)
             assertEquals("L$level exact visible words", words.toSet(), puzzle.words.map { it.word }.toSet())
             assertEquals("L$level visible number", words.size, puzzle.words.size)
+            if (boardSize >= 10 && words.size >= 8 && kind != "MISTERIOSO") {
+                assertTrue("L$level difficult board must contain real crossings",
+                    PuzzleGenerator.crossingWordCount(puzzle) >= 2)
+            }
             assertTrue("L$level alphabet", puzzle.letters.all { it == 'Ñ' || it in 'A'..'Z' })
             for (word in puzzle.words) {
                 assertEquals("L$level found word letters ${word.word}",

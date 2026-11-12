@@ -90,7 +90,7 @@ fun levelInfo(level: Int): LevelInfo {
 }
 
 fun levelParams(info: LevelInfo): GenParams =
-    GenParams(n = info.n, words = info.words, dirs = info.dirs, decoy = info.decoy)
+    GenParams(n = info.n, words = info.words, dirs = info.dirs, decoy = info.decoy, requireCrossing = info.n >= 10 && info.words >= 8 && info.kind != LevelKind.MYSTERY)
 
 fun campaignSeed(level: Int, languageCode: String): Long =
     level * 7919L + if (languageCode == Language.EN_CODE) 1L else 0L

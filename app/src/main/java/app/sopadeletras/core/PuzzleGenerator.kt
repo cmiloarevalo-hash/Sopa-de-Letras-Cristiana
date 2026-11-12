@@ -29,6 +29,15 @@ internal fun <T> shuffled(list: List<T>, rnd: Mulberry32): List<T> {
 }
 
 object PuzzleGenerator {
+    /** Real intersections of solved word paths; filler coincidences do not count. */
+    fun crossingWordCount(puzzle: Puzzle): Int {
+        val touches = mutableMapOf<Int, Int>()
+        puzzle.words.forEach { word ->
+            word.cells.forEach { cell -> touches[cell] = (touches[cell] ?: 0) + 1 }
+        }
+        return puzzle.words.count { word -> word.cells.any { (touches[it] ?: 0) > 1 } }
+    }
+
     fun countOccurrences(letters: List<Char>, n: Int, word: String): Int {
         var count = 0
         for (r in 0 until n) {
@@ -121,10 +130,15 @@ object PuzzleGenerator {
         // Retry deterministic layouts when a chosen word has ambiguous occurrences.
         for (a in 0 until 128) {
             val attempt = genOnce(params, bank, seed + a * 977L, fill)
+            val needsCrossing = params.requireCrossing && params.n >= 10 && params.words >= 8
             val ok = attempt.words.size >= params.words &&
-                attempt.words.all { countOccurrences(attempt.letters, attempt.n, it.word) == 1 }
+                attempt.words.all { countOccurrences(attempt.letters, attempt.n, it.word) == 1 } &&
+                (!needsCrossing || crossingWordCount(attempt) >= 2)
             if (ok) return attempt
             if (best == null || attempt.words.size > best.words.size) best = attempt
+        }
+        if (params.requireCrossing && params.n >= 10 && params.words >= 8) {
+            error("El tablero difícil no cumplió la regla de cruces reales: $seed")
         }
         return best!!
     }
@@ -142,6 +156,10 @@ object PuzzleGenerator {
         fill: String,
     ): Puzzle {
         require(answer.word.length in 3..n)
+        require(visibleWords.size == answer.word.length) { "El misterio requiere una inicial por palabra" }
+        require(visibleWords.map { it.first() }.joinToString("") == answer.word) {
+            "Las iniciales de las palabras no forman el misterio"
+        }
         val params = GenParams(n, visibleWords.size, BoardConfig.normalDirs(n), 0.0)
         for (attempt in 0 until 96) {
             val candidate = generate(params, visibleWords, seed + attempt * 9973L, fill)
@@ -159,7 +177,7 @@ object PuzzleGenerator {
             if (candidate.words.any { countOccurrences(letters, n, it.word) != 1 }) continue
             return candidate.copy(
                 letters = letters,
-                mystery = Mystery(answer.word, answer.clue, secretCells, answer.reference),
+                mystery = Mystery(answer.word, answer.clue, secretCells, answer.reference, visibleWords),
                 seed = seed,
             )
         }
