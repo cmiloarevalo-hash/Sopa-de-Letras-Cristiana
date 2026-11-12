@@ -4,7 +4,7 @@ import kotlin.math.round
 
 const val GENERATOR_VERSION = 1
 
-data class MysteryEntry(val word: String, val clue: String)
+data class MysteryEntry(val word: String, val clue: String, val reference: String = "")
 
 internal class Mulberry32(seed: Long) {
     private var state: Int = seed.toInt()
@@ -159,7 +159,7 @@ object PuzzleGenerator {
             if (candidate.words.any { countOccurrences(letters, n, it.word) != 1 }) continue
             return candidate.copy(
                 letters = letters,
-                mystery = Mystery(answer.word, answer.clue, secretCells),
+                mystery = Mystery(answer.word, answer.clue, secretCells, answer.reference),
                 seed = seed,
             )
         }
@@ -217,7 +217,7 @@ object PuzzleGenerator {
             n = n,
             letters = filled,
             words = placed,
-            mystery = Mystery(entry.word, entry.clue, free),
+            mystery = Mystery(entry.word, entry.clue, free, entry.reference),
             seed = seed,
         )
     }

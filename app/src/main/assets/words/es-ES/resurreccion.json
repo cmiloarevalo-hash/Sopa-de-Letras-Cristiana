@@ -1,6 +1,6 @@
 {
   "id": "resurreccion",
-  "name": "Redención, resurrección y salvación",
+  "name": "Jesús vive: amor y esperanza",
   "reference": "Lucas 22–24; Juan 19–20",
   "guide": "Aprendemos sobre la entrega, la resurrección y la esperanza.",
   "source": "Paráfrasis editorial original; referencia Reina-Valera 1909 (sin reproducción literal).",
@@ -79,63 +79,78 @@
   "mystery": [
     {
       "word": "ROCA",
-      "clue": "Una piedra grande que se encuentra en la naturaleza."
+      "clue": "Moisés recibe la indicación de golpear una piedra. ¿Qué palabra nombra esa piedra grande?",
+      "reference": "Éxodo 17:6"
     },
     {
       "word": "RAMA",
-      "clue": "Parte del árbol que nace del tronco."
+      "clue": "Jesús habla de la vid y sus ramas. ¿Cómo llamamos a la parte que nace de un árbol?",
+      "reference": "Juan 15:5"
     },
     {
       "word": "ALAS",
-      "clue": "Las aves las usan para volar."
+      "clue": "la protección se compara con alas. ¿Con qué vuelan las aves?",
+      "reference": "Salmo 91:4"
     },
     {
       "word": "HOGAR",
-      "clue": "Lugar donde una familia vive y se cuida."
+      "clue": "Josué habla de servir a Dios con toda su casa. ¿Cómo llamamos al lugar de una familia?",
+      "reference": "Josué 24:15"
     },
     {
       "word": "PATIO",
-      "clue": "Espacio al aire libre junto a una casa."
+      "clue": "Pedro está sentado fuera, en el patio. ¿Qué espacio es ese?",
+      "reference": "Mateo 26:69"
     },
     {
       "word": "FAROL",
-      "clue": "Lámpara que ayuda a iluminar el camino."
+      "clue": "compara la Palabra con una lámpara que ilumina el camino. ¿Qué objeto portátil también da luz?",
+      "reference": "Salmo 119:105"
     },
     {
       "word": "TUNICA",
-      "clue": "Prenda de vestir que aparece en muchos relatos antiguos."
+      "clue": "menciona la túnica de Jesús. ¿Qué prenda de vestir era?",
+      "reference": "Juan 19:23"
     },
     {
       "word": "PUENTE",
-      "clue": "Construcción que permite pasar de un lado a otro."
+      "clue": "invita a reflexionar sobre la reconciliación. ¿Qué construcción une dos orillas?",
+      "reference": "2 Corintios 5:18"
     },
     {
       "word": "MANTOS",
-      "clue": "Prendas que se usan para cubrirse."
+      "clue": "relata que Bartimeo dejó su ropa para acercarse a Jesús. ¿Cómo llamamos a prendas para cubrirnos?",
+      "reference": "Marcos 10:50"
     },
     {
       "word": "PALOMAS",
-      "clue": "Aves que pueden verse volando en grupo."
+      "clue": "compara con una paloma el descenso del Espíritu. ¿Qué aves recuerda esa imagen?",
+      "reference": "Mateo 3:16"
     },
     {
       "word": "REGALOS",
-      "clue": "Objetos que damos para mostrar cariño."
+      "clue": "narra que unos visitantes ofrecieron presentes al niño Jesús. ¿Cómo llamamos a esos obsequios?",
+      "reference": "Mateo 2:11"
     },
     {
       "word": "PASTORA",
-      "clue": "Persona que cuida un rebaño."
+      "clue": "cuenta que Raquel cuidaba el rebaño de su padre. ¿Cómo se llama una mujer que cuida ovejas?",
+      "reference": "Génesis 29:9"
     },
     {
       "word": "ALABANZA",
-      "clue": "Expresión de gratitud y reconocimiento."
+      "clue": "invita a alabar a Dios. ¿Qué palabra describe esa expresión de reconocimiento?",
+      "reference": "Salmo 150"
     },
     {
       "word": "ESCUCHAR",
-      "clue": "Prestar atención a lo que otra persona dice."
+      "clue": "nos invita a estar dispuestos a oír. ¿Qué verbo significa prestar atención a otra persona?",
+      "reference": "Santiago 1:19"
     },
     {
       "word": "CAMINATA",
-      "clue": "Recorrido que hacemos al andar."
+      "clue": "narra el camino de dos discípulos hacia Emaús. ¿Cómo llamamos a un recorrido a pie?",
+      "reference": "Lucas 24:13–15"
     }
   ]
 }

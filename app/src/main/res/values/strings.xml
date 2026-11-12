@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Sopa de Letras Cristiana</string>
-    <string name="m1_test_title">Sopa de Letras Cristiana</string>
+    <string name="app_name">Sopa de letras -Biblia Rv-1909</string>
+    <string name="m1_test_title">Sopa de letras -Biblia Rv-1909</string>
     <string name="m1_test_subtitle">Aventura bíblica para descubrir y aprender.</string>
 </resources>

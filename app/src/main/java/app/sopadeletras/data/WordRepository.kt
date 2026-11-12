@@ -21,6 +21,7 @@ data class CampaignLevelData(
     val reference: String,
     val value: String,
     val learningMessage: String,
+    val bibleHint: String,
     val boardSize: Int,
     val words: List<String>,
     val mystery: MysteryEntry?,
@@ -42,9 +43,10 @@ class WordRepository(private val context: Context) {
                 reference = row.getString("reference"),
                 value = row.getString("value"),
                 learningMessage = row.getString("learningMessage"),
+                bibleHint = row.optString("bibleHint", row.getString("learningMessage")),
                 boardSize = row.getInt("boardSize"),
                 words = row.getJSONArray("words").toStringList(),
-                mystery = hidden?.let { MysteryEntry(it.getString("word"), it.getString("clue")) },
+                mystery = hidden?.let { MysteryEntry(it.getString("word"), it.getString("clue"), it.optString("reference")) },
             )
         }.associateBy { it.level }.also { require(it.size == 300) }
     }
@@ -61,6 +63,7 @@ class WordRepository(private val context: Context) {
         context.assets.list("words/$language").orEmpty()
             .filter { it.endsWith(".json") }
             .map { loadCategory(language, it.removeSuffix(".json")) }
+            .sortedBy { CAMPAIGN_BANK_IDS.indexOf(it.id).let { index -> if (index < 0) Int.MAX_VALUE else index } }
 
     internal fun parseCategory(text: String): WordCategoryData {
         val root = JSONObject(text)
@@ -70,7 +73,7 @@ class WordRepository(private val context: Context) {
         for (i in 0 until array.length()) {
             val entry = array.getJSONObject(i)
             val word = entry.getString("word")
-            mysteries[word.length] = MysteryEntry(word, entry.getString("clue"))
+            mysteries[word.length] = MysteryEntry(word, entry.getString("clue"), entry.optString("reference"))
         }
         return WordCategoryData(
             id = root.getString("id"),

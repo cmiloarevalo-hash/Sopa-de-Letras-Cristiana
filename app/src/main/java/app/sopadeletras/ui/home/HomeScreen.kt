@@ -61,6 +61,7 @@ fun HomeScreen(
     onAlbum: () -> Unit,
     onStats: () -> Unit,
     onSettings: () -> Unit,
+    onBible: () -> Unit,
 ) {
     val colors = LocalSopaColors.current
     val progress by container.gameData.progressFlow(language).collectAsState(initial = emptyMap())
@@ -87,7 +88,7 @@ fun HomeScreen(
             .padding(top = 18.dp, bottom = 22.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text("Sopa de Letras Cristiana", fontFamily = Bricolage, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp, color = colors.text)
+        Text("Sopa de letras -Biblia Rv-1909", fontFamily = Bricolage, fontWeight = FontWeight.ExtraBold, fontSize = 25.sp, color = colors.text)
         Text("Explora las historias y las palabras de la Biblia.", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
 
         CampaignCard(
@@ -108,6 +109,7 @@ fun HomeScreen(
             summary = dailySummary(daily, today),
             onPlay = onDaily,
         )
+        ModeRow(title = "Leer la Biblia RV1909", desc = "Los 66 libros, disponibles sin internet.", icon = null, glyph = "📖", enabled = true, onClick = onBible)
         ModeRow(title = "Juego libre", desc = "Elige tamaño, categoría y dificultad.", icon = Icons.Filled.PlayArrow, enabled = true, onClick = onFreeGame)
         ModeRow(title = "Contrarreloj", desc = "Encuentra las palabras antes de que termine el tiempo.", icon = null, glyph = "⏱", enabled = true, onClick = onTimeGame)
         ModeRow(title = "Palabra misteriosa", desc = "Descubre la palabra especial del tablero.", icon = null, glyph = "?", enabled = true, onClick = onMysteryGame)

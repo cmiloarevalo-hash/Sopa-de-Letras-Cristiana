@@ -37,6 +37,8 @@ import app.sopadeletras.data.SavedGameData
 import app.sopadeletras.data.StartupSnapshot
 import app.sopadeletras.data.StoredResult
 import app.sopadeletras.ui.album.AlbumScreen
+import app.sopadeletras.ui.bible.BibleScreen
+import app.sopadeletras.data.BibleRepository
 import app.sopadeletras.ui.cover.CoverScreen
 import app.sopadeletras.ui.campaign.CampaignScreen
 import app.sopadeletras.ui.game.GameScreen
@@ -82,13 +84,22 @@ class MainActivity : ComponentActivity() {
                 colorblind = false,
             )
             val theme by container.settings.theme.collectAsState(initial = startup.theme)
-            val lang by container.settings.language.collectAsState(initial = startup.language)
+            val lang = Language.ES_CODE
             val haptics by container.settings.haptics.collectAsState(initial = startup.haptics)
             val letterScale by container.settings.letterScale.collectAsState(initial = startup.letterScale)
             val colorblind by container.settings.colorblind.collectAsState(initial = startup.colorblind)
             val sound by container.settings.sound.collectAsState(initial = true)
             SopaTheme(colors = if (theme == "TOKYO") TokyoNight else TintaAmbar) {
                 val nav = rememberNavController()
+                val bibleRepository = remember { BibleRepository(applicationContext) }
+                val openBible: (String) -> Unit = { ref ->
+                    val loc = bibleRepository.locationFor(ref)
+                    nav.navigate("bible/" + loc.bookId + "/" + loc.chapter + "/" + loc.verse)
+                }
+                val bankBible: (String) -> app.sopadeletras.data.CampaignLevelData = { id ->
+                    val index = CAMPAIGN_BANK_IDS.indexOf(id).coerceAtLeast(0)
+                    container.words.loadCampaignLevel(index * 30 + 1)
+                }
                 val scope = rememberCoroutineScope()
                 androidx.compose.animation.Crossfade(
                     targetState = theme,
@@ -114,6 +125,7 @@ class MainActivity : ComponentActivity() {
                             onAlbum = { nav.navigate("album") },
                             onStats = { nav.navigate("stats") },
                             onSettings = { nav.navigate("settings") },
+                            onBible = { nav.navigate("bible/GEN/1/1") },
                         )
                     }
                     composable("campaign") {
@@ -122,6 +134,21 @@ class MainActivity : ComponentActivity() {
                             language = lang,
                             onBack = { nav.popBackStack() },
                             onPlayLevel = { level -> nav.navigate("gameCampaign/$level") },
+                        )
+                    }
+                    composable(
+                        route = "bible/{book}/{chapter}/{verse}",
+                        arguments = listOf(
+                            navArgument("book") { type = NavType.StringType },
+                            navArgument("chapter") { type = NavType.IntType },
+                            navArgument("verse") { type = NavType.IntType },
+                        ),
+                    ) { entry ->
+                        BibleScreen(
+                            onBack = { nav.popBackStack() },
+                            initialBook = entry.arguments?.getString("book") ?: "GEN",
+                            initialChapter = entry.arguments?.getInt("chapter") ?: 1,
+                            initialVerse = entry.arguments?.getInt("verse") ?: 1,
                         )
                     }
                     composable("settings") {
@@ -208,6 +235,9 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            bibleHint = bankBible(bankId).bibleHint,
+                            bibleReference = bankBible(bankId).reference,
+                            onReadBible = openBible,
                         )
                     }
                     composable(
@@ -261,6 +291,9 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            bibleHint = bankBible(category).bibleHint,
+                            bibleReference = bankBible(category).reference,
+                            onReadBible = openBible,
                         )
                     }
                     composable(
@@ -306,6 +339,8 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            bibleReference = bankBible(category).reference,
+                            onReadBible = openBible,
                         )
                     }
                     composable(
@@ -353,6 +388,9 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                            bibleHint = bankBible(category).bibleHint,
+                            bibleReference = bankBible(category).reference,
+                            onReadBible = openBible,
                         )
                     }
                     composable(
@@ -438,6 +476,8 @@ class MainActivity : ComponentActivity() {
                                 colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                                bibleReference = campaignLevel.reference,
+                                onReadBible = openBible,
                             )
                         } else {
                             val params = remember(level) { levelParams(info) }
@@ -505,6 +545,9 @@ class MainActivity : ComponentActivity() {
                                 colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
+                                bibleHint = campaignLevel.bibleHint,
+                                bibleReference = campaignLevel.reference,
+                                onReadBible = openBible,
                             )
                         }
                     }
@@ -537,9 +580,9 @@ class MainActivity : ComponentActivity() {
         if (level != 1 && level != 3 && level != 11) return null
         if ("tip$level" in seen) return null
         return when (level) {
-            1 -> "Arrasta o dedo sobre as letras de uma palavra."
-            3 -> "Se bloqueares, a Pista mostra a primeira letra."
-            else -> "Cuidado com as palavras quase certas: lê até ao fim."
+            1 -> "Desliza el dedo por las letras de una palabra."
+            3 -> "Para aprender, toca Pista y descubre un pasaje bíblico."
+            else -> "Lee la palabra completa antes de confirmar."
         }
     }
 }

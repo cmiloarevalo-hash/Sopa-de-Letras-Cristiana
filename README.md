@@ -1,3 +1,5 @@
+**Nombre oficial de la aplicación (11-11-2026): «Sopa de letras -Biblia Rv-1909».** La edición bíblica RV1909 (66 libros) se lee sin internet; las palabras misteriosas revelan una letra por cada palabra encontrada y todas las pistas conducen a referencias bíblicas. Documentación de fuente y experiencia en [BIBLIA_RV1909_PISTAS_Y_LECTOR](docs/BIBLIA_RV1909_PISTAS_Y_LECTOR.md). La configuración de Google sigue en fase final, sin bloquear la APK offline.
+
 <!-- PROYECTO: SOPA DE LETRAS CRISTIANA -->
 # Sopa de Letras Cristiana — Aventura Bíblica Moderna
 

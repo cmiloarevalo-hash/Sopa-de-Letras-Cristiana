@@ -105,7 +105,7 @@ fun StatsScreen(
         }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             SectionTitle("RÉCORDS")
-            StatLine(label = "Campanha", value = "$done de 300 · ★ $stars", valueAccent = true)
+            StatLine(label = "Campaña", value = "$done de 300 · ★ $stars", valueAccent = true)
             StatLine(label = "Contrarreloj", value = bestTimeAttack(rows)?.let { "$it pts" } ?: "—", valueAccent = bestTimeAttack(rows) != null)
             StatLine(label = "Desafío de hoy", value = todaySummary, valueAccent = todaySummary != "sin partidas")
         }

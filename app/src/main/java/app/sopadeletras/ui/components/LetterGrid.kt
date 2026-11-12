@@ -152,7 +152,7 @@ fun LetterGrid(
                         }
                     }
                     .semantics {
-                        contentDescription = "Tabuleiro de $n por $n letras"
+                        contentDescription = "Tablero de $n por $n letras"
                     },
             ) {
                 repeat(n) { r ->

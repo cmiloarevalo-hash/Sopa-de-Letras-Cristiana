@@ -35,6 +35,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.sopadeletras.ui.components.AdaptiveGameScaffold
 import app.sopadeletras.ui.components.HintButton
+import app.sopadeletras.ui.components.BiblicalHintDialog
 import app.sopadeletras.ui.components.LetterGrid
 import app.sopadeletras.ui.components.SecondaryButton
 import app.sopadeletras.ui.components.SopaProgress
@@ -72,6 +73,9 @@ fun GameScreen(
     colorblind: Boolean = false,
     sounds: app.sopadeletras.feedback.Sounds? = null,
     sound: Boolean = true,
+    bibleHint: String = "La Biblia nos enseña a cuidar a las personas.",
+    bibleReference: String = "Génesis 1",
+    onReadBible: (String) -> Unit = {},
 ) {
     val colors = LocalSopaColors.current
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -92,6 +96,7 @@ fun GameScreen(
     var pop by remember { mutableStateOf(setOf<Int>()) }
     val popAnim = remember { Animatable(0f) }
     var showVictory by remember { mutableStateOf(false) }
+    var showBibleHint by remember { mutableStateOf(false) }
     var winReported by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
@@ -224,10 +229,7 @@ fun GameScreen(
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 HintButton(
                     hintsLeft = MAX_HINTS - state.hintsUsed,
-                    onClick = {
-                        viewModel.useHint()
-                        onTutorialAction()
-                    },
+                    onClick = { showBibleHint = true },
                     modifier = Modifier.weight(1f),
                 )
                 SecondaryButton(
@@ -238,6 +240,20 @@ fun GameScreen(
             }
         },
         overlays = {
+            if (showBibleHint) {
+                BiblicalHintDialog(
+                    clue = bibleHint,
+                    reference = bibleReference,
+                    remaining = MAX_HINTS - state.hintsUsed,
+                    onRead = { showBibleHint = false; viewModel.pause(); onReadBible(bibleReference) },
+                    onReveal = {
+                        showBibleHint = false
+                        viewModel.useHint()
+                        onTutorialAction()
+                    },
+                    onDismiss = { showBibleHint = false },
+                )
+            }
             if (state.paused && !state.victory && !state.timedOut) {
                 PauseOverlay(
                     subtitle = "$title · ${formatElapsed(state.elapsed)}",

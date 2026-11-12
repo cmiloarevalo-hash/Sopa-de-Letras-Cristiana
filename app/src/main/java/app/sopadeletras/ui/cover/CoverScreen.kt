@@ -43,7 +43,7 @@ fun CoverScreen(onStart: () -> Unit) {
             Text("✦ AVENTURA BÍBLICA ✦", fontFamily = Figtree,
                 fontSize = 15.sp, color = Color(0xFFF2C45B), fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(16.dp))
-            Text("Sopa de Letras\nCristiana", fontFamily = Bricolage,
+            Text("Sopa de letras\n-Biblia Rv-1909", fontFamily = Bricolage,
                 fontWeight = FontWeight.ExtraBold, fontSize = 39.sp,
                 color = Color.White, textAlign = TextAlign.Center, lineHeight = 42.sp)
             Spacer(Modifier.height(14.dp))
