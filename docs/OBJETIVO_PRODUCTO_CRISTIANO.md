@@ -1,5 +1,11 @@
 # Objetivo oficial de producto — Sopa de Letras Cristiana
 
+**Decisión humana de prioridad del 11-11-2026:** lo primero es la **experiencia educativa**, el vocabulario actual, la asignación EXACTA de palabras en 300 niveles y la dificultad compatible con tableros 6×6 a 12×12; no basta un banco de palabras por mundo. Catálogo completo: [tabla humana](CATALOGO_300_NIVELES_V1.md) / [datos JSON](data/campana_300_niveles_v1.json). **Google y respaldo de cuenta permanecen autorizados, pero su implementación se posterga hasta después del juego y APK offline funcionales.** No introducir requisitos de cuenta como bloqueo del avance.
+
+
+**Actualización humana de producto · 11-11-2026:** la prioridad educativa es amor, esperanza, cordialidad, amistad, solidaridad, entusiasmo, paz y palabras amables en lenguaje actual, con enfoque cristiano general sin denominación; además se ha solicitado inicio Google simple y respaldo/restauración de progreso **sin perder el juego offline como invitado**. La fuente unificada de los diez mundos, sus palabras y el alcance técnico actualizado está en [ESPECIFICACIÓN MAESTRA V1](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md) (PR #14, pendiente de integración). Este aviso es posterior a las frases históricas «sin cuentas/sin internet» y las modifica **solo en la sincronización opcional**. No reabrir otras decisiones.
+
+
 **Fecha de decisión vigente:** 2026-11-01. **Autoridad:** Humano. **Estado:** definición de producto y preinvestigación, no implementación. **Repositorio:** `cmiloarevalo-hash/Sopa-de-Letras-Cristiana`.
 
 ## Decisión expresa del Humano (2026-11-03): todos los agentes, continuidad y seguridad por alertas

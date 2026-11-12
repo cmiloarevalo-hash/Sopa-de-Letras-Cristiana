@@ -1,3 +1,5 @@
+**Contenido completo — 11-11-2026:** [300 niveles, palabras exactas y 30 episodios](docs/CATALOGO_300_NIVELES_V1.md) · [JSON estructurado para implementar](docs/data/campana_300_niveles_v1.json). Este catálogo sustituye la selección no determinista desde bancos generales. **Google va al final** tras el juego y APK offline funcionales; ver [especificación maestra actualizada](docs/ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md).
+
 <!-- PROYECTO: SOPA DE LETRAS CRISTIANA -->
 # Sopa de Letras Cristiana — Aventura Bíblica Moderna
 

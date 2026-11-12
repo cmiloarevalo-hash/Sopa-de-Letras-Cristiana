@@ -1,5 +1,11 @@
 # Alcance de la primera APK — Sopa de Letras Cristiana
 
+**Orden de implementación corregido por el Humano 11-11-2026:** 1) datos EXACTOS de [300 niveles](CATALOGO_300_NIVELES_V1.md) y [JSON](data/campana_300_niveles_v1.json), 2) diseño ligero + progreso offline, 3) juego/primera APK Android funcional, 4) Google opcional/backup al FINAL. La primera APK offline no debe esperar OAuth. Los bancos históricos de 70+15 no son el catálogo vinculante de los niveles; el software debe respetar la lista individual. Simulación independiente de geometría 300/300 != QA Kotlin o Android.
+
+
+**Extensión expresa del Humano · 11-11-2026:** se añade **Google opcional + recuperación de avance asociado a la cuenta** (Work Item [A6 #15](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15)). Esta decisión modifica el alcance histórico «sin cuentas» pero mantiene **campaña offline e invitado sin cuenta**. Se propone Google Credential Manager + Drive appDataFolder **sin backend propio**. Las configuraciones Google Cloud reales y pruebas de segundo dispositivo aún no están acreditadas. Ver [especificación maestra única](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md), PR #14 pendiente de revisión. El resto del alcance aprobado y los A1–A5 permanece.
+
+
 **Fecha:** 2026-11-01. **Estado:** especificación de producto y orientación de preparación, NO implementación. **Autoridad:** decisiones del Humano del proyecto. **Protocolo:** Workflow V3.
 
 ## Resultado solicitado

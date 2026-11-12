@@ -1,5 +1,11 @@
 # Plan base de cinco actividades — primera APK
 
+**Priorización humana 11-11-2026:** A2 debe aplicar el [catálogo EXACTO de 300 niveles](CATALOGO_300_NIVELES_V1.md) / [JSON](data/campana_300_niveles_v1.json), manteniendo 10 mundos y 30 episodios con tamaño compatible. A3/A4/A5 completan experiencia visual ligera, progreso local, pruebas, integración y APK offline. **A6 Google #15 va estrictamente al final** y nunca bloquea los trabajos A1–A5. No agregar nuevos planes ni aprobación extra.
+
+
+**Control de cambio material · 11-11-2026:** el plan **A1–A5 no se reinicia ni se reemplaza**. Por orden humana se añade Work Item independiente [A6 #15 — Google opcional y copia/restauración](https://github.com/cmiloarevalo-hash/Sopa-de-Letras-Cristiana/issues/15), sin bloquear las actividades previas por configuración OAuth pendiente. La [especificación maestra V1](ESPECIFICACION_MAESTRA_APK_CRISTIANA_V1.md) en PR #14 consolida estado real de ramas, catálogos de 70+15 por mundo y nuevos criterios de aceptación. No considerar propuestas documentales como código integrado/QA PASS.
+
+
 **Proyecto:** Sopa de Letras Cristiana. **Versión documental:** v001 (2026-11-02). **Origen:** decisiones expresas del Humano y organización propuesta por el Jefe. **Estado:** especificación de producto y gestión **para entregar al Supervisor**, no Work Item ni asignación ejecutada.
 
 **Propósito:** disponer de una **APK Android liviana, offline y jugable**, con 300 niveles bíblicos en español, experiencia infantil-juvenil y diseño «Aventura Bíblica Moderna». Reutilizar el proyecto original tanto como resulte viable. La ingeniería detallada y los Work Items corresponden al Supervisor bajo Workflow V3.
