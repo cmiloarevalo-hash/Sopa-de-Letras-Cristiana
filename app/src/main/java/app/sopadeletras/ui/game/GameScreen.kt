@@ -253,11 +253,8 @@ fun GameScreen(
                 BiblicalHintDialog(
                     clue = wordHint?.clue ?: bibleHint,
                     reference = targetReference,
-                    remaining = MAX_HINTS - state.hintsUsed,
                     onRead = { showBibleHint = false; viewModel.pause(); onReadBible(targetReference) },
-                    onReveal = null,
                     onDismiss = { showBibleHint = false; onTutorialAction() },
-                    autoRevealed = true,
                 )
             }
             if (state.paused && !state.victory && !state.timedOut) {

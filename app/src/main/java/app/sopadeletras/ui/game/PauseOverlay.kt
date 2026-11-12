@@ -42,7 +42,7 @@ fun PauseOverlay(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(
-                text = "Em pausa",
+                text = "En pausa",
                 fontFamily = Bricolage,
                 fontWeight = FontWeight.Bold,
                 fontSize = 31.sp,
@@ -56,7 +56,7 @@ fun PauseOverlay(
             )
             PrimaryButton(text = "Continuar", onClick = onContinue)
             SecondaryButton(text = "Reiniciar", onClick = onRestart)
-            SecondaryButton(text = "Sair", onClick = onExit)
+            SecondaryButton(text = "Salir", onClick = onExit)
         }
     }
 }

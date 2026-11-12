@@ -46,6 +46,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextDecoration
+import app.sopadeletras.ui.theme.TokyoNight
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -99,6 +102,7 @@ fun MysteryScreen(
     worldIndex: Int? = null,
 ) {
     val colors = LocalSopaColors.current
+    val mysteryTextColor = if (colors.bg == TokyoNight.bg) colors.accent else Color(0xFF94600C)
     val context = LocalContext.current
     val view = LocalView.current
     val animationsEnabled = remember {
@@ -185,11 +189,10 @@ fun MysteryScreen(
                 clue = mystery.clue,
                 answerLength = mystery.word.length,
                 revealed = state.revealed || state.victory,
-                answer = mystery.word,
                 revealedLetters = mysterySlots.count { it != null },
                 visibleSlots = mysterySlots,
                 reference = mysteryReference,
-                onShowHint = { showBibleHint = true },
+                onReadBible = { viewModel.pause(); onReadBible(mysteryReference) },
             )
         }
     }
@@ -219,7 +222,7 @@ fun MysteryScreen(
                             fontFamily = Bricolage,
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
-                            color = colors.accent,
+                            color = mysteryTextColor,
                         )
                     }
                 }
@@ -308,11 +311,8 @@ fun MysteryScreen(
                 BiblicalHintDialog(
                     clue = wordHint?.clue ?: mystery.clue,
                     reference = targetReference,
-                    remaining = MAX_HINTS - state.hintsUsed,
                     onRead = { showBibleHint = false; viewModel.pause(); onReadBible(targetReference) },
-                    onReveal = null,
                     onDismiss = { showBibleHint = false },
-                    autoRevealed = true,
                 )
             }
             if (state.sheetOpen && mystery != null) {
@@ -336,59 +336,74 @@ private fun MysteryClueCard(
     clue: String,
     answerLength: Int,
     revealed: Boolean,
-    answer: String?,
     revealedLetters: Int,
     visibleSlots: List<Char?>,
     reference: String,
-    onShowHint: () -> Unit,
+    onReadBible: () -> Unit,
 ) {
     val colors = LocalSopaColors.current
     val fontScale = androidx.compose.ui.platform.LocalDensity.current.fontScale
+    val linkColor = if (colors.bg == TokyoNight.bg) colors.accent else Color(0xFF94600C)
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(22.dp))
             .background(colors.surface)
-            .padding(horizontal = 12.dp, vertical = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+            .padding(horizontal = 12.dp, vertical = 9.dp),
+        verticalArrangement = Arrangement.spacedBy(7.dp),
     ) {
         Text(
-            text = "Pista bíblica · $clue",
+            text = clue,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             fontFamily = Figtree,
             fontSize = 15.sp,
             color = colors.text,
         )
-        Text(
-            text = "Referencia: " + reference,
-            fontFamily = Figtree,
-            fontSize = 12.sp,
-            color = colors.mute,
-        )
-        Text(
-            text = "Leer pista y Biblia RV1909",
-            fontFamily = Figtree,
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Bold,
-            color = colors.accent,
-            modifier = Modifier.clickable(onClick = onShowHint),
-        )
-        Text(
-            text = if (revealed) "¡Lo descubriste!" else "¡Muy bien! " +
-                minOf(revealedLetters, answerLength) + " de " + answerLength + " letras descubiertas.",
-            fontFamily = Figtree,
-            fontSize = 13.sp,
-            color = colors.accent,
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .clip(RoundedCornerShape(10.dp))
+                .background(colors.cell.copy(alpha = 0.40f))
+                .clickable(role = Role.Button, onClick = onReadBible)
+                .padding(horizontal = 9.dp, vertical = 11.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                reference,
+                modifier = Modifier.weight(1f),
+                fontFamily = Bricolage,
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                color = linkColor,
+                textDecoration = TextDecoration.Underline,
+            )
+            Text(
+                "Leer la Biblia",
+                fontFamily = Figtree,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = linkColor,
+            )
+        }
+        if (revealedLetters > 0 || revealed) {
+            Text(
+                text = if (revealed) "¡Lo descubriste!" else
+                    "¡Muy bien! " + minOf(revealedLetters, answerLength) +
+                        " de " + answerLength + " letras descubiertas.",
+                fontFamily = Figtree,
+                fontSize = 13.sp,
+                color = colors.text,
+            )
+        }
         val visible = visibleSlots
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             repeat(answerLength) { index ->
                 val letter = visible.getOrNull(index)?.toString().orEmpty()
                 Box(
                     modifier = Modifier
-                        .width(30.dp)
-                        .height(35.dp)
+                        .width(if (answerLength >= 8) 26.dp else 30.dp)
+                        .height(34.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .background(colors.cell),
                     contentAlignment = Alignment.Center,
@@ -398,7 +413,7 @@ private fun MysteryClueCard(
                         fontFamily = Bricolage,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp / fontScale,
-                        color = colors.accent,
+                        color = linkColor,
                     )
                 }
             }
@@ -487,10 +502,26 @@ private fun GuessSheet(
         ) {
             Text("¿Cuál es la palabra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
             Text("$clue · $answerLength letras", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
-            Text("Referencia: " + reference, fontFamily = Figtree,
-                fontSize = 13.sp, color = colors.accent)
-            SecondaryButton(text = "Leer en Biblia RV1909",
-                onClick = { onDismiss(); onReadBible() })
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(colors.cell.copy(alpha = 0.40f))
+                    .clickable(role = Role.Button) { onDismiss(); onReadBible() }
+                    .padding(horizontal = 10.dp, vertical = 10.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                val linkColor = if (colors.bg == TokyoNight.bg) colors.accent else Color(0xFF94600C)
+                Text(
+                    reference,
+                    modifier = Modifier.weight(1f),
+                    fontFamily = Bricolage,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    color = linkColor,
+                    textDecoration = TextDecoration.Underline,
+                )
+                Text("Leer la Biblia", fontFamily = Figtree, fontSize = 12.sp, color = linkColor)
+            }
             TextField(
                 value = text,
                 onValueChange = { text = it.uppercase().filter { c -> c in 'A'..'Z' || c == 'Ñ' } },
