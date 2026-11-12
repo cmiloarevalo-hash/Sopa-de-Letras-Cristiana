@@ -37,16 +37,16 @@ const val LEVELS_PER_WORLD = 30
 const val TOTAL_LEVELS = 300
 
 val WORLDS = listOf(
-    World("La Creación", category = 0, n = 6, minWords = 3, maxWords = 4, dirsCount = 2, decoy = 0.0),
-    World("Los primeros tiempos", category = 1, n = 8, minWords = 4, maxWords = 6, dirsCount = 3, decoy = 0.0),
-    World("Noé y el Diluvio", category = 2, n = 8, minWords = 6, maxWords = 8, dirsCount = 5, decoy = 0.2),
-    World("Patriarcas y promesas", category = 3, n = 10, minWords = 6, maxWords = 9, dirsCount = 3, decoy = 0.2),
-    World("Moisés, reyes y profetas", category = 4, n = 10, minWords = 8, maxWords = 11, dirsCount = 5, decoy = 0.4),
-    World("Jesús, su infancia y familia", category = 5, n = 10, minWords = 10, maxWords = 12, dirsCount = 8, decoy = 0.5),
-    World("Jesús crece y enseña", category = 6, n = 12, minWords = 8, maxWords = 12, dirsCount = 5, decoy = 0.5),
-    World("Jesús, sus amigos y apóstoles", category = 7, n = 12, minWords = 10, maxWords = 14, dirsCount = 8, decoy = 0.6),
-    World("Redención, resurrección y salvación", category = 8, n = 12, minWords = 12, maxWords = 16, dirsCount = 8, decoy = 0.8),
-    World("Comunidad y valores cristianos", category = 9, n = 12, minWords = 14, maxWords = 18, dirsCount = 8, decoy = 1.0),
+    World("La creación y la vida", category = 0, n = 6, minWords = 3, maxWords = 4, dirsCount = 2, decoy = 0.0),
+    World("Las primeras familias", category = 1, n = 8, minWords = 4, maxWords = 6, dirsCount = 3, decoy = 0.0),
+    World("Noé y la esperanza", category = 2, n = 8, minWords = 6, maxWords = 8, dirsCount = 5, decoy = 0.2),
+    World("Abraham y las promesas", category = 3, n = 10, minWords = 6, maxWords = 9, dirsCount = 3, decoy = 0.2),
+    World("Moisés, libertad y justicia", category = 4, n = 10, minWords = 8, maxWords = 11, dirsCount = 5, decoy = 0.4),
+    World("Jesús y su familia", category = 5, n = 10, minWords = 10, maxWords = 12, dirsCount = 8, decoy = 0.5),
+    World("Jesús nos enseña a amar", category = 6, n = 12, minWords = 8, maxWords = 12, dirsCount = 5, decoy = 0.5),
+    World("Jesús y sus amigos", category = 7, n = 12, minWords = 10, maxWords = 14, dirsCount = 8, decoy = 0.6),
+    World("Jesús vive: amor y esperanza", category = 8, n = 12, minWords = 12, maxWords = 16, dirsCount = 8, decoy = 0.8),
+    World("Una comunidad que comparte", category = 9, n = 12, minWords = 14, maxWords = 18, dirsCount = 8, decoy = 1.0),
 )
 
 private fun dirsForCount(count: Int): List<Dir> = when (count) {
@@ -67,10 +67,7 @@ fun levelInfo(level: Int): LevelInfo {
     var dirsCount = def.dirsCount
     var kind = LevelKind.NORMAL
     if (num == 10) kind = LevelKind.TIMED
-    if (num == 20) {
-        kind = LevelKind.MYSTERY
-        n = minOf(n, 10)
-    }
+    if (num == 20) kind = LevelKind.MYSTERY
     if (num == 30) {
         kind = LevelKind.BOSS
         words = minOf(BoardConfig.maxWords(n), def.maxWords + 2)

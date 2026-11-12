@@ -15,7 +15,7 @@ class SpanishCampaignTest {
         assertEquals(10, CAMPAIGN_BANK_IDS.size)
         assertEquals(10, CAMPAIGN_GUIDES.size)
         assertEquals("diluvio", CAMPAIGN_BANK_IDS[2])
-        assertTrue(WORLDS[2].name.contains("Diluvio"))
+        assertTrue(WORLDS[2].name.contains("Noé"))
         for (level in 1..300) {
             val info = levelInfo(level)
             assertEquals((level - 1) / 30, info.world)

@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.sopadeletras.ui.components.PrimaryButton
@@ -81,9 +82,11 @@ fun WinOverlay(
                 Text(
                     text = extraLine,
                     fontFamily = Figtree,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 14.sp,
-                    color = colors.accent,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 13.sp,
+                    lineHeight = 19.sp,
+                    textAlign = TextAlign.Center,
+                    color = colors.text,
                 )
             }
             PrimaryButton(text = primaryLabel, onClick = onPrimary)

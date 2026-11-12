@@ -12,11 +12,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "app.sopadeletras"
+        applicationId = "app.sopadeletras.cristiana"
         minSdk = 26
         targetSdk = 36
-        versionCode = 24
-        versionName = "1.0.5"
+        versionCode = 25
+        versionName = "1.0.6"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -46,7 +46,7 @@ android {
     buildTypes {
         debug {
             // Test-only identity; no release credentials or distribution change.
-            applicationIdSuffix = ".cristiana.debug"
+            applicationIdSuffix = ".debug"
             versionNameSuffix = "-candidate-dev"
         }
         release {

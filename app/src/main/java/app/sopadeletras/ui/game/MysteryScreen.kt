@@ -81,7 +81,7 @@ fun MysteryScreen(
     onExit: () -> Unit,
     onNext: () -> Unit,
     onWin: (stars: Int, seconds: Int) -> Unit = { _, _ -> },
-    winPrimaryLabel: String = "Próximo",
+    winPrimaryLabel: String = "Siguiente",
     winSecondaryLabel: String = "Mapa",
     haptics: Boolean = true,
     letterScale: Float = 1f,
@@ -245,7 +245,7 @@ fun MysteryScreen(
                     )
                     SecondaryButton(text = "Pausa", onClick = viewModel::pause, modifier = Modifier.weight(1f))
                 }
-                PrimaryButton(text = "Adivinhar", onClick = viewModel::openSheet)
+                PrimaryButton(text = "Adivinar", onClick = viewModel::openSheet)
             }
         },
         overlays = {
@@ -369,7 +369,7 @@ private fun MysteryWordChip(length: Int, word: String, colorIndex: Int?, colorbl
                 .clip(androidx.compose.foundation.shape.CircleShape)
                 .background(colors.surface)
                 .padding(horizontal = 11.dp, vertical = 5.dp)
-                .semantics { contentDescription = "Palavra de $length letras, por encontrar" },
+                .semantics { contentDescription = "Palabra de $length letras por descubrir" },
         )
     }
 }
@@ -406,7 +406,7 @@ private fun GuessSheet(
             modifier = Modifier.padding(horizontal = 20.dp).padding(bottom = 22.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text("Qual é a palavra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
+            Text("¿Cuál es la palabra?", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 21.sp, color = colors.text)
             Text("$clue · $answerLength letras", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             TextField(
                 value = text,
@@ -472,9 +472,9 @@ private fun MysteryWinOverlay(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Palavra descoberta", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 32.sp, color = colors.text)
+            Text("¡Palabra descubierta!", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 32.sp, color = colors.text)
             StarsRow(stars = stars)
-            Text("A palavra era", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
+            Text("La palabra era", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 answer.forEach { letter ->
                     Box(

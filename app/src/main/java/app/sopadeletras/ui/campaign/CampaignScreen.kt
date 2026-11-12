@@ -3,6 +3,8 @@ package app.sopadeletras.ui.campaign
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,9 +18,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -49,7 +48,6 @@ import app.sopadeletras.core.WORLDS
 import app.sopadeletras.core.isLevelUnlocked
 import app.sopadeletras.core.isWorldUnlocked
 import app.sopadeletras.core.levelInfo
-import app.sopadeletras.data.CAMPAIGN_BANK_IDS
 import app.sopadeletras.data.guideForLevel
 import app.sopadeletras.ui.components.SopaProgress
 import app.sopadeletras.ui.theme.Bricolage
@@ -84,7 +82,7 @@ fun CampaignScreen(
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 18.dp, bottom = 22.dp),
+            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 18.dp, bottom = 22.dp),
             verticalArrangement = Arrangement.spacedBy(15.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -120,29 +118,46 @@ fun CampaignScreen(
                     }
                 }
             }
-            WorldCard(world = openWorld, progress = progress)
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(6),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.weight(1f),
-            ) {
-                items((1..30).toList()) { num ->
-                    val level = openWorld * LEVELS_PER_WORLD + num
-                    LevelNode(
-                        level = level,
-                        world = openWorld,
-                        stars = progress[level] ?: 0,
-                        isCurrent = level == current,
-                        locked = !isLevelUnlocked(level, completed),
-                        onClick = {
-                            if (!isLevelUnlocked(level, completed)) {
-                                scope.launch { snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa el nivel anterior") }
-                            } else {
-                                onPlayLevel(level)
-                            }
-                        },
-                    )
+            val wordCounts = remember(openWorld) {
+                (1..30).map { index ->
+                    container.words.loadCampaignLevel(openWorld * LEVELS_PER_WORLD + index).words.size
+                }
+            }
+            WorldCard(
+                world = openWorld,
+                progress = progress,
+                wordRange = (wordCounts.minOrNull() ?: 0) to (wordCounts.maxOrNull() ?: 0),
+            )
+            // Five complete rows remain accessible on compact phones.
+            // Do not place the grid in a zero-height weighted LazyVerticalGrid.
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                for (row in 0 until 5) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        for (col in 0 until 6) {
+                            val num = row * 6 + col + 1
+                            val level = openWorld * LEVELS_PER_WORLD + num
+                            LevelNode(
+                                modifier = Modifier.weight(1f),
+                                level = level,
+                                world = openWorld,
+                                stars = progress[level] ?: 0,
+                                isCurrent = level == current,
+                                locked = !isLevelUnlocked(level, completed),
+                                onClick = {
+                                    if (!isLevelUnlocked(level, completed)) {
+                                        scope.launch {
+                                            snackbar.showSnackbar(lockedMessage(openWorld) ?: "Completa el nivel anterior")
+                                        }
+                                    } else {
+                                        onPlayLevel(level)
+                                    }
+                                },
+                            )
+                        }
+                    }
                 }
             }
             Text(
@@ -159,23 +174,22 @@ fun CampaignScreen(
 }
 
 @Composable
-private fun WorldCard(world: Int, progress: Map<Int, Int>) {
+private fun WorldCard(world: Int, progress: Map<Int, Int>, wordRange: Pair<Int, Int>) {
     val colors = LocalSopaColors.current
     val def = WORLDS[world]
     val range = (world * LEVELS_PER_WORLD + 1)..(world * LEVELS_PER_WORLD + 30)
     val done = range.count { it in progress }
     val stars = range.sumOf { progress[it] ?: 0 }
-    val bankName = CAMPAIGN_BANK_IDS.getOrNull(def.category)?.uppercase() ?: "PRÓXIMAMENTE"
     Column(
         modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(colors.surface).padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        Text("MUNDO ${world + 1} · $bankName", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
+        Text("MUNDO ${world + 1} · 30 NIVELES", fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text(def.name, fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text)
         val guide = guideForLevel(world * LEVELS_PER_WORLD + 1)
         Text(guide.introduction, fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
         Text("Referencia: ${guide.reference}", fontFamily = Figtree, fontSize = 11.sp, color = colors.mute)
-        Text("${def.n}×${def.n} · ${def.minWords} a ${def.maxWords} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
+        Text("${def.n}×${def.n} · ${wordRange.first} a ${wordRange.second} palabras · ${def.dirsCount} direcciones", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
         SopaProgress(progress = done / 30f)
         Text("$done de 30 · ★ $stars de 90", fontFamily = Figtree, fontSize = 13.sp, color = colors.mute)
     }
@@ -183,6 +197,7 @@ private fun WorldCard(world: Int, progress: Map<Int, Int>) {
 
 @Composable
 private fun LevelNode(
+    modifier: Modifier = Modifier,
     level: Int,
     world: Int,
     stars: Int,
@@ -206,7 +221,7 @@ private fun LevelNode(
         else -> null
     }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .aspectRatio(1f)
             .clip(RoundedCornerShape(16.dp))
             .background(bg)

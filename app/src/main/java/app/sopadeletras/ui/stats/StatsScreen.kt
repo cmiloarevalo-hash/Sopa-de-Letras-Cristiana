@@ -55,7 +55,7 @@ fun StatsScreen(
             "★".repeat(daily!!.resultStars),
         )
     } else {
-        "por jogar"
+        "sin partidas"
     }
     val rows = results.map {
         ResultRow(mode = it.mode, n = it.n, seconds = it.seconds, stars = it.stars, score = it.score, words = it.words)
@@ -78,22 +78,22 @@ fun StatsScreen(
                 modifier = Modifier.size(38.dp).clip(RoundedCornerShape(13.dp)).background(colors.surface).clickable { onBack() },
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = colors.text)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = colors.text)
             }
-            Text("Estatísticas", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
+            Text("Estadísticas", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = colors.text, modifier = Modifier.padding(start = 12.dp))
         }
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                StatCard(number = "${wins(rows)}", label = "Partidas ganhas", modifier = Modifier.weight(1f))
-                StatCard(number = "${wordsFound(rows)}", label = "Palavras encontradas", modifier = Modifier.weight(1f))
+                StatCard(number = "${wins(rows)}", label = "Partidas ganadas", modifier = Modifier.weight(1f))
+                StatCard(number = "${wordsFound(rows)}", label = "Palabras encontradas", modifier = Modifier.weight(1f))
             }
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                StatCard(number = "$streak", label = "Dias seguidos", modifier = Modifier.weight(1f))
-                StatCard(number = "${mysteriesSolved(rows)}", label = "Palavras misteriosas", modifier = Modifier.weight(1f))
+                StatCard(number = "$streak", label = "Días seguidos", modifier = Modifier.weight(1f))
+                StatCard(number = "${mysteriesSolved(rows)}", label = "Palabras misteriosas", modifier = Modifier.weight(1f))
             }
         }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            SectionTitle("MELHOR TEMPO · CLÁSSICO")
+            SectionTitle("MEJOR TIEMPO · CLÁSICO")
             for (size in listOf(6, 8, 10, 12)) {
                 val seconds = best[size]
                 StatLine(
@@ -104,10 +104,10 @@ fun StatsScreen(
             }
         }
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            SectionTitle("RECORDES")
+            SectionTitle("RÉCORDS")
             StatLine(label = "Campanha", value = "$done de 300 · ★ $stars", valueAccent = true)
-            StatLine(label = "Contra-relógio", value = bestTimeAttack(rows)?.let { "$it pts" } ?: "—", valueAccent = bestTimeAttack(rows) != null)
-            StatLine(label = "Desafio de hoje", value = todaySummary, valueAccent = todaySummary != "por jogar")
+            StatLine(label = "Contrarreloj", value = bestTimeAttack(rows)?.let { "$it pts" } ?: "—", valueAccent = bestTimeAttack(rows) != null)
+            StatLine(label = "Desafío de hoy", value = todaySummary, valueAccent = todaySummary != "sin partidas")
         }
     }
 }
