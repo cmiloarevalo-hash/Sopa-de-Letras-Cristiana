@@ -165,3 +165,6 @@ O código está em inglês e a interface em português europeu.
 ## Licença
 
 Distribuído sob a licença [MIT](LICENSE).
+
+
+Corrección del modo misterioso 6×6/8×8/10×10 y datos del desarrollador: [notas de corrección](docs/CORRECCION_MISTERIO_8X8_Y_CREDITOS_V1.md).

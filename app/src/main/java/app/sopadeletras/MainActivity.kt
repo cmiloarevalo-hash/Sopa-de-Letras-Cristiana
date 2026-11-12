@@ -311,11 +311,12 @@ class MainActivity : ComponentActivity() {
                         val category = entry.arguments?.getString("category").orEmpty()
                         val assist by container.settings.directionAssist.collectAsState(initial = true)
                         val bank = remember(category) { container.words.loadCategory(lang, category) }
-                        val challenge = remember(category) {
-                            val world = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0)
-                            container.words.loadCampaignLevel(world * 30 + 20)
+                        // Free mystery respects the size chosen on the setup screen.
+                        // The campaign's special level can use a different board size.
+                        val challenge = remember(category, size) {
+                            container.words.loadFreeMystery(category, size)
                         }
-                        val board = challenge.boardSize
+                        val board = size
                         var round by remember { mutableIntStateOf(0) }
                         val seed = remember(round) { Random.nextLong() }
                         val vm: app.sopadeletras.ui.game.MysteryViewModel = viewModel(
@@ -351,8 +352,8 @@ class MainActivity : ComponentActivity() {
                             colorblind = colorblind,
                             sounds = container.sounds,
                             sound = sound,
-                            wordHints = challenge.wordHints,
-                            bibleReference = challenge.reference,
+                            wordHints = container.words.wordHintsForCategory(category),
+                            bibleReference = challenge.mystery.reference,
                             onReadBible = openBible,
                                 worldIndex = CAMPAIGN_BANK_IDS.indexOf(category).coerceAtLeast(0),
                         )

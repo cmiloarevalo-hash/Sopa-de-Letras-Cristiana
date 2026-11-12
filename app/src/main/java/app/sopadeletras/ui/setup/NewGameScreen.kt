@@ -142,7 +142,7 @@ fun NewGameScreen(
         }
         if (mode == SetupMode.MYSTERY) {
             Text(
-                "Las letras restantes permiten descubrir una palabra final.",
+                "Las iniciales de las palabras encontradas forman la palabra misteriosa.",
                 fontFamily = Figtree, fontSize = 13.sp, color = colors.mute,
             )
         }

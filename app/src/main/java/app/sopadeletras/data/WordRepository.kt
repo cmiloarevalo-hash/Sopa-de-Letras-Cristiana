@@ -19,6 +19,12 @@ data class BiblicalWordHint(
     val reference: String,
 )
 
+data class FreeMysteryChallenge(
+    val boardSize: Int,
+    val words: List<String>,
+    val mystery: MysteryEntry,
+)
+
 data class CampaignLevelData(
     val level: Int,
     val world: Int,
@@ -66,6 +72,30 @@ class WordRepository(private val context: Context) {
             )
         }.associateBy { it.level }.also { require(it.size == 300) }
     }
+
+    private val freeMysteryLayouts: Map<Pair<String, Int>, FreeMysteryChallenge> by lazy {
+        val text = context.assets.open("campaign/es-ES/free_mystery_sizes_v1.json")
+            .bufferedReader(Charsets.UTF_8).use { it.readText() }
+        val layouts = JSONObject(text).getJSONArray("layouts")
+        (0 until layouts.length()).associate { i ->
+            val row = layouts.getJSONObject(i)
+            val size = row.getInt("size")
+            val hidden = row.getJSONObject("mystery")
+            val words = row.getJSONArray("words").toStringList()
+            val mystery = MysteryEntry(
+                hidden.getString("word"), hidden.getString("clue"), hidden.getString("reference"),
+            )
+            require(words.size == mystery.word.length)
+            require(words.joinToString("") { it.first().toString() } == mystery.word)
+            require(words.all { it.length in 3..size })
+            (row.getString("categoryId") to size) to FreeMysteryChallenge(size, words, mystery)
+        }.also { require(it.size == CAMPAIGN_BANK_IDS.size * 3) }
+    }
+
+    fun loadFreeMystery(category: String, size: Int): FreeMysteryChallenge =
+        requireNotNull(freeMysteryLayouts[category to size]) {
+            "No existe el misterio $size×$size para esta categoría"
+        }
 
     fun loadCampaignLevel(level: Int): CampaignLevelData =
         requireNotNull(campaignLevels[level]) { "Nivel fuera del catálogo: $level" }

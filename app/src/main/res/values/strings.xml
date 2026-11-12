@@ -3,4 +3,7 @@
     <string name="app_name">Sopa de letras -Biblia Rv-1909</string>
     <string name="m1_test_title">Sopa de letras -Biblia Rv-1909</string>
     <string name="m1_test_subtitle">Aventura bíblica para descubrir y aprender.</string>
+    <string name="developer_name">Camilo Arévalo</string>
+    <string name="support_email">apkcristiana@gmail.com</string>
+    <string name="related_app_name">Guía pastoral - Biblia</string>
 </resources>
