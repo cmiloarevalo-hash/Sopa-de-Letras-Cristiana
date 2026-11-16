@@ -10,7 +10,7 @@ on:
       - ".github/workflows/ios-simulator.yml"
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   simulator-and-device:
     runs-on: macos-15
@@ -59,3 +59,19 @@ jobs:
           path: ios/SopaBibliaIOS-v0.1-UNSIGNED.ipa
           if-no-files-found: error
           retention-days: 7
+
+      - name: Publish public UNSIGNED IPA prerelease (requires local Apple signing)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="slc-ios-v0.1-unsigned-20261116"
+          FILE="ios/SopaBibliaIOS-v0.1-UNSIGNED.ipa"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$FILE" --clobber
+          else
+            gh release create "$TAG" "$FILE" \
+              --target "$GITHUB_SHA" \
+              --prerelease \
+              --title "iPhone iOS v0.1 SIN FIRMA - para AltServer, no instalable directo" \
+              --notes-file ios/RELEASE_UNSIGNED.md
+          fi
