@@ -1,0 +1,77 @@
+name: iPhone iOS simulator and unsigned device package
+on:
+  push:
+    branches:
+      - supervisor/ios-swiftui-port-20261116
+    paths:
+      - "ios/**"
+      - "app/src/main/assets/campaign/**"
+      - "app/src/main/assets/bible/rv1909/**"
+      - ".github/workflows/ios-simulator.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  simulator-and-device:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Generate Xcode project with Android content
+        run: cd ios && bash bootstrap.sh
+      - name: Compile iOS simulator (unsigned)
+        run: |
+          cd ios
+          xcodebuild \
+            -project SopaBibliaIOS.xcodeproj \
+            -scheme SopaBibliaIOS \
+            -configuration Debug \
+            -derivedDataPath "$PWD/DerivedData" \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+      - name: Compile for physical iPhone CPU (unsigned)
+        run: |
+          cd ios
+          xcodebuild \
+            -project SopaBibliaIOS.xcodeproj \
+            -scheme SopaBibliaIOS \
+            -configuration Debug \
+            -derivedDataPath "$PWD/DerivedData" \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+      - name: Package unsigned iPhone IPA (requires Apple ID signing on device)
+        run: |
+          cd ios
+          test -d DerivedData/Build/Products/Debug-iphoneos/SopaBibliaIOS.app
+          mkdir -p Payload
+          cp -R DerivedData/Build/Products/Debug-iphoneos/SopaBibliaIOS.app Payload/
+          zip -q -r SopaBibliaIOS-v0.1-UNSIGNED.ipa Payload
+          unzip -t SopaBibliaIOS-v0.1-UNSIGNED.ipa | tail -1
+          du -h SopaBibliaIOS-v0.1-UNSIGNED.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SopaBibliaIOS-v0.1-UNSIGNED-not-directly-installable
+          path: ios/SopaBibliaIOS-v0.1-UNSIGNED.ipa
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish public UNSIGNED IPA prerelease (requires local Apple signing)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="slc-ios-v0.1-unsigned-20261116"
+          FILE="ios/SopaBibliaIOS-v0.1-UNSIGNED.ipa"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$FILE" --clobber
+          else
+            gh release create "$TAG" "$FILE" \
+              --target "$GITHUB_SHA" \
+              --prerelease \
+              --title "iPhone iOS v0.1 SIN FIRMA - para AltServer, no instalable directo" \
+              --notes-file ios/RELEASE_UNSIGNED.md
+          fi

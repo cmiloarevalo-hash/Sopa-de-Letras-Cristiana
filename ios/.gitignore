@@ -1,0 +1,7 @@
+campaign/
+rv1909/
+SopaBibliaIOS.xcodeproj/
+build/
+DerivedData/
+*.xcuserstate
+.DS_Store
