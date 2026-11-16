@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 // Native iOS models. These decode the same editorial JSON files as the Android APK;
 // the 300-level corpus and public-domain RV1909 are not rewritten for iPhone.
@@ -47,7 +48,7 @@ struct FreeMystery: Decodable {
     let mystery: MysterySpec
 }
 struct BibleIndex: Decodable { let books: [BibleBook] }
-struct BibleBook: Decodable, Identifiable {
+struct BibleBook: Decodable, Identifiable, Equatable {
     let id: String
     let name: String
     let chapterCount: Int
@@ -271,7 +272,7 @@ enum GridGenerator {
     }
 
     static func occurrences(of word: String, in letters: [String], size: Int) -> Int {
-        let chars = Array(word).map(String.init)
+        let chars = Array(word).map { String($0) }
         var paths: Set<String> = []
         for row in 0..<size {
             for col in 0..<size {
