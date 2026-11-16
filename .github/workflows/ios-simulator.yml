@@ -1,0 +1,31 @@
+name: iOS simulator build (unsigned)
+on:
+  push:
+    branches:
+      - supervisor/ios-swiftui-port-20261116
+    paths:
+      - "ios/**"
+      - "app/src/main/assets/campaign/**"
+      - "app/src/main/assets/bible/rv1909/**"
+      - ".github/workflows/ios-simulator.yml"
+  workflow_dispatch:
+jobs:
+  simulator-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: cd ios && bash bootstrap.sh
+      - name: Verify iOS simulator compilation (not an installable IPA)
+        run: |
+          cd ios
+          xcodebuild \
+            -project SopaBibliaIOS.xcodeproj \
+            -scheme SopaBibliaIOS \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
