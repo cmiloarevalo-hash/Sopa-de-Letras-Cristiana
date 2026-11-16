@@ -1,0 +1,89 @@
+name: iPhone simulator UX smoke tests
+on:
+  push:
+    branches:
+      - supervisor/ios-swiftui-port-20261116
+    paths:
+      - "ios/**"
+      - "app/src/main/assets/campaign/**"
+      - "app/src/main/assets/bible/rv1909/**"
+      - ".github/workflows/ios-ux-smoke.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios-ux:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free XcodeGen
+        run: brew install xcodegen
+      - name: Prepare iOS code and 300-level / RV1909 resources
+        run: cd ios && bash bootstrap.sh
+      - name: Select available iPhone simulator
+        id: sim
+        shell: bash
+        run: |
+          xcrun simctl list devices available
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, subprocess
+          data=json.loads(subprocess.check_output(["xcrun","simctl","list","devices","available","-j"],text=True))
+          candidates=[(runtime,d) for runtime,devices in data["devices"].items()
+                    if "iOS" in runtime for d in devices
+                    if "iPhone" in d["name"] and d.get("isAvailable",True)]
+          if not candidates: raise SystemExit("No hay simulador iPhone disponible en macOS")
+          runtime,sim=candidates[-1]
+          print("udid="+sim["udid"])
+          print("name="+sim["name"])
+          print("runtime="+runtime)
+          PY
+      - name: Boot iPhone simulator
+        env:
+          SIMUDID: ${{ steps.sim.outputs.udid }}
+        run: |
+          xcrun simctl boot "$SIMUDID" || true
+          xcrun simctl bootstatus "$SIMUDID" -b
+      - name: XCTest on running iPhone simulator
+        env:
+          SIMUDID: ${{ steps.sim.outputs.udid }}
+        shell: bash
+        run: |
+          cd ios
+          set -o pipefail
+          xcodebuild \
+            -project SopaBibliaIOS.xcodeproj \
+            -scheme SopaBibliaIOS \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination "platform=iOS Simulator,id=$SIMUDID" \
+            -parallel-testing-enabled NO \
+            -resultBundlePath "$PWD/ios-ux.xcresult" \
+            CODE_SIGNING_ALLOWED=NO \
+            test | tee ios-ux-build.log
+      - name: Export simulator evidence and screenshots
+        if: always()
+        shell: bash
+        env:
+          SIMUDID: ${{ steps.sim.outputs.udid }}
+        run: |
+          cd ios
+          mkdir -p screenshots
+          if [[ -d ios-ux.xcresult ]]; then
+            xcrun xcresulttool export attachments --path ios-ux.xcresult --output-path screenshots || true
+            xcrun xcresulttool get test-results summary --path ios-ux.xcresult > screenshots/test-summary.json || true
+          fi
+          if [[ -n "$SIMUDID" ]]; then
+            xcrun simctl io "$SIMUDID" screenshot screenshots/last-simulator-screen.png || true
+          fi
+          find screenshots -maxdepth 2 -type f | head -40
+      - name: Upload UX proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iPhone-simulator-UX-evidence
+          path: |
+            ios/screenshots/
+            ios/ios-ux-build.log
+          if-no-files-found: warn
+          retention-days: 14
