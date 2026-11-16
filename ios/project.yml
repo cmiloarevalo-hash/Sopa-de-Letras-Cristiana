@@ -32,6 +32,8 @@ targets:
         PRODUCT_NAME: SopaBibliaIOS
     scheme:
       gatherCoverageData: false
+      testTargets:
+        - SopaBibliaIOSUITests
 
   SopaBibliaIOSUITests:
     type: bundle.ui-testing
