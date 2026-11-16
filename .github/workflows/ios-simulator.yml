@@ -1,4 +1,4 @@
-name: iOS simulator build (unsigned)
+name: iPhone iOS simulator and unsigned device package
 on:
   push:
     branches:
@@ -9,23 +9,53 @@ on:
       - "app/src/main/assets/bible/rv1909/**"
       - ".github/workflows/ios-simulator.yml"
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  simulator-build:
+  simulator-and-device:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Install project generator
         run: brew install xcodegen
-      - name: Generate Xcode project
+      - name: Generate Xcode project with Android content
         run: cd ios && bash bootstrap.sh
-      - name: Verify iOS simulator compilation (not an installable IPA)
+      - name: Compile iOS simulator (unsigned)
         run: |
           cd ios
           xcodebuild \
             -project SopaBibliaIOS.xcodeproj \
             -scheme SopaBibliaIOS \
             -configuration Debug \
+            -derivedDataPath "$PWD/DerivedData" \
             -sdk iphonesimulator \
             -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO \
             build
+      - name: Compile for physical iPhone CPU (unsigned)
+        run: |
+          cd ios
+          xcodebuild \
+            -project SopaBibliaIOS.xcodeproj \
+            -scheme SopaBibliaIOS \
+            -configuration Debug \
+            -derivedDataPath "$PWD/DerivedData" \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+      - name: Package unsigned iPhone IPA (requires Apple ID signing on device)
+        run: |
+          cd ios
+          test -d DerivedData/Build/Products/Debug-iphoneos/SopaBibliaIOS.app
+          mkdir -p Payload
+          cp -R DerivedData/Build/Products/Debug-iphoneos/SopaBibliaIOS.app Payload/
+          zip -q -r SopaBibliaIOS-v0.1-UNSIGNED.ipa Payload
+          unzip -t SopaBibliaIOS-v0.1-UNSIGNED.ipa | tail -1
+          du -h SopaBibliaIOS-v0.1-UNSIGNED.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SopaBibliaIOS-v0.1-UNSIGNED-not-directly-installable
+          path: ios/SopaBibliaIOS-v0.1-UNSIGNED.ipa
+          if-no-files-found: error
+          retention-days: 7
