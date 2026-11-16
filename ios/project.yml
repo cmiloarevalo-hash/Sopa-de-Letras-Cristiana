@@ -32,3 +32,16 @@ targets:
         PRODUCT_NAME: SopaBibliaIOS
     scheme:
       gatherCoverageData: false
+
+  SopaBibliaIOSUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: SopaBibliaIOSUITests
+    dependencies:
+      - target: SopaBibliaIOS
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.9"
