@@ -27,7 +27,11 @@ class StorybookUxTest {
             "setup/NewGameScreen.kt", "bible/BibleScreen.kt", "album/AlbumScreen.kt", "stats/StatsScreen.kt"
         )) {
             val source = code("ui/$screen")
-            assertTrue("$screen hides the landscape", source.contains(".background(androidx.compose.ui.graphics.Color.Transparent)"))
+            assertTrue(
+                "$screen hides the landscape",
+                source.contains(".background(androidx.compose.ui.graphics.Color.Transparent)") ||
+                    source.contains(".background(Color.Transparent)"),
+            )
         }
     }
 
