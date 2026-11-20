@@ -17,10 +17,22 @@ OUT.mkdir(parents=True, exist_ok=True)
 report = {"mode": "emulator Android", "screenshots": [], "checks": {}, "notes": []}
 
 def adb(*args, checked=True):
-    result = subprocess.run(ADB + list(args), capture_output=True, text=True, timeout=40)
+    result = subprocess.run(ADB + list(args), capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=40)
     if checked and result.returncode:
         raise RuntimeError("adb " + " ".join(args) + " → " + result.stderr[-350:])
     return result.stdout
+
+def wait_for_visual_ready(timeout=90):
+    """Avoid recording Android 12+ launch splash as an actual app screen."""
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        shot = subprocess.run(ADB + ["exec-out", "screencap", "-p"],
+                              capture_output=True, timeout=45)
+        if shot.returncode == 0 and len(shot.stdout) > 16000:
+            return
+        time.sleep(2)
+    raise RuntimeError("Android sigue mostrando splash o no renderiza la aplicación")
+
 
 def screenshot(name):
     path = OUT / (name + ".png")
@@ -73,6 +85,15 @@ def tap_text(text, scroll=False, exact=False, min_y=0, bottom_first=False):
     print("NOT FOUND",text,flush=True)
     return False
 
+def wait_text(text, timeout=20):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if matches(text):
+            return True
+        time.sleep(.8)
+    report["notes"].append("No apareció la pantalla/etiqueta: " + text)
+    return False
+
 def save():
     (OUT/"results.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
@@ -105,15 +126,17 @@ def parse_board_letters():
     return [sorted(letters[row*6:(row+1)*6],key=lambda z:z[0]) for row in range(6)]
 
 def solve_first_board():
-    grid=parse_board_letters()
-    if grid is None:
-        report["notes"].append("No se pudieron leer 36 casillas en el árbol de accesibilidad")
-        return False
-    letters=[[cell[2] for cell in row] for row in grid]
-    report["checks"]["six_by_six_accessibility"]=True
     words=["LUZ","TIERRA","DIA"]
     direction=[(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
     for word in words:
+        # The introductory hint disappears after the first match, moving the grid.
+        # Re-read the 36 real cell coordinates before EVERY swipe.
+        grid=parse_board_letters()
+        if grid is None:
+            report["notes"].append("No se pudieron leer 36 casillas en el árbol de accesibilidad")
+            return False
+        letters=[[cell[2] for cell in row] for row in grid]
+        report["checks"]["six_by_six_accessibility"]=True
         found=False
         for r in range(6):
             for c in range(6):
@@ -139,33 +162,38 @@ try:
     adb("shell","wm","density","160")
     adb("shell","am","force-stop","app.sopadeletras.cristiana.debug",checked=False)
     adb("shell","am","start","-n","app.sopadeletras.cristiana.debug/app.sopadeletras.MainActivity")
-    time.sleep(2)
+    wait_for_visual_ready()
+    if not wait_text("Comenzar la aventura", timeout=90):
+        raise RuntimeError("La portada real no se mostró después del splash")
     screenshot("01-portada-dia")
     if tap_text("Comenzar la aventura",scroll=True):
-        report["checks"]["home_accessible"]=True
-        screenshot("02-inicio-dia")
-        if tap_text("Ajustes",scroll=True):
-            screenshot("03-ajustes-dia")
-            if tap_text("Noche estrellada",scroll=True):
-                screenshot("04-ajustes-noche")
-                report["checks"]["manual_night_theme"]=True
-                if tap_text("Volver"):
-                    screenshot("05-inicio-noche")
-                    report["checks"]["night_home"]=True
-                    if tap_text("Ajustes",scroll=True):
-                        tap_text("Día soleado",scroll=True)
-                        tap_text("Volver")
-                        screenshot("06-inicio-dia-restaurado")
-                        report["checks"]["manual_day_theme"]=True
-        # Optional board and actual win celebration
-        if tap_text("Jugar nivel 1", scroll=True):
-            screenshot("07-mapa-campana")
-            if tap_text("1",exact=True,min_y=210,bottom_first=True):
-                screenshot("08-tablero-primer-nivel")
-                report["checks"]["board_accessible"]=bool(matches("Tablero de 6 por 6 letras"))
-                if solve_first_board():
-                    screenshot("09-victoria-estrellas-grandes")
-                    report["checks"]["victory_celebration"]=bool(matches("MISIÓN CUMPLIDA"))
+        report["checks"]["home_accessible"]=wait_text("Jugar nivel 1")
+        if report["checks"]["home_accessible"]:
+            screenshot("02-inicio-dia")
+            if tap_text("Ajustes",scroll=True) and wait_text("Noche estrellada"):
+                screenshot("03-ajustes-dia")
+                if tap_text("Noche estrellada",scroll=True):
+                    screenshot("04-ajustes-noche")
+                    report["checks"]["manual_night_theme"]=True
+                    if tap_text("Volver") and wait_text("Jugar nivel 1"):
+                        screenshot("05-inicio-noche")
+                        report["checks"]["night_home"]=True
+                        if tap_text("Ajustes",scroll=True) and wait_text("Día soleado"):
+                            tap_text("Día soleado",scroll=True)
+                            tap_text("Volver")
+                            if wait_text("Jugar nivel 1"):
+                                screenshot("06-inicio-dia-restaurado")
+                                report["checks"]["manual_day_theme"]=True
+            if tap_text("Jugar nivel 1", scroll=True) and wait_text("Campaña"):
+                screenshot("07-mapa-campana")
+                if tap_text("1",exact=True,min_y=210,bottom_first=True) and wait_text("Tablero de 6 por 6 letras"):
+                    screenshot("08-tablero-primer-nivel")
+                    report["checks"]["board_accessible"]=True
+                    if solve_first_board():
+                        passed=wait_text("MISIÓN CUMPLIDA")
+                        report["checks"]["victory_celebration"]=passed
+                        if passed:
+                            screenshot("09-victoria-estrellas-grandes")
 finally:
     save()
     print("QA_SUMMARY",json.dumps(report,ensure_ascii=False),flush=True)

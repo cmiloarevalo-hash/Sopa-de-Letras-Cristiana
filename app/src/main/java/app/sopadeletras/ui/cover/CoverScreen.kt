@@ -39,8 +39,10 @@ fun CoverScreen(onStart: () -> Unit) {
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            // At 320dp the sun/moon decorates the upper-right corner; keep this label clear of it.
             Text("✦ AVENTURA BÍBLICA ✦", fontFamily = Figtree,
-                fontSize = 15.sp, color = colors.accent, fontWeight = FontWeight.Bold)
+                fontSize = 15.sp, color = colors.accent, fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(end = 72.dp))
             Spacer(Modifier.height(16.dp))
             Text("Sopa de letras\n-Biblia Rv-1909", fontFamily = Bricolage,
                 fontWeight = FontWeight.ExtraBold, fontSize = 39.sp,
