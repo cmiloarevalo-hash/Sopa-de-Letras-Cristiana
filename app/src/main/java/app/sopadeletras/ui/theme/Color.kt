@@ -17,11 +17,11 @@ data class SopaColors(
 
 val TintaAmbar = SopaColors(
     // Aventura Bíblica Moderna: marfil, azul, violeta, turquesa y dorado.
-    bg = Color(0xFFE6F3FC),
-    surface = Color(0xFFF8F6EE),
-    cell = Color(0xFFCFDFEE),
+    bg = Color(0xFF83CCFA),
+    surface = Color(0xFFFFF9EB),
+    cell = Color(0xFFDCEBFC),
     text = Color(0xFF142446),
-    mute = Color(0xFF405878),
+    mute = Color(0xFF385477),
     accent = Color(0xFFF2C45B),
     onAccent = Color(0xFF142446),
     found = listOf(
@@ -34,13 +34,13 @@ val TintaAmbar = SopaColors(
 )
 
 val TokyoNight = SopaColors(
-    bg = Color(0xFF1A1B26),
-    surface = Color(0xFF24283B),
-    cell = Color(0xFF292E42),
-    text = Color(0xFFC0CAF5),
-    mute = Color(0xFF7982B4),
-    accent = Color(0xFF7AA2F7),
-    onAccent = Color(0xFF16161E),
+    bg = Color(0xFF071935),
+    surface = Color(0xFF163460),
+    cell = Color(0xFF244775),
+    text = Color(0xFFF2F7FF),
+    mute = Color(0xFFC2D8F3),
+    accent = Color(0xFFFFD66D),
+    onAccent = Color(0xFF122444),
     found = listOf(
         Color(0xFF7AA2F7),
         Color(0xFFBB9AF7),

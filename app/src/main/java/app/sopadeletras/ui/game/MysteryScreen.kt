@@ -574,43 +574,37 @@ private fun MysteryWinOverlay(
     onPrimary: () -> Unit,
     onSecondary: () -> Unit,
 ) {
-    val colors = LocalSopaColors.current
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colors.bg.copy(alpha = 0.88f))
-            .padding(horizontal = 20.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text("¡Palabra descubierta!", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 32.sp, color = colors.text)
-            StarsRow(stars = stars)
-            Text("La palabra era", fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+    // Use the same full-size children's star celebration as the campaign.
+    WinOverlay(
+        title = "¡Palabra descubierta!",
+        stars = stars,
+        summary = "¡Acertaste el misterio bíblico!",
+        extraLine = "Lee también: $reference · ${formatElapsed(seconds)}",
+        primaryLabel = primaryLabel,
+        onPrimary = onPrimary,
+        secondaryLabel = secondaryLabel,
+        onSecondary = onSecondary,
+        extraContent = {
+            Row(horizontalArrangement = Arrangement.spacedBy(3.dp)) {
                 answer.forEach { letter ->
                     Box(
                         modifier = Modifier
-                            .width(30.dp)
-                            .height(35.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(colors.cell),
+                            .width(if (answer.length >= 9) 19.dp else if (answer.length >= 7) 24.dp else 31.dp)
+                            .height(37.dp)
+                            .clip(RoundedCornerShape(9.dp))
+                            .background(Color(0xFFFFD461)),
                         contentAlignment = Alignment.Center,
                     ) {
-                        Text(letter.toString(), fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 18.sp / androidx.compose.ui.platform.LocalDensity.current.fontScale, color = colors.accent)
+                        Text(
+                            letter.toString(),
+                            fontFamily = Bricolage,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 18.sp,
+                            color = Color(0xFF17315B),
+                        )
                     }
                 }
             }
-            Text("Descubriste una palabra del camino bíblico.",
-                fontFamily = Figtree, fontSize = 14.sp, color = colors.text)
-            Text("Lee también: " + reference,
-                fontFamily = Figtree, fontSize = 12.sp, color = colors.mute)
-            Text(formatElapsed(seconds), fontFamily = Figtree, fontSize = 14.sp, color = colors.mute)
-            PrimaryButton(text = primaryLabel, onClick = onPrimary)
-            SecondaryButton(text = secondaryLabel, onClick = onSecondary)
-        }
-    }
+        },
+    )
 }

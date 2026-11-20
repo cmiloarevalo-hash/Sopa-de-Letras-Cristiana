@@ -15,8 +15,8 @@ android {
         applicationId = "app.sopadeletras.cristiana"
         minSdk = 26
         targetSdk = 36
-        versionCode = 29
-        versionName = "1.0.10"
+        versionCode = 30
+        versionName = "1.0.11"
         vectorDrawables {
             useSupportLibrary = true
         }

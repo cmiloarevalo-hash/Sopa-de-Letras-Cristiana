@@ -60,7 +60,7 @@ fun SettingsScreen(
     val colors = LocalSopaColors.current
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
-    val theme by container.settings.theme.collectAsState(initial = "TINTA")
+    val theme by container.settings.theme.collectAsState(initial = "AUTO")
     val assist by container.settings.directionAssist.collectAsState(initial = true)
     val haptics by container.settings.haptics.collectAsState(initial = true)
     val sound by container.settings.sound.collectAsState(initial = true)
@@ -70,7 +70,7 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colors.bg)
+            .background(androidx.compose.ui.graphics.Color.Transparent)
             .windowInsetsPadding(WindowInsets.safeDrawing)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
@@ -97,13 +97,19 @@ fun SettingsScreen(
             SettingBlock {
                 SettingLabel("Tema")
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    ThemeCard(name = "Aventura Bíblica", preview = TintaAmbar, selected = theme != "TOKYO", onClick = {
+                    ThemeCard(name = "Día soleado", preview = TintaAmbar, selected = theme == "TINTA", onClick = {
                         scope.launch { container.settings.setTheme("TINTA") }
                     }, modifier = Modifier.weight(1f))
-                    ThemeCard(name = "Modo nocturno", preview = TokyoNight, selected = theme == "TOKYO", onClick = {
+                    ThemeCard(name = "Noche estrellada", preview = TokyoNight, selected = theme == "TOKYO", onClick = {
                         scope.launch { container.settings.setTheme("TOKYO") }
                     }, modifier = Modifier.weight(1f))
                 }
+                SwitchRow(
+                    label = "Seguir el modo día/noche del teléfono",
+                    checked = theme == "AUTO",
+                    onChange = { auto -> scope.launch { container.settings.setTheme(if (auto) "AUTO" else "TINTA") } },
+                )
+                SettingCaption("Al activar el modo oscuro del teléfono, aparece la noche con estrellas.")
             }
             Divider()
             SettingBlock {
