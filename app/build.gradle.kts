@@ -15,15 +15,15 @@ android {
         applicationId = "app.sopadeletras.cristiana"
         minSdk = 26
         targetSdk = 36
-        versionCode = 30
-        versionName = "1.0.11"
+        versionCode = 31
+        versionName = "1.0.12"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
-    // Release signing: credentials come from env vars (CI) or Gradle properties
-    // (~/.gradle/gradle.properties). Without them, release falls back to the debug key.
+    // Release credentials belong only to owner-controlled local Gradle properties.
+    // Never fall back to the debug certificate for a production build.
     val releaseStoreFile = providers.environmentVariable("SIGNING_KEYSTORE_FILE")
         .orElse(providers.gradleProperty("sopa.keystoreFile")).orNull
     val releaseStorePassword = providers.environmentVariable("SIGNING_PASSWORD")
@@ -55,7 +55,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            signingConfig = signingConfigs.getByName(if (hasReleaseSigning) "release" else "debug")
+            signingConfig = if (hasReleaseSigning) signingConfigs.getByName("release") else null
         }
     }
     compileOptions {

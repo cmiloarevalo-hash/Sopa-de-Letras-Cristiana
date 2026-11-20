@@ -1,0 +1,41 @@
+name: Uptodown APK release - unsigned review
+on:
+  push:
+    branches:
+      - supervisor/uptodown-v1.0.12-branding-20261120
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Accept Android SDK licenses
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+      - name: Build unsigned release
+        run: ./gradlew :app:assembleRelease
+      - name: Record actual APK bytes and hash
+        shell: bash
+        run: |
+          find app/build/outputs/apk/release -maxdepth 1 -type f -name '*.apk' -print -exec sha256sum {} \; -exec stat -c '%s bytes %n' {} \;
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sopa-1.0.12-release-UNSIGNED-sign-locally
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          retention-days: 14
+      - name: Validate word banks and UX content
+        run: |
+          python3 tools/validate_words.py
+          python3 tools/validate_ux_content.py
+      - name: JVM unit tests
+        run: ./gradlew :app:testDebugUnitTest
