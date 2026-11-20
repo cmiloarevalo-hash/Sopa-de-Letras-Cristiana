@@ -44,7 +44,7 @@ fun AlbumScreen(container: AppContainer, onBack: () -> Unit) {
     var edited by remember(nickname) { mutableStateOf(nickname) }
     val scope = rememberCoroutineScope()
     Column(
-        modifier = Modifier.fillMaxSize().background(colors.bg)
+        modifier = Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.Transparent)
             .windowInsetsPadding(WindowInsets.safeDrawing)
             .verticalScroll(rememberScrollState())
             .padding(20.dp),

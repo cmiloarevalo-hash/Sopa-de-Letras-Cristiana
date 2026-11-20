@@ -79,7 +79,7 @@ fun CampaignScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colors.bg)
+            .background(androidx.compose.ui.graphics.Color.Transparent)
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
         Column(
@@ -246,7 +246,7 @@ private fun LevelNode(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("${(level - 1) % LEVELS_PER_WORLD + 1}", fontFamily = Bricolage, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = if (locked) colors.mute else if (stars > 0 || isCurrent) fg else colors.text)
             if (stars > 0) {
-                Text("★".repeat(stars), fontSize = 9.sp, color = fg)
+                Text("★".repeat(stars), fontSize = 12.sp, lineHeight = 12.sp, color = fg)
             }
         }
         if (special != null && !locked) {

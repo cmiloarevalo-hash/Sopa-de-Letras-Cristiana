@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.sopadeletras.ui.theme.LocalSopaColors
-import app.sopadeletras.ui.theme.TokyoNight
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
@@ -43,14 +42,16 @@ fun AdaptiveGameScaffold(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colors.bg)
+            .background(androidx.compose.ui.graphics.Color.Transparent)
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
+        // This background is used on every game mode; day/night is controlled
+        // by the app-wide palette. The board remains on solid cells.
         if (worldIndex != null) {
             WorldBackground(
                 worldIndex,
                 modifier = Modifier.fillMaxSize(),
-                alpha = if (colors.bg == TokyoNight.bg) 0.16f else 0.60f,
+                alpha = if (colors.bg == app.sopadeletras.ui.theme.TokyoNight.bg) 0.07f else 0.13f,
             )
         }
         if (wide) {

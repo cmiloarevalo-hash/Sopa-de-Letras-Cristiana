@@ -63,7 +63,7 @@ fun BibleScreen(onBack: () -> Unit, initialBook: String = "GEN", initialChapter:
     BackHandler(onBack = onBack)
 
     Column(
-        Modifier.fillMaxSize().background(colors.bg)
+        Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.Transparent)
             .windowInsetsPadding(WindowInsets.safeDrawing)
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),

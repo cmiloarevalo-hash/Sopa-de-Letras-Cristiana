@@ -34,7 +34,7 @@ class SettingsStore(context: Context) {
         val prefs = store.data.first()
         return StartupSnapshot(
             language = prefs[Keys.LANGUAGE] ?: defaultLanguageForSystem(),
-            theme = prefs[Keys.THEME] ?: "TINTA",
+            theme = prefs[Keys.THEME] ?: "AUTO",
             assist = prefs[Keys.ASSIST] ?: true,
             haptics = prefs[Keys.HAPTICS] ?: true,
             letterScale = prefs[Keys.LETTER_SCALE] ?: 1f,
@@ -46,7 +46,7 @@ class SettingsStore(context: Context) {
     val difficulty: Flow<Difficulty> = store.data.map {
         runCatching { Difficulty.valueOf(it[Keys.DIFFICULTY] ?: "NORMAL") }.getOrDefault(Difficulty.NORMAL)
     }
-    val theme: Flow<String> = store.data.map { it[Keys.THEME] ?: "TINTA" }
+    val theme: Flow<String> = store.data.map { it[Keys.THEME] ?: "AUTO" }
     val directionAssist: Flow<Boolean> = store.data.map { it[Keys.ASSIST] ?: true }
     val boardSize: Flow<Int> = store.data.map { it[Keys.BOARD_SIZE] ?: 8 }
     val categoryId: Flow<String> = store.data.map { it[Keys.CATEGORY] ?: "" }

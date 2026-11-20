@@ -53,6 +53,9 @@ import app.sopadeletras.ui.settings.SettingsScreen
 import app.sopadeletras.ui.setup.NewGameScreen
 import app.sopadeletras.ui.setup.SetupMode
 import app.sopadeletras.ui.stats.StatsScreen
+import app.sopadeletras.ui.components.AdventureBackdrop
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
 import app.sopadeletras.ui.theme.SopaTheme
 import app.sopadeletras.ui.theme.TintaAmbar
 import app.sopadeletras.ui.theme.TokyoNight
@@ -77,7 +80,7 @@ class MainActivity : ComponentActivity() {
                 withTimeoutOrNull(800) { container.settings.snapshot() }
             } ?: StartupSnapshot(
                 language = Language.ES_CODE,
-                theme = "TINTA",
+                theme = "AUTO",
                 assist = true,
                 haptics = true,
                 letterScale = 1f,
@@ -89,7 +92,8 @@ class MainActivity : ComponentActivity() {
             val letterScale by container.settings.letterScale.collectAsState(initial = startup.letterScale)
             val colorblind by container.settings.colorblind.collectAsState(initial = startup.colorblind)
             val sound by container.settings.sound.collectAsState(initial = true)
-            SopaTheme(colors = if (theme == "TOKYO") TokyoNight else TintaAmbar) {
+            val isNight = theme == "TOKYO" || (theme == "AUTO" && isSystemInDarkTheme())
+            SopaTheme(colors = if (isNight) TokyoNight else TintaAmbar) {
                 val nav = rememberNavController()
                 val bibleRepository = remember { BibleRepository(applicationContext) }
                 val openBible: (String) -> Unit = { ref ->
@@ -106,7 +110,9 @@ class MainActivity : ComponentActivity() {
                     animationSpec = tween(350),
                     label = "theme",
                 ) {
-                NavHost(navController = nav, startDestination = "cover") {
+                androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxSize()) {
+                    AdventureBackdrop(modifier = androidx.compose.ui.Modifier.fillMaxSize())
+                    NavHost(navController = nav, startDestination = "cover") {
                     composable("cover") {
                         CoverScreen(onStart = { nav.navigate("home") {
                             popUpTo("cover") { inclusive = true }
@@ -571,6 +577,7 @@ class MainActivity : ComponentActivity() {
                                 worldIndex = info.world,
                             )
                         }
+                    }
                     }
                 }
                 }
